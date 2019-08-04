@@ -3,4 +3,7 @@ import * as controller from "../controllers/index";
 
 export const index = Router();
 
-index.get("/ron", controller.index);
+index.get("/", controller.index);
+index.post("/");
+index.put("/");
+index.delete("/");

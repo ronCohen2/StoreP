@@ -36,6 +36,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 20
+  },
+  role: {
+    type: Boolean,
+    required: true
   }
 });
 const User = mongoose.model<IUser>("User", UserSchema);

@@ -5,6 +5,20 @@ export interface IUser extends mongoose.Document {
   lastName: String;
   email: String;
   password: String;
-  city: String;
-  Street: String;
+  city?: String;
+  Street?: String;
+  role: Boolean;
+}
+export interface ICategory extends mongoose.Document {
+  categoryName: String;
+  categoryId: String;
+  price: Number;
+  image: String;
+}
+
+export interface IProduct extends mongoose.Document {
+  productName: String;
+  categoryId: String;
+  price: Number;
+  image: String;
 }
