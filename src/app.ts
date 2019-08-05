@@ -6,8 +6,9 @@ import * as bodyParser from "body-parser";
 import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
 
 // Routes
-import { index } from "./routes/index";
 import { Admin } from "./routes/AdminRoutes";
+import { Products } from "./routes/ProductsRoute";
+import { Auth } from "./routes/AuthRoutes";
 
 // Create Express server
 export const app = express();
@@ -27,8 +28,9 @@ app.use(logger("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 
 // Use routes
-app.use("/", index);
 app.use("/admin", Admin);
+app.use("/Products", Products);
+app.use("/Auth", Auth);
 
 //Connect to mongo
 const mongoDB: string = "mongodb://localhost/StoreDb";

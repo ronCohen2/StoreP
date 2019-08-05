@@ -2,6 +2,11 @@ import * as mongoose from "mongoose";
 import { IUser } from "./modelInterfece";
 
 const UserSchema = new mongoose.Schema({
+  ID: {
+    type: Number,
+    required: true,
+    unique: true
+  },
   firstName: {
     type: String,
     minlength: 5,
@@ -19,7 +24,8 @@ const UserSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 50,
     required: true,
-    unique: true
+    unique: true,
+    match: [/.+\@.+\..+/, "Please fill a valid email address"]  
   },
   password: {
     type: String,

@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import * as mongoose from "mongoose";
 import Products from "../model/ProuductSchema";
-import { IProduct } from "../model/modelInterfece";
 
 export let allProducts = async (req: Request, res: Response) => {
   const products = await Products.find();
