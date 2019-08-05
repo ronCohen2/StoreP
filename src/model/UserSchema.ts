@@ -1,5 +1,7 @@
 import * as mongoose from "mongoose";
 import { IUser } from "./modelInterfece";
+import * as jwt from "jsonwebtoken";
+const keys = require("../config/keys");
 
 const UserSchema = new mongoose.Schema({
   ID: {
@@ -50,5 +52,21 @@ const UserSchema = new mongoose.Schema({
     required: true
   }
 });
+UserSchema.methods.generateToken = (
+  ID: Number,
+  email: String,
+  password: String
+) => {
+  const token = jwt.sign(
+    {
+      id: ID,
+      email,
+      password
+    },
+    keys.secretOrKey,
+    { expiresIn: 3600 }
+  );
+  return token;
+};
 const User = mongoose.model<IUser>("User", UserSchema);
 export default User;

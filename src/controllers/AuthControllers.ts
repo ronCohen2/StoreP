@@ -6,8 +6,6 @@ import * as jwt from "jsonwebtoken";
 import * as EmailValidator from "email-validator";
 import * as validator from "validator";
 
-import * as isNumeric from "validator/lib/isNumeric";
-
 const keys = require("../config/keys");
 export let registerverification = async (req: Request, res: Response) => {
   const { ID, email, password, password2 } = req.body;
@@ -94,21 +92,36 @@ export let Register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
-  const idValid = validator.isNumeric(id);
-  if (idValid) {
+  //Error array
+  let errors: Object[] = [];
+  console.log(id, password);
+
+  if (typeof password == "undefined") {
+    errors.push({ type: "password", msg: "Password is required" });
+  }
+  if (typeof id == "undefined") {
+    errors.push({ type: "id", msg: "Id is required" });
+  }
+
+  if (errors.length > 0) {
+    return res.send(errors);
+  }
+  try {
     const user = await User.findOne({ ID: id });
-    const UserPassword: any = user.password;
-    if (!user) return res.status(400).send({ err: "User is not exist." });
-    const validPassword = await bcrypt.compare(password, UserPassword);
+    const UserHash: any = user.password;
+    const email: String = user.email;
+
+    //Compere hash
+    const validPassword = await bcrypt.compare(password, UserHash);
     if (validPassword) {
-      // const token = user.generateToken();
-      // res.header("x-token", token);
-      res.status(200).send("ok");
+      //Generate token
+      const token = user.generateToken(id, email, password);
+      res.status(200).json({ seccess: true, token: "Bearer " + token });
     } else {
-      res.send({ msg: "error in login" });
+      res.status(400).send({ msg: "User or Password WRONG !" });
     }
-  } else {
-    res.send("error in id");
+  } catch (err) {
+    res.send({ msg: "User or Password WRONG !" });
   }
 };
 export let getUser = async (req: Request, res: Response) => {
