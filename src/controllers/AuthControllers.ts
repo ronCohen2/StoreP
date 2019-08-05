@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import * as mongoose from "mongoose";
 import User from "../model/UserSchema";
+import * as bcrypt from "bcrypt";
+import * as jwt from "jsonwebtoken";
 import * as EmailValidator from "email-validator";
-
+const keys = require("../config/keys");
 export let registerverification = async (req: Request, res: Response) => {
   const { ID, email, password, password2 } = req.body;
   const error = [];
@@ -35,6 +37,20 @@ export let registerverification = async (req: Request, res: Response) => {
 
   if (error.length > 0) {
     res.status(404).send({ Error: error });
+  } else {
+    jwt.sign(
+      {
+        id: ID,
+        email,
+        password
+      },
+      keys.secretOrKey,
+      { expiresIn: 3600 },
+      (err, token) => {
+        res.status(200).json({ seccess: true, token });
+      }
+    );
   }
-  res.status(200).send({ msg: "ok" });
 };
+
+export let Register = async (req: Request, res: Response) => {};
