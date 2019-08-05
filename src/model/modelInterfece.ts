@@ -1,12 +1,13 @@
 import * as mongoose from "mongoose";
 
 export interface IUser extends mongoose.Document {
+  ID: Number;
   firstName: String;
   lastName: String;
   email: String;
   password: String;
-  city?: String;
-  Street?: String;
+  city: String;
+  street: String;
   role: Boolean;
 }
 export interface ICategory extends mongoose.Document {

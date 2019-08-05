@@ -9,13 +9,13 @@ const UserSchema = new mongoose.Schema({
   },
   firstName: {
     type: String,
-    minlength: 5,
+    minlength: 2,
     maxlength: 15,
     required: true
   },
   lastName: {
     type: String,
-    minlength: 5,
+    minlength: 2,
     maxlength: 15,
     required: true
   },
@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     maxlength: 50,
     required: true,
     unique: true,
-    match: [/.+\@.+\..+/, "Please fill a valid email address"]  
+    match: [/.+\@.+\..+/, "Please fill a valid email address"]
   },
   password: {
     type: String,
@@ -36,12 +36,14 @@ const UserSchema = new mongoose.Schema({
   city: {
     type: String,
     minlength: 2,
-    maxlength: 20
+    maxlength: 20,
+    required: true
   },
   street: {
     type: String,
     minlength: 2,
-    maxlength: 20
+    maxlength: 20,
+    required: true
   },
   role: {
     type: Boolean,
