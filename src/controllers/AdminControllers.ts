@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import * as mongoose from "mongoose";
 import Products from "../model/ProuductSchema";
+import category from "../model/categorySchema";
 
 export let allProducts = async (req: Request, res: Response) => {
   const products = await Products.find();
@@ -39,5 +40,18 @@ export let removeProducts = async (req: Request, res: Response) => {
     res.status(200).send({ msg: "product removed" });
   } catch (err) {
     res.status(400).send({ msg: "error in remove product " });
+  }
+};
+
+export let addCategory = async (req: Request, res: Response) => {
+  const { categoryName } = req.body;
+  const newCategory = new category({
+    categoryName
+  });
+  try {
+    await newCategory.save();
+    res.status(200).send({ msg: `success add category` });
+  } catch (err) {
+    res.status(400).send({ msg: "error in add category ", err });
   }
 };

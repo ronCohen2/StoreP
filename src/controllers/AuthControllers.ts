@@ -94,7 +94,6 @@ export const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
   //Error array
   let errors: Object[] = [];
-  console.log(id, password);
 
   if (typeof password == "undefined") {
     errors.push({ type: "password", msg: "Password is required" });
@@ -102,7 +101,6 @@ export const login = async (req: Request, res: Response) => {
   if (typeof id == "undefined") {
     errors.push({ type: "id", msg: "Id is required" });
   }
-
   if (errors.length > 0) {
     return res.send(errors);
   }
@@ -120,7 +118,7 @@ export const login = async (req: Request, res: Response) => {
     } else {
       res.status(400).send({ msg: "User or Password WRONG !" });
     }
-  } catch (err) {
+  } catch {
     res.send({ msg: "User or Password WRONG !" });
   }
 };

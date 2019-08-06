@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { StringLiteral } from "babel-types";
 
 export interface IUser extends mongoose.Document {
   ID: Number;
@@ -23,4 +24,18 @@ export interface IProduct extends mongoose.Document {
   categoryId: String;
   price: Number;
   image: String;
+}
+
+export interface IcartItem extends mongoose.Document {
+  product: any;
+  quantity: Number;
+  totalPrice: Number;
+  cartId: String;
+}
+
+export interface Icart extends mongoose.Document {
+  userId: String;
+  cartId: String;
+  date: any;
+  products: any;
 }

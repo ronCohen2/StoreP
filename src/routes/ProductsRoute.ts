@@ -4,8 +4,8 @@ export const Products = Router();
 
 //All products
 Products.get("/", controllear.getAllProducts);
-//search detaild
-Products.get("/:product", controllear.getProductDetails);
+//get product details
+// Products.get("/:product", controllear.getProductDetails);
 //All category
 Products.get("/category", controllear.getAllCategoty);
 //Get products by category
