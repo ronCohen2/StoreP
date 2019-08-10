@@ -3,8 +3,7 @@ import ProductSchema from "../model/ProuductSchema";
 import { IcartItem } from "./modelInterfece";
 const cartItemSchema = new mongoose.Schema({
   product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "products",
+    type: ProductSchema,
     required: true
   },
   quantity: {

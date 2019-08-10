@@ -6,16 +6,16 @@ const cartSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  cartId: {
-    type: String,
+  date: {
+    default: Date.now(),
+    required: true
+  },
+  status: {
+    type: Boolean,
     required: true
   },
   items: {
     type: cartItemSchema,
-    required: true
-  },
-  date: {
-    default: Date.now(),
     required: true
   }
 });

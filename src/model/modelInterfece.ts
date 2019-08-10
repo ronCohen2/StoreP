@@ -33,6 +33,7 @@ export interface IcartItem extends mongoose.Document {
 export interface Icart extends mongoose.Document {
   userId: String;
   cartId: String;
-  date: any;
-  products: any;
+  date: Date;
+  status: Boolean;
+  products?: any;
 }
