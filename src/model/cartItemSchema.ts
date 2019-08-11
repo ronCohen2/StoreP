@@ -1,9 +1,12 @@
 import * as mongoose from "mongoose";
 import ProductSchema from "../model/ProuductSchema";
 import { IcartItem } from "./modelInterfece";
+const Schema = mongoose.Schema;
+
 const cartItemSchema = new mongoose.Schema({
   product: {
-    type: ProductSchema,
+    type: String,
+    // ref: "product",
     required: true
   },
   quantity: {

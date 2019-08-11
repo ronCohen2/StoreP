@@ -7,17 +7,17 @@ const cartSchema = new mongoose.Schema({
     required: true
   },
   date: {
-    default: Date.now(),
-    required: true
+    type: Date,
+    default: Date.now()
   },
   status: {
     type: Boolean,
     required: true
-  },
-  items: {
-    type: cartItemSchema,
-    required: true
   }
+  // items: {
+  //   type: String,
+  //   required: true
+  // }
 });
-const cart = mongoose.model<Icart>("Cart", cartSchema);
-export default cart;
+const Cart = mongoose.model<Icart>("Cart", cartSchema);
+export default Cart;

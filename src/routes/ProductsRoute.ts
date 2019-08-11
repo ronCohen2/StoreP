@@ -5,10 +5,10 @@ export const Products = Router();
 //All products
 Products.get("/", controllear.getAllProducts);
 //get product details
-// Products.get("/:product", controllear.getProductDetails);
+Products.get("/productDetails/:product", controllear.getProductDetails);
 //All category
-Products.get("/category", controllear.getAllCategoty);
+Products.get("/allCategory", controllear.getAllCategoty);
 //Get products by category
 Products.get("/category/:id", controllear.getProductsByCategory);
 //search product
-Products.get("/srearch/:product", controllear.searchProduct);
+Products.get("/search/:product", controllear.searchProduct);

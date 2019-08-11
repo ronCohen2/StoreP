@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import * as mongoose from "mongoose";
 import Products from "../model/ProuductSchema";
 import Category from "../model/categorySchema";
 
@@ -19,12 +18,12 @@ export let getProductDetails = async (req: Request, res: Response) => {
   }
 };
 export let getAllCategoty = async (req: Request, res: Response) => {
-  const products = await Category.find().select("categoryName");
+  const products = await Category.find();
   res.send(products);
 };
 export let getProductsByCategory = async (req: Request, res: Response) => {
   const categoryId = req.params.id;
-  const products = await Products.find({ categoryId });
+  const products = await Products.find({ categoryId: categoryId });
   if (products.length > 0) {
     res.status(200).send(products);
   } else {

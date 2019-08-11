@@ -9,6 +9,7 @@ import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
 import { Admin } from "./routes/AdminRoutes";
 import { Products } from "./routes/ProductsRoute";
 import { Auth } from "./routes/AuthRoutes";
+import { Cart } from "./routes/CartRoute";
 
 // Create Express server
 export const app = express();
@@ -31,6 +32,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use("/admin", Admin);
 app.use("/Products", Products);
 app.use("/Auth", Auth);
+app.use("/Cart", Cart);
+
 
 //Connect to mongo
 const mongoDB: string = "mongodb://localhost/StoreDb";

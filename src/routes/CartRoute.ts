@@ -1,17 +1,26 @@
 import { Router } from "express";
 import * as controller from "../controllers/CartControllers";
-import cart from "src/model/cartSchema";
+import cart from "../model/cartSchema";
 
 export const Cart = Router();
 
 // get all cart items
+// -> cartId
 Cart.get("/getItems", controller.GetCartItems);
 
 //add item to cart
-Cart.post("addItem", controller.addItem);
+//->cartId,productId,quantity
+Cart.post("/addItem", controller.addItem);
 
 //delte item from cart
 Cart.delete("/deleteItem", controller.deleteItem);
 
 //delete all items from cart
-cart.delete("/removeAllItems", controller.empty);
+Cart.delete("/removeAllItems", controller.empty);
+
+//->userId 
+Cart.get("/cartStatus", controller.CartStatus);
+
+Cart.post("/CreateCart", controller.CreateCart);
+
+Cart.get("/GetCart", controller.GetCart);
