@@ -18,9 +18,13 @@ Cart.delete("/deleteItem", controller.deleteItem);
 //delete all items from cart
 Cart.delete("/removeAllItems", controller.empty);
 
-//->userId 
-Cart.get("/cartStatus", controller.CartStatus);
+//->userId
+// Cart.get("/cartStatus", controller.CartStatus);
+
+//new order
+Cart.post("/createOrder", controller.createOrder);
 
 Cart.post("/CreateCart", controller.CreateCart);
 
 Cart.get("/GetCart", controller.GetCart);
+Cart.get("/getOrders", controller.getOrders);

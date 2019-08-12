@@ -36,3 +36,13 @@ export interface Icart extends mongoose.Document {
   status: Boolean;
   items?: any;
 }
+
+export interface IOrder extends mongoose.Document {
+  userId: String;
+  cartId: String;
+  totalPrice: Number;
+  city: String;
+  street: String;
+  shipDate: Date;
+  creditCard: Number;
+}

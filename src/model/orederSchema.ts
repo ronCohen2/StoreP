@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { IOrder } from "../model/modelInterfece";
 const orderSchema = new mongoose.Schema({
   userId: {
     type: String,
@@ -17,8 +18,8 @@ const orderSchema = new mongoose.Schema({
     required: true
   },
   street: {
-    type: String,
-    required: true
+    type: String
+    // required: true
   },
   shipDate: {
     type: Date,
@@ -30,9 +31,9 @@ const orderSchema = new mongoose.Schema({
   },
   creditCard: {
     type: Number,
-    default: Date.now(),
-    max: 4
+    required: true
+    // max: 4
   }
 });
-const Order = mongoose.model("Order", orderSchema);
+const Order = mongoose.model<IOrder>("Order", orderSchema);
 export default Order;
