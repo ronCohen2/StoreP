@@ -3,10 +3,8 @@ import * as mongoose from "mongoose";
 import User from "../model/UserSchema";
 import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
-import * as EmailValidator from "email-validator";
-import * as validator from "validator";
 import { registerValidation } from "../validation/registerValidation";
-
+import { loginValidation } from "../validation/loginValidation";
 const keys = require("../config/keys");
 export let registerverification = async (req: Request, res: Response) => {
   const { ID, email, password, password2 } = req.body;
@@ -67,15 +65,7 @@ export let Register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
-  //Error array
-  let errors: Object[] = [];
-
-  if (typeof password == "undefined") {
-    errors.push({ type: "password", msg: "Password is required" });
-  }
-  if (typeof id == "undefined") {
-    errors.push({ type: "id", msg: "Id is required" });
-  }
+  const errors = await loginValidation(req.body);
   if (errors.length > 0) {
     return res.send(errors);
   }
@@ -83,11 +73,8 @@ export const login = async (req: Request, res: Response) => {
     const user = await User.findOne({ ID: id });
     const UserHash: any = user.password;
     const email: String = user.email;
-
-    //Compere hash
     const validPassword = await bcrypt.compare(password, UserHash);
     if (validPassword) {
-      //Generate token
       const token = user.generateToken(id, email, password);
       res.status(200).json({ seccess: true, token: "Bearer " + token });
     } else {

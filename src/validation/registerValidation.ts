@@ -7,7 +7,7 @@ export let registerValidation = async (data: any) => {
 
   // password  validation
   if (!password || !password2) {
-    error.push({ type: "id", err: "Password is required" });
+    error.push({ type: "Password", err: "Password is required" });
   } else {
     if (password !== password2) {
       error.push({ type: "password", err: "Passwords not identical" });
@@ -24,6 +24,7 @@ export let registerValidation = async (data: any) => {
     }
   }
 
+  //id validation
   if (!ID) {
     error.push({ type: "id", err: "Id is required" });
   } else {
@@ -34,6 +35,5 @@ export let registerValidation = async (data: any) => {
       }
     } catch (err) {}
   }
-  console.log(error);
   return error;
 };

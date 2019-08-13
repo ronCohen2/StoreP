@@ -14,10 +14,7 @@ const cartSchema = new mongoose.Schema({
     type: Boolean,
     required: true
   }
-  // items: {
-  //   type: String,
-  //   required: true
-  // }
+
 });
 const Cart = mongoose.model<Icart>("Cart", cartSchema);
 export default Cart;
