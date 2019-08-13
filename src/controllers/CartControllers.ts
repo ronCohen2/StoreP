@@ -122,8 +122,13 @@ export let createOrder = async (req: Request, res: Response) => {
       shipDate,
       creditCard
     });
-    await newOrder.save();
-    res.status(200).send({ msg: "Order success.", Order: newOrder });
+    try {
+      await newOrder.save();
+      res.status(200).send({ msg: "Order success.", Order: newOrder });
+    } catch (err) {
+      res.send(err);
+    }
+  // if date is full !! 
   } else {
     res.status(400).send({ Err: "Delivery date full." });
   }

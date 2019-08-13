@@ -5,38 +5,13 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import * as EmailValidator from "email-validator";
 import * as validator from "validator";
+import { registerValidation } from "../validation/registerValidation";
 
 const keys = require("../config/keys");
 export let registerverification = async (req: Request, res: Response) => {
   const { ID, email, password, password2 } = req.body;
-  const error = [];
-  if (!password || !password2) {
-    error.push({ type: "id", err: "Password is required" });
-  } else {
-    if (password !== password2) {
-      error.push({ type: "password", err: "Passwords not identical" });
-    }
-  }
 
-  if (!email) {
-    error.push({ type: "email", err: "Email is required" });
-  } else {
-    const ValidEmail = EmailValidator.validate(email);
-    if (!ValidEmail) {
-      error.push({ type: "email", err: "Email is not valid." });
-    }
-  }
-
-  if (!ID) {
-    error.push({ type: "id", err: "Id is required" });
-  } else {
-    try {
-      const id = await User.findOne({ ID });
-      if (id) {
-        error.push({ type: "id", err: "Id is already exist." });
-      }
-    } catch (err) {}
-  }
+  const error = await registerValidation(req.body);
 
   if (error.length > 0) {
     res.status(404).send({ Error: error });
