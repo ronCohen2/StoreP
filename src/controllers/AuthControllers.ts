@@ -8,9 +8,7 @@ import { loginValidation } from "../validation/loginValidation";
 const keys = require("../config/keys");
 export let registerverification = async (req: Request, res: Response) => {
   const { ID, email, password, password2 } = req.body;
-
   const error = await registerValidation(req.body);
-
   if (error.length > 0) {
     res.status(404).send({ Error: error });
   } else {
