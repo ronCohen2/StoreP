@@ -1,11 +1,14 @@
 const initialState = {
-  ron: "Df"
+  products: null
 };
 
 export default (state = initialState, payload: any) => {
   switch (payload.type) {
-    case "typeName":
-      return;
+    case "GET_PRODUCTS":
+      return {
+        ...state,
+        products: payload.payload
+      };
 
     default:
       return state;

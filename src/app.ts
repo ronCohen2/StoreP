@@ -3,6 +3,7 @@ import * as logger from "morgan";
 import * as path from "path";
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
+import * as cors from "cors";
 import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
 
 // Routes
@@ -22,6 +23,9 @@ app.set("view engine", "pug");
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
+//
+app.use(cors());
+
 // parse application/json
 app.use(bodyParser.json());
 app.use(logger("dev"));
@@ -33,7 +37,6 @@ app.use("/admin", Admin);
 app.use("/Products", Products);
 app.use("/Auth", Auth);
 app.use("/Cart", Cart);
-
 
 //Connect to mongo
 const mongoDB: string = "mongodb://localhost/StoreDb";

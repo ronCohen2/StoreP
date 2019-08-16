@@ -1,4 +1,7 @@
-const initialState = {};
+const initialState = {
+  ron: "r",
+  cohemn: "rer"
+};
 
 export default (state = initialState, payload: any) => {
   switch (payload.type) {

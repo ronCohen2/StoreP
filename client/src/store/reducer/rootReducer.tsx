@@ -5,10 +5,10 @@ import authReducer from "../reducer/authReducer";
 import productsReducer from "../reducer/productsReducer";
 
 const rootReducer: any = combineReducers({
-  authReducer,
-  cartReducer,
-  productsReducer,
-  adminReducer
+  auth: authReducer,
+  cart: cartReducer,
+  product: productsReducer,
+  admin: adminReducer
 });
 
 export default rootReducer;
