@@ -31,7 +31,7 @@ export let addProducts = async (req: Request, res: Response) => {
 };
 
 export let editProducts = async (req: Request, res: Response) => {
-  const { id } = req.body;
+  const { id }: { id: String } = req.body;
   if (id) {
     const products = await Products.findByIdAndUpdate({ _id: id }, req.body);
     res.status(200).send({ msg: "product updated" });
@@ -41,12 +41,12 @@ export let editProducts = async (req: Request, res: Response) => {
 };
 
 export let removeProducts = async (req: Request, res: Response) => {
-  const { id } = req.body;
+  const id: String = req.params.id;
   try {
     const products = await Products.findByIdAndRemove({ _id: id });
     res.status(200).send({ msg: "product removed" });
   } catch (err) {
-    res.status(400).send({ msg: "error in remove product " });
+    res.status(500).send({ msg: "error in remove product " });
   }
 };
 
@@ -57,7 +57,7 @@ export let addCategory = async (req: Request, res: Response) => {
   });
   try {
     await newCategory.save();
-    res.status(200).send({ msg: `success add category` });
+    res.status(200).json({ msg: `success add category` });
   } catch (err) {
     res.status(400).send({ msg: "error in add category ", err });
   }

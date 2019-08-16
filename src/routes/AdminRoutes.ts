@@ -7,5 +7,5 @@ Admin.get("/", controller.allProducts);
 Admin.post("/ProductsByCategory", controller.allProductsByCategory);
 Admin.post("/", controller.addProducts);
 Admin.put("/", controller.editProducts);
-Admin.delete("/", controller.removeProducts);
+Admin.delete("/removeProduct/:id", controller.removeProducts);
 Admin.post("/category", controller.addCategory);

@@ -1,8 +1,5 @@
-import { response } from "express";
-import { any } from "prop-types";
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { clearLine } from "readline";
 import axios from "axios";
 
 export const getAllProducts = () => {
@@ -59,7 +56,7 @@ export const addProduct = (
       console.log(err);
       dispatch({
         type: "ADD_PRODUCTS_ERR",
-        payload: err.response.data.err.errors
+        payload: err.response.data.err
       });
     }
   };
@@ -68,4 +65,34 @@ export const addProduct = (
 //edit product
 
 //remove products
+export const removeProduct = (productId: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:3001/admin/category/${productId}`
+      );
+    } catch (err) {
+      console.log(err);
+      dispatch({
+        type: "REMOVE_PRODUCT_ERR",
+        payload: err.response.data
+      });
+    }
+  };
+};
 // add category
+export const addCategory = (categoryName: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(`http://localhost:3001/admin/category`, {
+        categoryName
+      });
+      console.log(res.data);
+    } catch (err) {
+      dispatch({
+        type: "ADD_CATEGORY_ERR",
+        payload: err.response.data
+      });
+    }
+  };
+};

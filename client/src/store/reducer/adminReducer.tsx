@@ -1,7 +1,11 @@
+import { removeProduct } from "../action/adminAction";
+
 const initialState = {
   allProducts: [],
   productsByCategory: null,
-  addProductErr: null
+  addProductErr: null,
+  removeProductError: null,
+  eddCategoryError: null
 };
 
 export default (state = initialState, payload: any) => {
@@ -26,7 +30,16 @@ export default (state = initialState, payload: any) => {
         ...state,
         addProductErr: payload.payload
       };
-
+    case "REMOVE_PRODUCT_ERR":
+      return {
+        ...state,
+        removeProductError: payload.payload
+      };
+    case "ADD_CATEGORY_ERR":
+      return {
+        ...state,
+        eddCategoryError: payload.payload
+      };
     default:
       return state;
   }
