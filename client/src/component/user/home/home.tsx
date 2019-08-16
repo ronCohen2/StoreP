@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { string, any } from "prop-types";
-import { getAllProducts } from "../../../store/action/adminAction";
+import {
+  addProduct,
+  getAllProductsByCategory
+} from "../../../store/action/adminAction";
 import { ThunkDispatch } from "redux-thunk";
 
 class home extends Component<any, any> {
@@ -11,7 +14,7 @@ class home extends Component<any, any> {
   }
 
   componentWillMount() {
-    this.props.login();
+    this.props.login("aasdasd", "Sdsafsdf", 123, "sdfasasdf");
   }
   render() {
     console.log(this.props);
@@ -28,7 +31,12 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => {
   return {
-    login: () => dispatch(getAllProducts())
+    login: (
+      productName: String,
+      categoryId: String,
+      price: Number,
+      image: String
+    ) => dispatch(addProduct(productName, categoryId, price, image))
   };
 };
 

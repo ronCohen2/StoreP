@@ -1,5 +1,7 @@
 const initialState = {
-  products: null
+  allProducts: [],
+  productsByCategory: null,
+  addProductErr: null
 };
 
 export default (state = initialState, payload: any) => {
@@ -7,7 +9,22 @@ export default (state = initialState, payload: any) => {
     case "GET_PRODUCTS":
       return {
         ...state,
-        products: payload.payload
+        allProducts: payload.payload
+      };
+    case "GET_PRODUCTS_BY_CATEGORY":
+      return {
+        ...state,
+        productsByCategory: payload.payload
+      };
+    case "ADD_PRODUCTS":
+      return {
+        ...state,
+        allProducts: state.allProducts.concat(payload.payload)
+      };
+    case "ADD_PRODUCTS_ERR":
+      return {
+        ...state,
+        addProductErr: payload.payload
       };
 
     default:

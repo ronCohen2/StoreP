@@ -7,19 +7,26 @@ export let allProducts = async (req: Request, res: Response) => {
   const products = await Products.find();
   res.send(products);
 };
+
+export let allProductsByCategory = async (req: Request, res: Response) => {
+  console.log(req.body);
+  const { categoryId } = req.body;
+  const products = await Products.find({ categoryId });
+  res.send(products);
+};
 export let addProducts = async (req: Request, res: Response) => {
-  const { productName, categoryId, price, image } = req.body;
-  const newProduct = new Products({
-    productName: productName,
-    categoryId: categoryId,
-    price: price,
-    image: image
-  });
   try {
+    const { productName, categoryId, price, image } = req.body;
+    const newProduct = new Products({
+      productName: productName,
+      categoryId: categoryId,
+      price: price,
+      image: image
+    });
     await newProduct.save();
-    res.status(200).send({ msg: `success add : ${newProduct._id}` });
+    res.status(200).send({ msg: `success`, newProduct });
   } catch (err) {
-    res.status(400).send({ msg: "error in add products ", err });
+    res.status(500).send({ err });
   }
 };
 
