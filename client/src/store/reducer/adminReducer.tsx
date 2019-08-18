@@ -1,6 +1,6 @@
 import { removeProduct } from "../action/adminAction";
 
-const initialState = {
+const initialState: any = {
   allProducts: [],
   productsByCategory: null,
   addProductErr: null,

@@ -111,26 +111,23 @@ export let createOrder = async (req: Request, res: Response) => {
   } = req.body;
 
   const checkDate = await Order.find({ shipDate });
-  console.log(checkDate);
-  if (checkDate.length < 3) {
-    const newOrder = new Order({
-      userId,
-      cartId,
-      totalPrice,
-      city,
-      street,
-      shipDate,
-      creditCard
-    });
-    try {
-      await newOrder.save();
-      res.status(200).send({ msg: "Order success.", Order: newOrder });
-    } catch (err) {
-      res.send(err);
-    }
-  // if date is full !! 
-  } else {
-    res.status(400).send({ Err: "Delivery date full." });
+  if (checkDate.length > 3) {
+    return res.status(400).send({ Err: "Delivery date full." });
+  }
+  const newOrder = new Order({
+    userId,
+    cartId,
+    totalPrice,
+    city,
+    street,
+    shipDate,
+    creditCard
+  });
+  try {
+    await newOrder.save();
+    res.status(200).send({ msg: "Order success.", Order: newOrder });
+  } catch (err) {
+    res.send(err);
   }
 };
 

@@ -1,4 +1,4 @@
-const initialState = {
+const initialState: any = {
   allProducts: null,
   productDetails: null,
   category: null,

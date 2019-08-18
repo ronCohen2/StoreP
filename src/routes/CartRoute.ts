@@ -8,9 +8,9 @@ Cart.get("/getItems", controller.GetCartItems);
 
 Cart.post("/addItem", controller.addItem);
 
-Cart.delete("/deleteItem", controller.deleteItem);
+Cart.post("/deleteItem", controller.deleteItem);
 
-Cart.delete("/removeAllItems", controller.empty);
+Cart.post("/removeAllItems", controller.empty);
 
 // Cart.get("/cartStatus", controller.CartStatus);
 

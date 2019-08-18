@@ -1,7 +1,9 @@
-const initialState = {
+const initialState: any = {
   items: [],
+  order: null,
   cartError: null,
-  addError: null
+  addError: null,
+  orderErr: null
 };
 export default (state = initialState, payload: any) => {
   switch (payload.type) {
@@ -24,6 +26,33 @@ export default (state = initialState, payload: any) => {
       return {
         ...state,
         addError: payload.payload
+      };
+    case "DELETE_CART_ITEM":
+      return {
+        ...state,
+        items: state.items.filter(
+          (item: any) => item.productId !== payload.payload
+        )
+      };
+    case "DELETE_CART_ITEM_ERROR":
+      return {
+        ...state,
+        deleteErr: payload.payload
+      };
+    case "REMOVE_ALL_ITEMS":
+      return {
+        ...state,
+        items: []
+      };
+    case "ORDER":
+      return {
+        ...state,
+        order: payload.payload.Order
+      };
+    case "ORDER_ERR":
+      return {
+        ...state,
+        orderErr: payload.payload
       };
 
     default:
