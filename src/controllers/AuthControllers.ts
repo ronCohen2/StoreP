@@ -75,7 +75,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(400).send({ msg: "User or Password WRONG !" });
     }
     const token = user.generateToken(id, email, password, role);
-    res.status(200).json({ seccess: true, token: "Bearer " + token });
+    res.status(200).json({ seccess: true, token: "Bearer " + token, user });
   } catch {
     res.send({ msg: "User or Password WRONG !" });
   }

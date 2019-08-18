@@ -1,5 +1,5 @@
 export interface StoreInterface {
-  auth: object;
+  auth: any;
   cart: any;
   product: any;
   admin: any;

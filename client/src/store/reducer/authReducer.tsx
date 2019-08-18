@@ -1,11 +1,15 @@
-const initialState: any = {
-  registerErr: null,
+import { IAuth } from "../../type/reducer";
+import { Reducer } from "redux";
+
+const initialState: IAuth = {
   registerToken: null,
   userConnected: false,
-  user: null
+  user: undefined,
+  registerErr: undefined,
+  loginErr: undefined
 };
 
-export default (state = initialState, payload: any) => {
+const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
   switch (payload.type) {
     case "REGISTER_VERIFICATION":
       return {
@@ -24,8 +28,22 @@ export default (state = initialState, payload: any) => {
         userConnected: true,
         user: payload.payload.user // fix password
       };
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        userConnected: true,
+        user: payload.payload.user,
+        token: payload.payload.token
+      };
+    case "LOGIN_ERR": {
+      return {
+        ...state,
+        loginErr: payload.payload
+      };
+    }
 
     default:
       return state;
   }
 };
+export default reducer;

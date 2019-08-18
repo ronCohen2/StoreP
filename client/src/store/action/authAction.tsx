@@ -47,3 +47,20 @@ export const register = (
     }
   };
 };
+
+export const login = (id: Number, password: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post("http://localhost:3001/Auth/login", {
+        id,
+        password
+      });
+      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+    } catch (error) {
+      dispatch({ type: "LOGIN_ERR", payload: error });
+    }
+  };
+};
+
+// create log out action 
+
