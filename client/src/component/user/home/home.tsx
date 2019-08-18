@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { string, any } from "prop-types";
-import { searchProducts } from "../../../store/action/productAction";
+import { registerVerif } from "../../../store/action/authAction";
 import { ThunkDispatch } from "redux-thunk";
 
 class home extends Component<any, any> {
@@ -11,10 +11,9 @@ class home extends Component<any, any> {
   }
 
   componentWillMount() {
-    this.props.searchProducts("as");
+    this.props.registerVerif(123123, "ronc@gmailk.com", 123123, 123123);
   }
   render() {
-    console.log(this.props);
     let { ron }: any = this.props;
     console.log(ron);
     return <div>rblbl</div>;
@@ -28,7 +27,8 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => {
   return {
-    searchProducts: (product: String) => dispatch(searchProducts(product))
+    registerVerif: (ID: Number, email: String, password: any, password2: any) =>
+      dispatch(registerVerif(ID, email, password, password2))
   };
 };
 

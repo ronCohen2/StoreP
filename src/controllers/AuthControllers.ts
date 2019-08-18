@@ -10,21 +10,20 @@ export let registerverification = async (req: Request, res: Response) => {
   const { ID, email, password, password2 } = req.body;
   const error = await registerValidation(req.body);
   if (error.length > 0) {
-    res.status(404).send({ Error: error });
-  } else {
-    jwt.sign(
-      {
-        id: ID,
-        email,
-        password
-      },
-      keys.secretOrKey,
-      { expiresIn: 3600 },
-      (err, token) => {
-        res.status(200).json({ seccess: true, token: "Bearer " + token });
-      }
-    );
+    return res.status(202).send({ success: false, Error: error });
   }
+  jwt.sign(
+    {
+      id: ID,
+      email,
+      password
+    },
+    keys.secretOrKey,
+    { expiresIn: 3600 },
+    (err, token) => {
+      res.status(200).json({ seccess: true, token: "Bearer " + token });
+    }
+  );
 };
 
 export let Register = async (req: Request, res: Response) => {
@@ -54,7 +53,7 @@ export let Register = async (req: Request, res: Response) => {
     });
     //Save User
     await newUser.save();
-    res.status(200).send({ status: true, token });
+    res.status(200).send({ status: true, token, user: newUser });
   } catch (err) {
     // FIX - error object
     res.send(err);
@@ -70,14 +69,13 @@ export const login = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ ID: id });
     const UserHash: any = user.password;
-    const email: String = user.email;
+    const { role, email } = user;
     const validPassword = await bcrypt.compare(password, UserHash);
-    if (validPassword) {
-      const token = user.generateToken(id, email, password);
-      res.status(200).json({ seccess: true, token: "Bearer " + token });
-    } else {
-      res.status(400).send({ msg: "User or Password WRONG !" });
+    if (!validPassword) {
+      return res.status(400).send({ msg: "User or Password WRONG !" });
     }
+    const token = user.generateToken(id, email, password, role);
+    res.status(200).json({ seccess: true, token: "Bearer " + token });
   } catch {
     res.send({ msg: "User or Password WRONG !" });
   }

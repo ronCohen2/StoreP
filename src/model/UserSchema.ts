@@ -54,13 +54,15 @@ const UserSchema = new mongoose.Schema({
 UserSchema.methods.generateToken = (
   ID: Number,
   email: String,
-  password: String
+  password: String,
+  role: Boolean
 ) => {
   const token = jwt.sign(
     {
       id: ID,
       email,
-      password
+      password,
+      role
     },
     keys.secretOrKey,
     { expiresIn: 3600 }

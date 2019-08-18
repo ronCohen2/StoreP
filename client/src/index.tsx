@@ -8,6 +8,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";
 import rootReducer from "../src/store/reducer/rootReducer";
 import * as serviceWorker from "./serviceWorker";
+import { StoreInterface } from "./type/store";
 const store = createStore(
   rootReducer,
   composeWithDevTools(compose(applyMiddleware(thunk)))

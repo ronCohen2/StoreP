@@ -10,7 +10,12 @@ export interface IUser extends mongoose.Document {
   city: String;
   street: String;
   role: Boolean;
-  generateToken: (ID: Number, email: String, password: String) => String;
+  generateToken: (
+    ID: Number,
+    email: String,
+    password: String,
+    role: Boolean
+  ) => String;
 }
 export interface ICategory extends mongoose.Document {
   categoryName: String;
