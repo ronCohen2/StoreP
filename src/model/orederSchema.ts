@@ -4,10 +4,12 @@ const orderSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true
+    //FIX- ref to user schema
   },
   cartId: {
     type: String,
     required: true
+    //FIX- ref to cart 
   },
   totalPrice: {
     type: Number,

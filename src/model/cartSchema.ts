@@ -5,6 +5,7 @@ const cartSchema = new mongoose.Schema({
   UserId: {
     type: Number,
     required: true
+    //FIX- need to be reference to user schema
   },
   date: {
     type: Date,
@@ -14,7 +15,6 @@ const cartSchema = new mongoose.Schema({
     type: Boolean,
     required: true
   }
-
 });
 const Cart = mongoose.model<Icart>("Cart", cartSchema);
 export default Cart;

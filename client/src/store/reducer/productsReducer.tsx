@@ -3,7 +3,8 @@ const initialState = {
   productDetails: null,
   category: null,
   productsByCategory: null,
-  search: null
+  search: null,
+  err: null
 };
 
 export default (state = initialState, payload: any) => {
@@ -32,6 +33,11 @@ export default (state = initialState, payload: any) => {
       return {
         ...state,
         search: payload.payload
+      };
+    case "PRODUCT_ERR":
+      return {
+        ...state,
+        err: "Err :error  in get data from server ."
       };
 
     default:

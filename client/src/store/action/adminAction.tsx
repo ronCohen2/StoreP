@@ -53,7 +53,6 @@ export const addProduct = (
         payload: res.data.newProduct
       });
     } catch (err) {
-      console.log(err);
       dispatch({
         type: "ADD_PRODUCTS_ERR",
         payload: err.response.data.err

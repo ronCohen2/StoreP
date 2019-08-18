@@ -9,7 +9,7 @@ export const getAllProducts = () => {
       const res = await axios.get("http://localhost:3001/Products");
       dispatch({ type: "GET_PRODUCTS_USER", payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: "PRODUCT_ERR" });
     }
   };
 };
@@ -23,7 +23,7 @@ export const getProductsDetails = (productId: String) => {
       );
       dispatch({ type: "GET_PRODUCTS_DETAILS", payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: "PRODUCT_ERR" });
     }
   };
 };
@@ -36,7 +36,7 @@ export const getAllCategory = () => {
       );
       dispatch({ type: "ALL_CATEGORY", payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: "PRODUCT_ERR" });
     }
   };
 };
@@ -49,7 +49,7 @@ export const getProductsByCategory = (categoryId: String) => {
       );
       dispatch({ type: "GET_PRODUCT_BY_CATEGORY", payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: "PRODUCT_ERR" });
     }
   };
 };
@@ -62,7 +62,7 @@ export const searchProducts = (product: String) => {
       );
       dispatch({ type: "SEARCH_PRODUCT", payload: res.data });
     } catch (err) {
-      console.log(err);
+      dispatch({ type: "PRODUCT_ERR" });
     }
   };
 };

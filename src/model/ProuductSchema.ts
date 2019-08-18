@@ -10,6 +10,7 @@ const ProductsSchema = new mongoose.Schema({
   categoryId: {
     type: String,
     required: true
+    //FIX- ref to category Schema 
   },
   price: {
     type: Number,
