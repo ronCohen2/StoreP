@@ -41,24 +41,19 @@ export default class TopNav extends React.Component {
 
     return (
       <Container>
-        <Navbar className="" light>
+        <Navbar>
           <NavbarBrand>
-            <img
-              src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/uploads/2019/03/logo.png"
-              alt=""
-            />
+            <img src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/uploads/2019/03/logo.png" />
           </NavbarBrand>
           <Nav navbar>
             <InputGroup>
               <Input />
-              <InputGroupAddon addonType="append">
+              <InputGroupAddon addonType="prepend">
                 <Button color="secondary">Search</Button>
               </InputGroupAddon>
             </InputGroup>
           </Nav>
-          <div>
-            <SignOut />
-          </div>
+          <SignOut />
         </Navbar>
       </Container>
     );

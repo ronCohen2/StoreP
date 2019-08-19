@@ -1,55 +1,35 @@
 import React from "react";
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
-var style = {
-  backgroundColor: "#F8F8F8",
-  borderTop: "1px solid #E7E7E7",
-  textAlign: "center",
-  padding: "200px",
-  position: "fixed",
-  left: "0",
-  bottom: "0",
-  height: "60px",
-  width: "100%"
-};
-const footer = () => {
+import { Container, Col, Row } from "reactstrap";
+
+const Footer = () => {
   return (
-    <MDBFooter color="blue" style={style}>
-      <MDBContainer fluid className="text-center text-md-left">
-        <MDBRow>
-          <MDBCol md="6">
-            <h5 className="title">Footer Content</h5>
-            <p>
-              Here you can use rows and columns here to organize your footer
-              content.
-            </p>
-          </MDBCol>
-          <MDBCol md="6">
-            <h5 className="title">Links</h5>
-            <ul>
-              <li className="list-unstyled">
-                <a href="#!">Link 1</a>
-              </li>
-              <li className="list-unstyled">
-                <a href="#!">Link 2</a>
-              </li>
-              <li className="list-unstyled">
-                <a href="#!">Link 3</a>
-              </li>
-              <li className="list-unstyled">
-                <a href="#!">Link 4</a>
-              </li>
-            </ul>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-      <div className="footer-copyright text-center py-3">
-        <MDBContainer fluid>
-          &copy; {new Date().getFullYear()} Copyright:{" "}
-          <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
-        </MDBContainer>
-      </div>
-    </MDBFooter>
+    <div className="footer">
+      <Row>
+        <Col sm="1" />
+        <Col sm="4">
+          <h4>ABOUT US</h4>
+          <p className="p-2">
+            There are many variations of passages of Lorem Ipsum available, but
+            There are many variations of passages of Lorem Ipsum available, but
+          </p>
+        </Col>
+        <Col sm="3">
+          <h4>QUICK LINKS</h4>
+          <p>Home</p>
+          <p>Shoping cart</p>
+          <p>Shop</p>
+          <p>Contact</p>
+        </Col>
+        <Col sm="3">
+          <h4>FOLLOW US</h4>
+          <p>Facebook</p>
+          <p>Instegram</p>
+          <p>Twiter</p>
+        </Col>
+        <Col sm="1" />
+      </Row>
+    </div>
   );
 };
 
-export default footer;
+export default Footer;

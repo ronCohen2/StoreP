@@ -19,22 +19,22 @@ class CategoryDropDown extends React.Component<any, any> {
   }
   render() {
     const { category }: any = this.props.products;
-    console.log(category);
-
-    // console.log(category);
     return (
       <div>
-        <UncontrolledDropdown color="light ">
-          <DropdownToggle caret className=" display-2">
+        <UncontrolledDropdown className="navb">
+          <DropdownToggle caret className="btn-lg navb">
             Catrgory
           </DropdownToggle>
           <DropdownMenu>
             {category
-              ? category.map((name: any, key: any) => {
+              ? category.map((name: any, key: string) => {
                   return (
-                    <DropdownItem className="mt-3 mr-3 ml-3" key={key}>
-                      {name.categoryName}
-                    </DropdownItem>
+                    <div>
+                      <DropdownItem className="mt-3 mr-3 ml-3" key={key}>
+                        {name.categoryName}
+                      </DropdownItem>
+                      <DropdownItem divider />
+                    </div>
                   );
                 })
               : null}

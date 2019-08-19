@@ -36,7 +36,7 @@ export default class NavbarC extends React.Component {
 
     return (
       <div>
-        <Navbar className="p-3  navb" light expand="md">
+        <Navbar className=" navb" light expand="md">
           <Container>
             <NavbarBrand>
               <CategoryDropDown />
@@ -61,15 +61,12 @@ export default class NavbarC extends React.Component {
                   </Col>
                   <Col>
                     <NavItem className="d-2 text-white">
-                      <NavLink
-                        className="d-2 text-white ml-2"
-                        href="/components/"
-                      >
+                      <NavLink className="d-2 text-white " href="/components/">
                         Contact
                       </NavLink>
                     </NavItem>
                   </Col>
-                  <Col className="mr-4">
+                  <Col className="">
                     <NavItem>
                       <NavLink className="d-2 text-white " href="/components/">
                         About

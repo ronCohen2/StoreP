@@ -12,6 +12,7 @@ import order from "./component/user/oreder/order";
 import shoppingCart from "./component/user/shopping/shoppingCart";
 import NavbarC from "./component/layout/Navbar";
 import TopNav from "./component/layout/TopNav";
+import Footer from "./component/layout/Footer";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -32,9 +33,9 @@ class Store extends Component<any, any> {
           <Route path="/register" component={register} />
           <Route path="/order" component={order} />
           <Route path="/shoppingCart" component={shoppingCart} />
-
           <Route path="/" component={noMatch} />
         </Switch>
+        <Footer />
       </Router>
     );
   }
