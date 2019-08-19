@@ -1,14 +1,16 @@
 import { removeProduct } from "../action/adminAction";
+import { Reducer } from "redux";
+import { IAdmin } from "../../type/reducer";
 
-const initialState: any = {
+const initialState: IAdmin = {
   allProducts: [],
-  productsByCategory: null,
+  productsByCategory: undefined,
   addProductErr: null,
   removeProductError: null,
   eddCategoryError: null
 };
 
-export default (state = initialState, payload: any) => {
+const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
   switch (payload.type) {
     case "GET_PRODUCTS":
       return {
@@ -44,3 +46,4 @@ export default (state = initialState, payload: any) => {
       return state;
   }
 };
+export default adminReducer;

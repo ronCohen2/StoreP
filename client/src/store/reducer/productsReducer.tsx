@@ -1,4 +1,6 @@
-const initialState: any = {
+import { Iproduct } from "../../type/reducer";
+import { Reducer } from "redux";
+const initialState: Iproduct = {
   allProducts: null,
   productDetails: null,
   category: null,
@@ -7,7 +9,7 @@ const initialState: any = {
   err: null
 };
 
-export default (state = initialState, payload: any) => {
+const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
   switch (payload.type) {
     case "GET_PRODUCTS_USER":
       return {
@@ -44,3 +46,4 @@ export default (state = initialState, payload: any) => {
       return state;
   }
 };
+export default reducer;

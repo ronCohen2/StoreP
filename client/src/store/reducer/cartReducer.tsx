@@ -1,11 +1,14 @@
-const initialState: any = {
+import { Reducer } from "redux";
+import { Icart } from "../../type/reducer";
+
+const initialState: Icart = {
   items: [],
   order: null,
   cartError: null,
   addError: null,
   orderErr: null
 };
-export default (state = initialState, payload: any) => {
+const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
   switch (payload.type) {
     case "CART_ITEMS":
       return {
@@ -59,3 +62,4 @@ export default (state = initialState, payload: any) => {
       return state;
   }
 };
+export default cartreducer;

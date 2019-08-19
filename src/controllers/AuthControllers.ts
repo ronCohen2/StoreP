@@ -6,6 +6,7 @@ import * as jwt from "jsonwebtoken";
 import { registerValidation } from "../validation/registerValidation";
 import { loginValidation } from "../validation/loginValidation";
 const keys = require("../config/keys");
+
 export let registerverification = async (req: Request, res: Response) => {
   const { ID, email, password, password2 } = req.body;
   const error = await registerValidation(req.body);

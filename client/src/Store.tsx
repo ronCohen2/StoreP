@@ -10,6 +10,8 @@ import register from "./component/auth/register";
 import login from "./component/auth/login";
 import order from "./component/user/oreder/order";
 import shoppingCart from "./component/user/shopping/shoppingCart";
+import NavbarC from "./component/layout/Navbar";
+import TopNav from "./component/layout/TopNav";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -19,7 +21,8 @@ class Store extends Component<any, any> {
   render() {
     return (
       <Router>
-        <div>nav</div>
+        <TopNav />
+        <NavbarC />
         <Switch>
           <Route path="/" exact component={home} />
           <Route path="/shopping" component={shopping} />
