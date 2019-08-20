@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import { string, any } from "prop-types";
 import { registerVerif } from "../../../store/action/authAction";
 import { ThunkDispatch } from "redux-thunk";
-
+import Carousel from "./Carousel";
+import CategoryHome from "./CategoryHome";
+import "./home.css";
+import StatisticData from "./StatisticData";
 class home extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -14,13 +17,16 @@ class home extends Component<any, any> {
     this.props.registerVerif(123123, "ronc@gmailk.com", 123123, 123123);
   }
   render() {
-    let { ron }: any = this.props;
-    console.log(ron);
-    return <div>rblbl</div>;
+    return (
+      <div>
+        <Carousel />
+        <CategoryHome id="5d5bd6960a5a7d1ab05da2cf" />
+        <StatisticData />
+      </div>
+    );
   }
 }
 const mapStateToProps = (state: any) => {
-  console.log(state.auth);
   return {
     ron: state.auth
   };

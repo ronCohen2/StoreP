@@ -6,7 +6,6 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -15,6 +14,8 @@ import {
   Col,
   Row
 } from "reactstrap";
+import { NavLink } from "react-router-dom";
+
 import CategoryDropDown from "./CategoryDropDown";
 export default class NavbarC extends React.Component {
   constructor(props: any) {
@@ -35,8 +36,8 @@ export default class NavbarC extends React.Component {
     const { isOpen }: any = this.state;
 
     return (
-      <div>
-        <Navbar className=" navb" light expand="md">
+      <div className="navb">
+        <Navbar light expand="md">
           <Container>
             <NavbarBrand>
               <CategoryDropDown />
@@ -46,29 +47,29 @@ export default class NavbarC extends React.Component {
               <Nav className="m-auto" navbar>
                 <Row>
                   <Col>
-                    <NavItem className="d-2 text-white">
-                      <NavLink className="d-2 text-white" href="/components/">
+                    <NavItem>
+                      <NavLink to={"/"} className="d-2 text-white">
                         Home
                       </NavLink>
                     </NavItem>
                   </Col>
                   <Col>
-                    <NavItem className="d-2 text-white">
-                      <NavLink className="d-2 text-white" href="/components/">
+                    <NavItem>
+                      <NavLink to={"/shop"} className="d-2 text-white">
                         Shop
                       </NavLink>
                     </NavItem>
                   </Col>
                   <Col>
-                    <NavItem className="d-2 text-white">
-                      <NavLink className="d-2 text-white " href="/components/">
+                    <NavItem>
+                      <NavLink to={"/contact"} className="d-2 text-white">
                         Contact
                       </NavLink>
                     </NavItem>
                   </Col>
                   <Col className="">
                     <NavItem>
-                      <NavLink className="d-2 text-white " href="/components/">
+                      <NavLink to={"/about"} className="d-2 text-white">
                         About
                       </NavLink>
                     </NavItem>

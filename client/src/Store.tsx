@@ -4,6 +4,7 @@ import { Switch } from "react-router";
 import home from "./component/user/home/home";
 import shopping from "./component/user/shopping/shopping";
 import contact from "./component/user/contact/contact";
+import About from "./component/user/contact/About";
 import itemDetails from "./component/user/shopping/itemDetails";
 import noMatch from "./component/noMatch";
 import register from "./component/auth/register";
@@ -26,9 +27,10 @@ class Store extends Component<any, any> {
         <NavbarC />
         <Switch>
           <Route path="/" exact component={home} />
-          <Route path="/shopping" component={shopping} />
+          <Route path="/shop" component={shopping} />
           <Route path="/itemDetails/:id" component={itemDetails} />
           <Route path="/contact" component={contact} />
+          <Route path="/about" component={contact} />
           <Route path="/login" exact component={login} />
           <Route path="/register" component={register} />
           <Route path="/order" component={order} />

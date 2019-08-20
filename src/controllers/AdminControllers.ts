@@ -51,9 +51,10 @@ export let removeProducts = async (req: Request, res: Response) => {
 };
 
 export let addCategory = async (req: Request, res: Response) => {
-  const { categoryName } = req.body;
+  const { categoryName, image } = req.body;
   const newCategory = new category({
-    categoryName
+    categoryName,
+    image
   });
   try {
     await newCategory.save();
