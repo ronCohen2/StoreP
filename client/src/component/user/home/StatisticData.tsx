@@ -8,15 +8,15 @@ export default function StatisticData() {
   return (
     <Container className="banner">
       <Row>
-        <Col>
-          <img src={cart} className="StatisticIcom" />
+        <Col className="sd">
+          <img src={cart} className="StatisticIcom " />
           <h4> 150 Cart</h4>
         </Col>
-        <Col>
+        <Col className="sd">
           <img src={user} className="StatisticIcom" />
           <h4> 200 users</h4>
         </Col>
-        <Col>
+        <Col className="sd">
           <img src={products} className="StatisticIcom" />
           <h4> 300 products</h4>
         </Col>

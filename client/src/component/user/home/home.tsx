@@ -20,8 +20,9 @@ class home extends Component<any, any> {
     return (
       <div>
         <Carousel />
-        <CategoryHome id="5d5bd6960a5a7d1ab05da2cf" />
         <StatisticData />
+        <CategoryHome id="5d5bd6960a5a7d1ab05da2cf" />
+        <CategoryHome id="5d5bd6e10a5a7d1ab05da2d0" />
       </div>
     );
   }

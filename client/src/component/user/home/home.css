@@ -15,11 +15,27 @@
   height: 100%;
 }
 .banner {
-  background-color: #f7f5f6;
+  background-color: #eee9e9;
   margin-top: 30px;
   margin-bottom: 30px;
 }
 .StatisticIcom {
   width: 100px;
   height: 100px;
+}
+.sd {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+input {
+  background-color: transparent;
+  border: 2px solid white;
+}
+textarea {
+  background-color: transparent;
+  border: 2px solid white;
+}
+.contact {
+  border-radius: 20px;
 }

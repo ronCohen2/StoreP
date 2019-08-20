@@ -11,37 +11,36 @@ class CategoryHome extends Component<any, any> {
   }
   componentDidMount() {
     const { id }: any = this.props;
+    console.log(id);
     this.props.getProductByCategory(id);
   }
   render() {
     const { productsByCategory }: any = this.props.product;
-
+    console.log(productsByCategory);
     return (
       <Container className="mt-4">
         <h2>Electronic Products</h2>
         <Row className="cat rounded">
-          <Col md="4">
+          <Col sm="12" md="4">
             <img
               src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/themes/supermarket-ecommerce-pro/images/ecatprobanner.jpg"
               className="CatyegoryImg"
             />
           </Col>
-          <Col md="8">
-            <div className="">
-              {productsByCategory
-                ? productsByCategory.map((product: any, index: Number) => {
-                    return (
-                      <Col md="4" className="float-left mt-3">
-                        <ProductCard
-                          img={product.image}
-                          name={product.productName}
-                          price={product.price}
-                        />
-                      </Col>
-                    );
-                  })
-                : null}
-            </div>
+          <Col sm="12" md="8">
+            {productsByCategory
+              ? productsByCategory.map((product: any, index: Number) => {
+                  return (
+                    <Col md="4" className="float-left mt-3">
+                      <ProductCard
+                        img={product.image}
+                        name={product.productName}
+                        price={product.price}
+                      />
+                    </Col>
+                  );
+                })
+              : null}
           </Col>
         </Row>
       </Container>
