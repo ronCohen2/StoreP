@@ -23,6 +23,7 @@
     "@fortawesome/react-fontawesome": "^0.1.4",
     "@types/bcrypt": "^3.0.0",
     "@types/cors": "^2.8.5",
+    "@types/jquery": "^3.3.31",
     "@types/jsonwebtoken": "^8.3.2",
     "@types/mongoose": "^5.5.11",
     "@types/react-sidebar": "^3.0.0",
@@ -38,6 +39,7 @@
     "express": "^4.16.2",
     "http-errors": "^1.7.1",
     "i": "^0.3.6",
+    "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "mdbreact": "^4.19.1",
     "mongoose": "^5.6.8",
@@ -49,7 +51,8 @@
     "react-sidebar": "^3.0.2",
     "reactstrap": "^8.0.1",
     "tsc-watch": "^2.2.1",
-    "twilio": "^2.1.1"
+    "twilio": "^2.1.1",
+    "typescript-bootstrap": "^1.0.2"
   },
   "devDependencies": {
     "@types/express": "^4.11.0",
