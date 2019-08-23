@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Input } from "reactstrap";
 import { connect } from "react-redux";
 
 class contact extends Component {
@@ -25,25 +25,23 @@ class contact extends Component {
             </div>
           </Col>
           <Col sm="12" md="7">
-            <div className="rounded m-4 ">
-              <form className="contactForm ">
+            <div className="contactForm ">
+              <form>
                 <h3 className="pt-4 pb-2 text-white d-flex justify-content-center ">
                   Contact Now{" "}
                 </h3>
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Name"
-                    className="rounded ml-5 mr-3 p-2"
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="Email"
-                    className="rounded ml-4 mr-2 p-2"
-                    required
-                  />
-                </div>
+                <input
+                  type="text"
+                  placeholder="Name"
+                  className="inputContact "
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Email"
+                  className="inputContact"
+                  required
+                />
                 <div>
                   <textarea
                     name=""
@@ -51,7 +49,7 @@ class contact extends Component {
                     cols={57}
                     rows={6}
                     placeholder="youe text.."
-                    className="rounded ml-5 mr-4 mt-3 p-2"
+                    className="rounded "
                     required
                   />
                 </div>

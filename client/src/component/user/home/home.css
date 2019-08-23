@@ -28,14 +28,20 @@
   align-items: center;
   justify-content: center;
 }
-input {
-  background-color: transparent;
-  border: 2px solid white;
+.inputContact {
+  background-color: #605ca8;
+  border: 1px solid gray;
 }
 textarea {
   background-color: transparent;
   border: 2px solid white;
+  padding: 10px;
 }
 .contact {
   border-radius: 20px;
+}
+
+.productCard {
+  margin-top: 20px;
+  float: left;
 }
