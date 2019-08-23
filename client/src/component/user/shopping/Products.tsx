@@ -15,13 +15,15 @@ class Products extends Component<any, any> {
   render() {
     const { allProducts }: any = this.props.product;
     return (
-      <div className="shopProduct rounded">
-        {allProducts
-          ? allProducts.map((products: Object, key: Number) => {
-              return <ProductCard data={products} key={key} />;
-            })
-          : null}
-      </div>
+      <Container>
+        <div className="shopProduct ">
+          {allProducts
+            ? allProducts.map((products: Object, key: Number) => {
+                return <ProductCard data={products} key={key} />;
+              })
+            : null}
+        </div>
+      </Container>
     );
   }
 }
