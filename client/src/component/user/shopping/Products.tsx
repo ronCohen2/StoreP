@@ -18,7 +18,7 @@ class Products extends Component<any, any> {
       <Container>
         <div className="shopProduct ">
           {allProducts
-            ? allProducts.map((products: Object, key: Number) => {
+            ? allProducts.map((products: Object, key: any) => {
                 return <ProductCard data={products} key={key} />;
               })
             : null}

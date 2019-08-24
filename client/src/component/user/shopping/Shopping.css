@@ -7,6 +7,18 @@
 .slidecontainer {
   width: 100%; /* Width of the outside container */
 }
+.poductDetailsIMG {
+  width: 100%;
+  height: 80%;
+  border-radius: 20px;
+}
+.DetailsButton {
+  margin-top: 30px;
+  border: 0;
+  border-radius: 40px;
+  background-color: #605ca8;
+  padding: 10px;
+}
 
 /* The slider itself */
 .slider {

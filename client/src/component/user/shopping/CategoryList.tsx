@@ -1,17 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getAllCategory } from "../../../store/action/productAction";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button,
-  CardHeader,
-  Col
-} from "reactstrap";
+import { Card, CardText, CardHeader, Col } from "reactstrap";
 class CategoryList extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -22,12 +12,10 @@ class CategoryList extends Component<any, any> {
   }
   render() {
     const { category }: any = this.props.products;
-    console.log(category);
     return (
       <div className=" mb-4">
         <Card>
           <CardHeader>Category</CardHeader>
-
           {category
             ? category.map((category: any, key: Number) => {
                 return (
