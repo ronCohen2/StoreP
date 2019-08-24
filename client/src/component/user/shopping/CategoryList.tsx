@@ -9,6 +9,7 @@ import {
   CardTitle,
   CardSubtitle,
   Button,
+  CardHeader,
   Col
 } from "reactstrap";
 class CategoryList extends Component<any, any> {
@@ -23,17 +24,23 @@ class CategoryList extends Component<any, any> {
     const { category }: any = this.props.products;
     console.log(category);
     return (
-      <div className="border">
-        <h4 className="bg-light border">Category</h4>
-        {category
-          ? category.map((category: any, key: any) => {
-              return (
-                <CardText className="border-bottom">
-                  {category.categoryName}
-                </CardText>
-              );
-            })
-          : null}
+      <div className=" mb-4">
+        <Card>
+          <CardHeader>Category</CardHeader>
+
+          {category
+            ? category.map((category: any, key: Number) => {
+                return (
+                  <CardText
+                    className="border-bottom pb-3 pt-3 "
+                    onClick={() => console.log(category._id)}
+                  >
+                    {category.categoryName}
+                  </CardText>
+                );
+              })
+            : null}
+        </Card>
       </div>
     );
   }
