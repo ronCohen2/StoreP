@@ -28,8 +28,9 @@ class QuantintyModal extends React.Component<any, any> {
           toggle={this.toggle}
           className={this.props.className}
         >
+          <ModalHeader>{this.props.name}</ModalHeader>
           <ModalBody>
-            <img src={this.props.img} />
+            <label className="mr-4">Quantinty :</label>
             <input type="number" min="1" step="1" placeholder="1" />
           </ModalBody>
           <ModalFooter>

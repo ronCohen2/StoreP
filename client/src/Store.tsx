@@ -14,6 +14,7 @@ import shoppingCart from "./component/user/shopping/shoppingCart";
 import NavbarC from "./component/layout/Navbar";
 import TopNav from "./component/layout/TopNav";
 import Footer from "./component/layout/Footer";
+import shopCategory from "./component/user/shopping/shopCategory";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -28,6 +29,7 @@ class Store extends Component<any, any> {
         <Switch>
           <Route path="/" exact component={home} />
           <Route path="/shop" component={shopping} />
+          <Route path="/category/:id" component={shopCategory} />
           <Route path="/itemDetails/:id" component={itemDetails} />
           <Route path="/contact" component={contact} />
           <Route path="/about" component={contact} />

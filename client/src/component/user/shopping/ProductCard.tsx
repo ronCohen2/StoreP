@@ -16,17 +16,16 @@ const ProductCard = withRouter((props: any) => {
   return (
     <div>
       <Col md="3" className="productCard2 ">
-        <Card className="productCard2 rounded">
+        <Card
+          className="productCard2 rounded"
+          onClick={() => {
+            history.push(`/itemDetails/${props.data._id}`);
+          }}
+        >
           <CardImg top width="100%" height="100%" src={props.data.image} />
           <CardTitle>{props.data.productName}</CardTitle>
           <CardSubtitle>{props.data.price}</CardSubtitle>
-          <Button
-            onClick={() => {
-              history.push(`/itemDetails/${props.data._id}`);
-            }}
-          >
-            Add To Cart{" "}
-          </Button>
+          <Button>Add To Cart </Button>
         </Card>
       </Col>
     </div>

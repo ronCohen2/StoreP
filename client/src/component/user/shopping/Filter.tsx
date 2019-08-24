@@ -13,7 +13,7 @@ class Filter extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      filterPrice: null
+      filterPrice: null || 150
     };
   }
 
@@ -26,7 +26,7 @@ class Filter extends Component<any, any> {
     });
   };
   render() {
-    const maxPrice = 123;
+    const maxPrice: Number = 123;
     const { filterPrice } = this.state;
 
     return (

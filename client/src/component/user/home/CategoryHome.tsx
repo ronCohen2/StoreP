@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import { getProductsByCategory } from "../../../store/action/productAction";
 import "./home";
 import ProductCard from "./ProductCard";
+import { withRouter } from "react-router-dom";
+
 class CategoryHome extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -31,7 +34,13 @@ class CategoryHome extends Component<any, any> {
             {productsByCategory
               ? productsByCategory.map((product: any, index: Number) => {
                   return (
-                    <Col md="4" className="float-left mt-3">
+                    <Col
+                      md="4"
+                      className="float-left mt-3"
+                      onClick={() => {
+                        // this.props.history.push("/Home");
+                      }}
+                    >
                       <ProductCard
                         img={product.image}
                         name={product.productName}
