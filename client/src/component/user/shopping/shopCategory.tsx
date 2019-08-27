@@ -13,6 +13,9 @@ class shopCategory extends Component<any, any> {
   }
   render() {
     const { id }: any = this.props.match.params;
+    const { err }: any = this.props.products;
+
+    console.log(err);
     return (
       <Container>
         <Row>
@@ -29,7 +32,9 @@ class shopCategory extends Component<any, any> {
   }
 }
 const mapStateToProps = (state: any) => {
-  return {};
+  return {
+    products: state.product
+  };
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {};

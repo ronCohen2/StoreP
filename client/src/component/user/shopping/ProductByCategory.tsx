@@ -6,7 +6,7 @@ import {
 } from "../../../store/action/productAction";
 import ProductCard from "./ProductCard";
 import { Container } from "reactstrap";
-import { RouteProps } from "react-router";
+import { RouteProps, Redirect } from "react-router";
 
 import "./Shopping.css";
 class ProductByCategory extends Component<any & RouteProps, any> {
@@ -19,9 +19,19 @@ class ProductByCategory extends Component<any & RouteProps, any> {
     this.props.getProduct(id);
   }
   render() {
-    // const { allProducts }: any = this.props.product;
-    console.log(this.props);
-    return <Container />;
+    const { productsByCategory }: any = this.props.product;
+    const { err }: any = this.props.product;
+    return (
+      <Container>
+        <div className="shopProduct ">
+          {productsByCategory
+            ? productsByCategory.map((products: Object, key: any) => {
+                return <ProductCard data={products} key={key} />;
+              })
+            : null}
+        </div>
+      </Container>
+    );
   }
 }
 const mapStateToProps = (state: any) => {

@@ -53,6 +53,7 @@ export default class TopNav extends React.Component {
               </InputGroupAddon>
             </InputGroup>
           </Nav>
+          {/* user connectd */}
           <SignOut />
         </Navbar>
       </Container>
