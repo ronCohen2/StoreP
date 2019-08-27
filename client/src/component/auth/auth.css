@@ -1,0 +1,28 @@
+.modal-bg {
+  background-color: #605ca8 !important;
+  padding: 50px !important;
+}
+.input-login {
+  background-color: transparent !important;
+  color: white !important;
+  border: 1px solid white !important;
+  margin: 10px !important;
+}
+.flex1 {
+  display: flex !important;
+  flex-direction: row;
+}
+.to-center {
+  justify-content: center !important;
+}
+h3 {
+  color: white;
+}
+.button-modal {
+  border: 0 !important;
+  border-radius: 20px !important;
+  background: white !important;
+  color: black !important;
+  margin: 20px !important;
+  padding: 7px 30px !important;
+}

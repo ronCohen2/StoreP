@@ -1,11 +1,24 @@
-import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import React, { Component } from "react";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText
+} from "reactstrap";
+import "./auth.css";
 
 class Login extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      id: null,
+      password: null
     };
 
     this.toggle = this.toggle.bind(this);
@@ -16,36 +29,54 @@ class Login extends React.Component<any, any> {
       modal: !prevState.modal
     }));
   }
-
+  handleChange = (e: any) => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  };
   render() {
     return (
       <div>
-        <Button color="danger" onClick={this.toggle}>
-          {this.props.buttonLabel}
-        </Button>
+        <label color="danger" onClick={this.toggle}>
+          Login
+        </label>
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
-          className={this.props.className}
+          className="p-5 rounded  "
         >
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
-          <ModalBody>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+          <ModalBody className="modal-bg">
+            <h3 className="d-flex justify-content-center">Login</h3>
+            <div>
+              <InputGroup>
+                <Input
+                  placeholder="username"
+                  className="input-login"
+                  id="id"
+                  onChange={this.handleChange}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  className="input-login"
+                  id="password"
+                  onChange={this.handleChange}
+                />
+              </InputGroup>
+              <Button color="primary" className="button-modal ">
+                Login{" "}
+              </Button>
+              <Button
+                color="secondary"
+                className="button-modal "
+                onClick={this.toggle}
+              >
+                Cancel
+              </Button>
+            </div>
           </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Do Something
-            </Button>{" "}
-            <Button color="secondary" onClick={this.toggle}>
-              Cancel
-            </Button>
-          </ModalFooter>
         </Modal>
       </div>
     );

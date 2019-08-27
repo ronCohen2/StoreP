@@ -19,7 +19,7 @@ import {
   Row,
   Button
 } from "reactstrap";
-import SignIn from "./SignIn";
+import SignInlayout from "./SignIn";
 
 export default class TopNav extends React.Component {
   constructor(props: any) {
@@ -54,7 +54,7 @@ export default class TopNav extends React.Component {
             </InputGroup>
           </Nav>
           {/* user connectd */}
-          <SignIn />
+          <SignInlayout />
         </Navbar>
       </Container>
     );

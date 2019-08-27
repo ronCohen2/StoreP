@@ -1,14 +1,15 @@
-import * as React from "react";
+import React from "react";
 import { NavItem } from "reactstrap";
 import Login from "../auth/Login";
-let SignIn: React.SFC<any> = () => {
+
+export default function SignInlayout(props: any) {
   return (
     <div>
+      w
       <NavItem>
         <Login />
       </NavItem>
-      <NavItem>Register </NavItem>
+      <NavItem>Register</NavItem>
     </div>
   );
-};
-export default SignIn;
+}
