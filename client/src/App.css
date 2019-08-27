@@ -6,7 +6,7 @@
   bottom: 0;
   width: 100%;
   text-align: center;
-  background-color: #eee9e9;
+  background-color: #343748;
   padding: 20px;
 }
 .img {
@@ -31,5 +31,4 @@
   background-color: #605ca8;
   border-radius: 20px;
   margin: auto;
-
 }

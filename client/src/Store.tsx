@@ -15,6 +15,8 @@ import NavbarC from "./component/layout/Navbar";
 import TopNav from "./component/layout/TopNav";
 import Footer from "./component/layout/Footer";
 import shopCategory from "./component/user/shopping/shopCategory";
+import Slide from "./component/user/shopping/CartMenu";
+import RegisterStep2 from "./component/auth/RegisterStep2";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -24,22 +26,26 @@ class Store extends Component<any, any> {
   render() {
     return (
       <Router>
-        <TopNav />
-        <NavbarC />
-        <Switch>
-          <Route path="/" exact component={home} />
-          <Route path="/shop" component={shopping} />
-          <Route path="/category/:id" component={shopCategory} />
-          <Route path="/itemDetails/:id" component={itemDetails} />
-          <Route path="/contact" component={contact} />
-          <Route path="/about" component={contact} />
-          <Route path="/login" exact component={login} />
-          <Route path="/register" component={register} />
-          <Route path="/order" component={order} />
-          <Route path="/shoppingCart" component={shoppingCart} />
-          <Route path="/" component={noMatch} />
-        </Switch>
-        <Footer />
+        <Slide right pageWrapId={"page-wrap"} />
+        <main id="page-wrap">
+          <TopNav />
+          <NavbarC />
+          <Switch>
+            <Route path="/" exact component={home} />
+            <Route path="/shop" component={shopping} />
+            <Route path="/category/:id" component={shopCategory} />
+            <Route path="/itemDetails/:id" component={itemDetails} />
+            <Route path="/contact" component={contact} />
+            <Route path="/about" component={contact} />
+            <Route path="/login" exact component={login} />
+            <Route path="/register" component={register} />
+            <Route path="/register2" component={RegisterStep2} />
+            <Route path="/order" component={order} />
+            <Route path="/shoppingCart" component={shoppingCart} />
+            <Route path="/" component={noMatch} />
+          </Switch>
+          <Footer />
+        </main>
       </Router>
     );
   }

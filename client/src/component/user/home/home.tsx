@@ -7,6 +7,8 @@ import Carousel from "./Carousel";
 import CategoryHome from "./CategoryHome";
 import "./home.css";
 import StatisticData from "./StatisticData";
+import { slide } from "react-burger-menu";
+import Slide from "../shopping/CartMenu";
 class home extends Component<any, any> {
   constructor(props: any) {
     super(props);

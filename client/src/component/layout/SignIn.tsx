@@ -1,6 +1,7 @@
 import React from "react";
 import { NavItem } from "reactstrap";
 import Login from "../auth/Login";
+import RegisterStep2 from "../auth/RegisterStep2";
 
 export default function SignInlayout(props: any) {
   return (
@@ -8,6 +9,7 @@ export default function SignInlayout(props: any) {
       w
       <NavItem>
         <Login />
+        <RegisterStep2 />
       </NavItem>
       <NavItem>Register</NavItem>
     </div>
