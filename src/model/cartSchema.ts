@@ -3,7 +3,7 @@ import cartItemSchema from "../model/cartItemSchema";
 import { Icart } from "./modelInterfece";
 const cartSchema = new mongoose.Schema({
   UserId: {
-    type: Number,
+    type: String,
     required: true
     //FIX- need to be reference to user schema
   },
@@ -12,7 +12,8 @@ const cartSchema = new mongoose.Schema({
     default: Date.now()
   },
   status: {
-    type: Boolean,
+    type: Number,
+    default: 1,
     required: true
   }
 });

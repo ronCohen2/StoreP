@@ -30,6 +30,7 @@ class Login extends React.Component<any, any> {
     this.props.login(id, password);
     console.log(this.props);
   };
+
   render() {
     const { id, password } = this.state;
     const { loginErr } = this.props.auth;
@@ -65,6 +66,9 @@ class Login extends React.Component<any, any> {
                   required
                 />
               </InputGroup>
+              {loginErr ? (
+                <p className="to-center text-white mt-3">{loginErr}</p>
+              ) : null}
               <Button
                 color="primary"
                 className="button-modal "
@@ -75,13 +79,13 @@ class Login extends React.Component<any, any> {
               <Button
                 color="secondary"
                 className="button-modal "
-                onClick={this.toggle}
+                onClick={() => {
+                  this.toggle();
+                  this.props.clearErr();
+                }}
               >
                 Cancel
               </Button>
-              {loginErr ? (
-                <p className="to-center text-white">{loginErr}</p>
-              ) : null}
             </div>
           </ModalBody>
         </Modal>
@@ -96,7 +100,8 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    login: (id: Number, password: any) => dispatch(login(id, password))
+    login: (id: Number, password: any) => dispatch(login(id, password)),
+    clearErr: () => dispatch({ type: "CLEAR_LOGIN_ERR" })
   };
 };
 export default connect(

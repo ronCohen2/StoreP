@@ -39,8 +39,9 @@ export interface IcartItem extends mongoose.Document {
 export interface Icart extends mongoose.Document {
   UserId: String;
   // date: any;
-  status: Boolean;
+  status: Number;
   items?: any;
+  date: any;
 }
 
 export interface IOrder extends mongoose.Document {

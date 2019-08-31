@@ -59,45 +59,24 @@ export let empty = async (req: Request, res: Response) => {
   }
 };
 
-// export const CartStatus = async (req: Request, res: Response) => {
-//   const { UserId } = req.body;
-//   if (!UserId) {
-//     res.status(400).send({ err: "Please enter user id ." });
-//   }
-//   try {
-//     const cart = await Cart.find({ UserId });
-//     console.log(cart);
-//     if (cart.length === 0) {
-//       // const newCart = new Cart({
-//       //   UserId,
-//       //   status: true
-//       // });
-//       // await newCart.save();
-//       res.send({ msg: "Welcome to youe first cart" });
-//     }
-//     const status = cart.map(elm => {
-//       if (elm.status === true) {
-//         res.status(200).send({ msg: "open Cart.", elm });
-//       }
-//     });
-//     // const status = cart[0].status;
-//     // switch (status) {
-//     //   case true:
-//     //     res.status(200).send({ msg: "open Cart.", id: cart[0]._id });
-//     //     break;
-//     //   case false:
-//     //     res.status(400).send({ msg: "close Cart.", id: cart[0]._id });
-//     //     break;
-//     // }
-//   } catch (err) {
-//     // const newCart = new Cart({
-//     //   UserId,
-//     //   status: true
-//     // });
-//     // await newCart.save();
-//     // res.send({ msg: "Welcome to youe first cart", cart: newCart });
-//   }
-// };
+export const CartStatus = async (req: Request, res: Response) => {
+  const { UserId } = req.body;
+  try {
+    const cart = await Cart.findOne({ UserId });
+    if (cart.status === 1) {
+      console.log("open cart");
+      res.status(200).send({ cart: cart });
+    }
+    if (cart.status === 2) {
+      const newCart = await createCart(UserId);
+      console.log("lastcard");
+      res.status(200).send({ lastCart: cart, newCart });
+    }
+  } catch (err) {
+    const newCart = await createCart(UserId);
+    res.status(200).send({ newCart: newCart });
+  }
+};
 
 export let createOrder = async (req: Request, res: Response) => {
   const {
@@ -131,17 +110,27 @@ export let createOrder = async (req: Request, res: Response) => {
   }
 };
 
-export let CreateCart = async (req: Request, res: Response) => {
-  const { UserId } = req.body;
-
+const createCart = async (UserId: String) => {
   try {
-    const newCart = new Cart({
+    const newCart = await new Cart({
       UserId,
       status: true
     });
-    newCart.save();
+    await newCart.save();
+    return newCart;
   } catch {}
 };
+// export let CreateCart = async (req: Request, res: Response) => {
+//   const { UserId } = req.body;
+
+//   try {
+//     const newCart = new Cart({
+//       UserId,
+//       status: true
+//     });
+//     newCart.save();
+//   } catch {}
+// };
 export let GetCart = async (req: Request, res: Response) => {
   const { cartId } = req.body;
   const item = await Cart.find();

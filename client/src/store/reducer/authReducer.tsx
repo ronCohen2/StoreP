@@ -45,6 +45,12 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
         loginErr: "User or Password WRONG !"
       };
     }
+    case "CLEAR_LOGIN_ERR": {
+      return {
+        ...state,
+        loginErr: null
+      };
+    }
 
     default:
       return state;

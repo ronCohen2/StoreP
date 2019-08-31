@@ -12,12 +12,12 @@ Cart.post("/deleteItem", controller.deleteItem);
 
 Cart.post("/removeAllItems", controller.empty);
 
-// Cart.get("/cartStatus", controller.CartStatus);
+Cart.post("/cartStatus", controller.CartStatus);
 
 Cart.post("/createOrder", controller.createOrder);
 
 //dev
-Cart.post("/CreateCart", controller.CreateCart);
+// Cart.post("/CreateCart", controller.CreateCart);
 
 Cart.get("/GetCart", controller.GetCart);
 
