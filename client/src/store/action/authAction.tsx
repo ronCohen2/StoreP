@@ -56,11 +56,10 @@ export const login = (id: Number, password: any) => {
         password
       });
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-    } catch (error) {
-      dispatch({ type: "LOGIN_ERR", payload: error });
+    } catch (err) {
+      dispatch({ type: "LOGIN_ERR" });
     }
   };
 };
 
-// create log out action 
-
+// create log out action

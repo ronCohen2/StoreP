@@ -5,3 +5,7 @@ code {
 .App {
   /* background-color: rgb(238, 233, 233); */
 }
+.to-center {
+  display: flex;
+  justify-content: center;
+}

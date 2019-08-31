@@ -33,12 +33,16 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
         ...state,
         userConnected: true,
         user: payload.payload.user,
-        token: payload.payload.token
+        token: payload.payload.token,
+        loginErr: null
       };
     case "LOGIN_ERR": {
       return {
         ...state,
-        loginErr: payload.payload
+        userConnected: false,
+        token: null,
+        registerToken: null,
+        loginErr: "User or Password WRONG !"
       };
     }
 

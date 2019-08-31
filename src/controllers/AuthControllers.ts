@@ -65,20 +65,22 @@ export const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
   const errors = await loginValidation(req.body);
   if (errors.length > 0) {
-    return res.send(errors);
+    return res.send({ msg: errors });
   }
   try {
     const user = await User.findOne({ ID: id });
     const UserHash: any = user.password;
     const { role, email } = user;
     const validPassword = await bcrypt.compare(password, UserHash);
+    console.log(validPassword);
     if (!validPassword) {
       return res.status(400).send({ msg: "User or Password WRONG !" });
     }
     const token = user.generateToken(id, email, password, role);
     res.status(200).json({ seccess: true, token: "Bearer " + token, user });
   } catch {
-    res.send({ msg: "User or Password WRONG !" });
+    res.status(400).send({ msg: "User or Password WRONG !" });
+    console.log("catch");
   }
 };
 export let getUser = async (req: Request, res: Response) => {

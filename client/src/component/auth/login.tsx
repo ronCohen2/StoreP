@@ -1,16 +1,8 @@
 import React, { Component } from "react";
-import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText
-} from "reactstrap";
+import { Button, Modal, ModalBody, Input, InputGroup } from "reactstrap";
 import "./auth.css";
+import { connect } from "react-redux";
+import { login } from "../../store/action/authAction";
 
 class Login extends React.Component<any, any> {
   constructor(props: any) {
@@ -34,7 +26,13 @@ class Login extends React.Component<any, any> {
       [e.target.id]: e.target.value
     });
   };
+  handleSubmit = (id: Number, password: any) => {
+    this.props.login(id, password);
+    console.log(this.props);
+  };
   render() {
+    const { id, password } = this.state;
+    const { loginErr } = this.props.auth;
     return (
       <div>
         <label color="danger" onClick={this.toggle}>
@@ -54,6 +52,7 @@ class Login extends React.Component<any, any> {
                   className="input-login"
                   id="id"
                   onChange={this.handleChange}
+                  required
                 />
               </InputGroup>
               <InputGroup>
@@ -63,10 +62,15 @@ class Login extends React.Component<any, any> {
                   className="input-login"
                   id="password"
                   onChange={this.handleChange}
+                  required
                 />
               </InputGroup>
-              <Button color="primary" className="button-modal ">
-                Login{" "}
+              <Button
+                color="primary"
+                className="button-modal "
+                onClick={() => this.handleSubmit(id, password)}
+              >
+                Login
               </Button>
               <Button
                 color="secondary"
@@ -75,6 +79,9 @@ class Login extends React.Component<any, any> {
               >
                 Cancel
               </Button>
+              {loginErr ? (
+                <p className="to-center text-white">{loginErr}</p>
+              ) : null}
             </div>
           </ModalBody>
         </Modal>
@@ -82,5 +89,17 @@ class Login extends React.Component<any, any> {
     );
   }
 }
-
-export default Login;
+const mapStateToProps = (state: any) => {
+  return {
+    auth: state.auth
+  };
+};
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    login: (id: Number, password: any) => dispatch(login(id, password))
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);
