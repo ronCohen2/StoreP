@@ -58,11 +58,9 @@ export const login = (id: Number, password: any) => {
         id,
         password
       });
-      // console.log(res.data.user._id);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      
     } catch (err) {
-      dispatch({ type: "LOGIN_ERR" });
+      dispatch({ type: "LOGIN_ERR", payload: err.data });
     }
   };
 };

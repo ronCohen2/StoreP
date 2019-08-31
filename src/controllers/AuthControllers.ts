@@ -66,7 +66,7 @@ export const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
   const errors = await loginValidation(req.body);
   if (errors.length > 0) {
-    return res.send({ msg: errors });
+    return res.status(400).send({ errors });
   }
   try {
     const user = await User.findOne({ ID: id });

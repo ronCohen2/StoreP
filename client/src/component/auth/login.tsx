@@ -4,6 +4,9 @@ import "./auth.css";
 import { connect } from "react-redux";
 import { login } from "../../store/action/authAction";
 import { GetCartStatus, getCartItems } from "../../store/action/cartAction";
+import CartStatus from "./CartStatus";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 class Login extends React.Component<any, any> {
   constructor(props: any) {
@@ -34,25 +37,20 @@ class Login extends React.Component<any, any> {
       await this.props.getStatus(UserId);
       await this.props.getCartItems(this.props.cart.cartId);
       await this.toggle();
-      setTimeout(() => {
-        alert("sdf");
-      }, 300);
+      // setTimeout(() => {}, 300);
     }
   };
 
   render() {
     const { id, password } = this.state;
     const { loginErr, userConnected } = this.props.auth;
-    if (userConnected) {
-      const UserId = this.props.auth.user._id;
-      // this.props.getStatus(UserId);
-      // this.toggle();
-    }
+
     return (
       <div>
-        <label color="danger" onClick={this.toggle}>
+        <label color="danger" onClick={this.toggle} className="pr-4">
           Login
         </label>
+
         <Modal
           isOpen={this.state.modal}
           toggle={this.toggle}
@@ -61,45 +59,45 @@ class Login extends React.Component<any, any> {
           <ModalBody className="modal-bg">
             <h3 className="d-flex justify-content-center">Login</h3>
             <div>
-              <InputGroup>
-                <Input
-                  placeholder="username"
-                  className="input-login"
-                  id="id"
-                  onChange={this.handleChange}
-                  required
-                />
-              </InputGroup>
-              <InputGroup>
-                <Input
-                  placeholder="Password"
-                  type="password"
-                  className="input-login"
-                  id="password"
-                  onChange={this.handleChange}
-                  required
-                />
-              </InputGroup>
-              {loginErr ? (
-                <p className="to-center text-white mt-3">{loginErr}</p>
-              ) : null}
-              <Button
-                color="primary"
-                className="button-modal "
-                onClick={() => this.handleSubmit(id, password)}
-              >
-                Login
-              </Button>
-              <Button
-                color="secondary"
-                className="button-modal "
-                onClick={() => {
-                  this.toggle();
-                  this.props.clearErr();
-                }}
-              >
-                Cancel
-              </Button>
+                <InputGroup>
+                  <Input
+                    placeholder="username"
+                    className="input-login"
+                    id="id"
+                    required
+                    onChange={this.handleChange}
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <Input
+                    placeholder="Password"
+                    type="password"
+                    className="input-login"
+                    id="password"
+                    required
+                    onChange={this.handleChange}
+                  />
+                </InputGroup>
+                {loginErr ? (
+                  <p className="to-center text-white mt-3">{loginErr}</p>
+                ) : null}
+                <button
+                  color="primary"
+                  className="button-modal "
+                  onClick={() => this.handleSubmit(id, password)}
+                >
+                  Login
+                </button>
+                <Button
+                  color="secondary"
+                  className="button-modal "
+                  onClick={() => {
+                    this.toggle();
+                    this.props.clearErr();
+                  }}
+                >
+                  Cancel
+                </Button>
             </div>
           </ModalBody>
         </Modal>

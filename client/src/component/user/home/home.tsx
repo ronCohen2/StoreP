@@ -9,6 +9,7 @@ import "./home.css";
 import StatisticData from "./StatisticData";
 import { slide } from "react-burger-menu";
 import Slide from "../shopping/CartMenu";
+import CartStatus from "../../auth/CartStatus";
 class home extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -26,6 +27,7 @@ class home extends Component<any, any> {
 
     return (
       <div>
+        {/* <CartStatus /> */}
         <Carousel />
         <StatisticData />
         <CategoryHome id="5d5bd6960a5a7d1ab05da2cf" />

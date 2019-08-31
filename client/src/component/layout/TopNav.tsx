@@ -5,12 +5,6 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Container,
   InputGroup,
   InputGroupAddon,
@@ -20,8 +14,10 @@ import {
   Button
 } from "reactstrap";
 import SignInlayout from "./SignIn";
+import { connect } from "react-redux";
+import SignOut from "./signOut";
 
-export default class TopNav extends React.Component {
+class TopNav extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
@@ -38,25 +34,40 @@ export default class TopNav extends React.Component {
   }
   render() {
     const { isOpen }: any = this.state;
+    const { userConnected } = this.props.auth;
+    console.log("Sdsd" + this.props);
 
     return (
       <Container>
-        <Navbar>
-          <NavbarBrand>
+        <Row className="mt-3 mb-3  bg-white">
+          <Col sm="12" md="4">
             <img src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/uploads/2019/03/logo.png" />
-          </NavbarBrand>
-          <Nav navbar>
+          </Col>
+          <Col sm="12" md="6">
             <InputGroup>
               <Input />
               <InputGroupAddon addonType="prepend">
                 <Button color="secondary">Search</Button>
               </InputGroupAddon>
             </InputGroup>
-          </Nav>
-          {/* user connectd */}
-          <SignInlayout />
-        </Navbar>
+          </Col>
+          <Col sm="12" md="2">
+            {userConnected ? <SignOut /> : <SignInlayout />}
+          </Col>
+        </Row>
       </Container>
     );
   }
 }
+const mapStateToProps = (state: any) => {
+  return {
+    auth: state.auth
+  };
+};
+const mapDispatchToProps = (dispatch: any) => {
+  return {};
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TopNav);

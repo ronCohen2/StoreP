@@ -5,13 +5,9 @@ import RegisterStep2 from "../auth/RegisterStep2";
 
 export default function SignInlayout(props: any) {
   return (
-    <div>
-      w
-      <NavItem>
-        <Login />
-        <RegisterStep2 />
-      </NavItem>
-      <NavItem>Register</NavItem>
+    <div className="to-center">
+      <Login />
+      <RegisterStep2 />
     </div>
   );
 }

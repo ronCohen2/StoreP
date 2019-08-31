@@ -18,7 +18,8 @@ import {
 let SignOut: React.SFC<any> = () => {
   return (
     <div>
-      <NavItem> Hi $- name here </NavItem>
+      <span className="pr-4"> Hi </span>
+      <span>Log out</span>
     </div>
   );
 };

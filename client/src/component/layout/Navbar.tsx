@@ -6,18 +6,12 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Container,
   Col,
   Row
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
-
 import CategoryDropDown from "./CategoryDropDown";
-import Slide from "../user/shopping/CartMenu";
 export default class NavbarC extends React.Component {
   constructor(props: any) {
     super(props);
@@ -75,7 +69,6 @@ export default class NavbarC extends React.Component {
                       </NavLink>
                     </NavItem>
                   </Col>
-              
                 </Row>
               </Nav>
             </Collapse>
