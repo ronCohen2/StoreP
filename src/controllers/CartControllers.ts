@@ -70,11 +70,11 @@ export const CartStatus = async (req: Request, res: Response) => {
     if (cart.status === 2) {
       const newCart = await createCart(UserId);
       console.log("lastcard");
-      res.status(200).send({ lastCart: cart, newCart });
+      res.status(200).send({ lastCart: cart, cart: newCart });
     }
   } catch (err) {
     const newCart = await createCart(UserId);
-    res.status(200).send({ newCart: newCart });
+    res.status(200).send({ cart: newCart });
   }
 };
 
@@ -120,17 +120,6 @@ const createCart = async (UserId: String) => {
     return newCart;
   } catch {}
 };
-// export let CreateCart = async (req: Request, res: Response) => {
-//   const { UserId } = req.body;
-
-//   try {
-//     const newCart = new Cart({
-//       UserId,
-//       status: true
-//     });
-//     newCart.save();
-//   } catch {}
-// };
 export let GetCart = async (req: Request, res: Response) => {
   const { cartId } = req.body;
   const item = await Cart.find();

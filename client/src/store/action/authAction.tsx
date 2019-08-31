@@ -1,6 +1,9 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
+import { GetCartStatus } from "./cartAction";
+import { promised } from "q";
+import { promises } from "fs";
 
 export const registerVerif = (
   ID: Number,
@@ -55,7 +58,9 @@ export const login = (id: Number, password: any) => {
         id,
         password
       });
+      // console.log(res.data.user._id);
       dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      
     } catch (err) {
       dispatch({ type: "LOGIN_ERR" });
     }

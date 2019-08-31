@@ -4,7 +4,7 @@ import cart from "../model/cartSchema";
 
 export const Cart = Router();
 
-Cart.get("/getItems", controller.GetCartItems);
+Cart.post("/getItems", controller.GetCartItems);
 
 Cart.post("/addItem", controller.addItem);
 

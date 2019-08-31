@@ -2,6 +2,8 @@ import { Reducer } from "redux";
 import { Icart } from "../../type/reducer";
 
 const initialState: Icart = {
+  cartId: null,
+  status: null,
   items: [],
   order: null,
   cartError: null,
@@ -10,10 +12,17 @@ const initialState: Icart = {
 };
 const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
   switch (payload.type) {
+    case "CART_ID": {
+      return {
+        ...state,
+        cartId: payload.payload._id,
+        status: payload.payload.status
+      };
+    }
     case "CART_ITEMS":
       return {
         ...state,
-        items: [state.items, ...payload.payload]
+        items: state.items.concat(payload.payload)
       };
     case "CART_ERR":
       return {

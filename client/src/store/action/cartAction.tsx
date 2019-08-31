@@ -5,8 +5,10 @@ import axios from "axios";
 export const getCartItems = (cartId: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.get("http://localhost:3001/cart/getItems");
-      dispatch({ type: "CART_ITEMS", payload: res });
+      const res = await axios.post("http://localhost:3001/cart/getItems", {
+        cartId
+      });
+      dispatch({ type: "CART_ITEMS", payload: res.data });
     } catch (error) {
       dispatch({ type: "CART_ERR" });
     }
@@ -81,6 +83,19 @@ export const order = (
       dispatch({ type: "ORDER", payload: res });
     } catch (error) {
       dispatch({ type: "ORDER_ERR", payload: error });
+    }
+  };
+};
+export const GetCartStatus = (UserId: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post("http://localhost:3001/Cart/cartStatus", {
+        UserId
+      });
+      console.log(res.data);
+      dispatch({ type: "CART_ID", payload: res.data.cart });
+    } catch (error) {
+      // dispatch({ type: "CART_ERR" });
     }
   };
 };

@@ -5,6 +5,7 @@ import * as bcrypt from "bcrypt";
 import * as jwt from "jsonwebtoken";
 import { registerValidation } from "../validation/registerValidation";
 import { loginValidation } from "../validation/loginValidation";
+import { CartStatus } from "./CartControllers";
 const keys = require("../config/keys");
 
 export let registerverification = async (req: Request, res: Response) => {
@@ -72,12 +73,12 @@ export const login = async (req: Request, res: Response) => {
     const UserHash: any = user.password;
     const { role, email } = user;
     const validPassword = await bcrypt.compare(password, UserHash);
-    console.log(validPassword);
     if (!validPassword) {
       return res.status(400).send({ msg: "User or Password WRONG !" });
     }
     const token = user.generateToken(id, email, password, role);
     res.status(200).json({ seccess: true, token: token, user });
+    return user;
   } catch {
     res.status(400).send({ msg: "User or Password WRONG !" });
   }

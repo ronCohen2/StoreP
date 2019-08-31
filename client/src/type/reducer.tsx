@@ -13,6 +13,8 @@ export interface IAdmin {
   eddCategoryError: any;
 }
 export interface Icart {
+  status: any;
+  cartId: any;
   items: any;
   order: any;
   cartError: any;

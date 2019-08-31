@@ -19,6 +19,11 @@ class home extends Component<any, any> {
     this.props.registerVerif(123123, "ronc@gmailk.com", 123123, 123123);
   }
   render() {
+    const { status } = this.props.cart;
+    if (status) {
+      // alert("asdsd");
+    }
+
     return (
       <div>
         <Carousel />
@@ -31,7 +36,8 @@ class home extends Component<any, any> {
 }
 const mapStateToProps = (state: any) => {
   return {
-    ron: state.auth
+    ron: state.auth,
+    cart: state.cart
   };
 };
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => {

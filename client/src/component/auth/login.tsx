@@ -3,6 +3,7 @@ import { Button, Modal, ModalBody, Input, InputGroup } from "reactstrap";
 import "./auth.css";
 import { connect } from "react-redux";
 import { login } from "../../store/action/authAction";
+import { GetCartStatus, getCartItems } from "../../store/action/cartAction";
 
 class Login extends React.Component<any, any> {
   constructor(props: any) {
@@ -26,14 +27,27 @@ class Login extends React.Component<any, any> {
       [e.target.id]: e.target.value
     });
   };
-  handleSubmit = (id: Number, password: any) => {
-    this.props.login(id, password);
-    console.log(this.props);
+  handleSubmit = async (id: Number, password: any) => {
+    const promise = await this.props.login(id, password);
+    if (this.props.auth.userConnected) {
+      const { _id: UserId } = this.props.auth.user;
+      await this.props.getStatus(UserId);
+      await this.props.getCartItems(this.props.cart.cartId);
+      await this.toggle();
+      setTimeout(() => {
+        alert("sdf");
+      }, 300);
+    }
   };
 
   render() {
     const { id, password } = this.state;
-    const { loginErr } = this.props.auth;
+    const { loginErr, userConnected } = this.props.auth;
+    if (userConnected) {
+      const UserId = this.props.auth.user._id;
+      // this.props.getStatus(UserId);
+      // this.toggle();
+    }
     return (
       <div>
         <label color="danger" onClick={this.toggle}>
@@ -95,13 +109,18 @@ class Login extends React.Component<any, any> {
 }
 const mapStateToProps = (state: any) => {
   return {
-    auth: state.auth
+    auth: state.auth,
+    cart: state.cart
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
     login: (id: Number, password: any) => dispatch(login(id, password)),
-    clearErr: () => dispatch({ type: "CLEAR_LOGIN_ERR" })
+    clearErr: () => dispatch({ type: "CLEAR_LOGIN_ERR" }),
+    getStatus: (UserId: String) => {
+      dispatch(GetCartStatus(UserId));
+    },
+    getCartItems: (cartId: String) => dispatch(getCartItems(cartId))
   };
 };
 export default connect(
