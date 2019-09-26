@@ -15,12 +15,13 @@ export let GetCartItems = async (req: Request, res: Response) => {
 };
 
 export let addItem = async (req: Request, res: Response) => {
-  const { cartId, productId, quantity } = req.body;
+  const { name, cartId, productId, quantity } = req.body;
   try {
     const cart = await Cart.find({ _id: cartId });
     const product = await Products.find({ _id: productId }).select("price");
     let price: any = product[0].price;
     const newItem = new CartItem({
+      name,
       cartId,
       product: productId,
       quantity,

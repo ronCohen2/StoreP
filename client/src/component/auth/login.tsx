@@ -37,8 +37,7 @@ class Login extends React.Component<any, any> {
   render() {
     const { id, password } = this.state;
     const { loginErr, userConnected } = this.props.auth;
-    const { status } = this.props.cart;
-    console.log(status);
+
     return (
       <div>
         <label color="danger" onClick={this.toggle} className="pr-4">

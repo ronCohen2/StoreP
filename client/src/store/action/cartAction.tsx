@@ -18,16 +18,18 @@ export const getCartItems = (cartId: String) => {
 export const addCartItem = (
   cartId: String,
   productId: String,
-  quantity: Number
+  quantity: Number,
+  name: String
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.post("http://localhost:3001/cart/addItems", {
+      const res = await axios.post("http://localhost:3001/Cart/addItem", {
         cartId,
         productId,
-        quantity
+        quantity,
+        name
       });
-      dispatch({ type: "ADD_CART_ITEM", payload: res });
+      dispatch({ type: "ADD_CART_ITEM", payload: res.data });
     } catch (error) {
       dispatch({ type: "ADD_CART_ITEM_ERR", payload: error });
     }

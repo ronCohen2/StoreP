@@ -4,6 +4,10 @@ import { IcartItem } from "./modelInterfece";
 const Schema = mongoose.Schema;
 
 const cartItemSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
   product: {
     type: String,
     // ref: "product",
