@@ -87,15 +87,16 @@ export const order = (
   };
 };
 export const GetCartStatus = (UserId: String) => {
+  console.log("Ssd");
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       const res = await axios.post("http://localhost:3001/Cart/cartStatus", {
         UserId
       });
-      console.log(res.data);
+      console.log("fgd " + res.data);
       dispatch({ type: "CART_ID", payload: res.data.cart });
     } catch (error) {
-      // dispatch({ type: "CART_ERR" });
+      alert("err");
     }
   };
 };

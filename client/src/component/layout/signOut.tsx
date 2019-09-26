@@ -1,26 +1,21 @@
 import * as React from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Container,
-  Col,
-  Row
-} from "reactstrap";
-let SignOut: React.SFC<any> = () => {
+import { connect } from "react-redux";
+
+let SignOut: React.SFC<any> = (props: any) => {
+  const { firstName } = props.auth.user;
   return (
     <div>
-      <span className="pr-4"> Hi </span>
+      <span className="pr-4"> Hi {firstName} </span>
       <span>Log out</span>
     </div>
   );
 };
-export default SignOut;
+const mapStateToProps = (state: any) => {
+  return {
+    auth: state.auth
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(SignOut);

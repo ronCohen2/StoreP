@@ -22,7 +22,7 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
     case "CART_ITEMS":
       return {
         ...state,
-        items: state.items.concat(payload.payload)
+        items: state.items.push(payload.payload)
       };
     case "CART_ERR":
       return {

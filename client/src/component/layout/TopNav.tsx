@@ -35,15 +35,14 @@ class TopNav extends React.Component<any, any> {
   render() {
     const { isOpen }: any = this.state;
     const { userConnected } = this.props.auth;
-    console.log("Sdsd" + this.props);
 
     return (
       <Container>
         <Row className="mt-3 mb-3  bg-white">
-          <Col sm="12" md="4">
+          <Col sm="12" md="3">
             <img src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/uploads/2019/03/logo.png" />
           </Col>
-          <Col sm="12" md="6">
+          <Col sm="12" md="7">
             <InputGroup>
               <Input />
               <InputGroupAddon addonType="prepend">

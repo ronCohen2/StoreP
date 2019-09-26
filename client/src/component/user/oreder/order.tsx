@@ -33,6 +33,7 @@ class order extends Component {
                   placeholder="e.g Tel Aviv"
                   onChange={this.handleChange}
                   required
+                  onDoubleClick={() => alert("sdf")}
                 />
               </FormGroup>
               <FormGroup>

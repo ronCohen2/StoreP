@@ -17,14 +17,9 @@ class home extends Component<any, any> {
   }
 
   componentWillMount() {
-    this.props.registerVerif(123123, "ronc@gmailk.com", 123123, 123123);
+    // this.props.registerVerif(123123, "ronc@gmailk.com", 123123, 123123);
   }
   render() {
-    const { status } = this.props.cart;
-    if (status) {
-      // alert("asdsd");
-    }
-
     return (
       <div>
         {/* <CartStatus /> */}
@@ -38,14 +33,14 @@ class home extends Component<any, any> {
 }
 const mapStateToProps = (state: any) => {
   return {
-    ron: state.auth,
-    cart: state.cart
+    auth: state.auth
   };
 };
 const mapDispatchToProps = (dispatch: ThunkDispatch<{}, {}, any>) => {
   return {
-    registerVerif: (ID: Number, email: String, password: any, password2: any) =>
-      dispatch(registerVerif(ID, email, password, password2))
+    //   registerVerif: (ID: Number, email: String, password: any, password2: any) =>
+    //     dispatch(registerVerif(ID, email, password, password2))
+    // };
   };
 };
 

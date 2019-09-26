@@ -31,20 +31,22 @@ class Login extends React.Component<any, any> {
     });
   };
   handleSubmit = async (id: Number, password: any) => {
-    const promise = await this.props.login(id, password);
-    if (this.props.auth.userConnected) {
-      const { _id: UserId } = this.props.auth.user;
-      await this.props.getStatus(UserId);
-      await this.props.getCartItems(this.props.cart.cartId);
-      await this.toggle();
-      // setTimeout(() => {}, 300);
-    }
+    await this.props.login(id, password);
   };
 
   render() {
     const { id, password } = this.state;
     const { loginErr, userConnected } = this.props.auth;
 
+    let userco = async () => {
+      if (userConnected) {
+        console.log("asad");
+        const { _id } = this.props.auth.user;
+        await this.props.getStatus(this.props.auth.user._id);
+        await this.props.getCartItems(this.props.cart.cartId);
+        // this.toggle();
+      }
+    };
     return (
       <div>
         <label color="danger" onClick={this.toggle} className="pr-4">
@@ -59,45 +61,48 @@ class Login extends React.Component<any, any> {
           <ModalBody className="modal-bg">
             <h3 className="d-flex justify-content-center">Login</h3>
             <div>
-                <InputGroup>
-                  <Input
-                    placeholder="username"
-                    className="input-login"
-                    id="id"
-                    required
-                    onChange={this.handleChange}
-                  />
-                </InputGroup>
-                <InputGroup>
-                  <Input
-                    placeholder="Password"
-                    type="password"
-                    className="input-login"
-                    id="password"
-                    required
-                    onChange={this.handleChange}
-                  />
-                </InputGroup>
-                {loginErr ? (
-                  <p className="to-center text-white mt-3">{loginErr}</p>
-                ) : null}
-                <button
-                  color="primary"
-                  className="button-modal "
-                  onClick={() => this.handleSubmit(id, password)}
-                >
-                  Login
-                </button>
-                <Button
-                  color="secondary"
-                  className="button-modal "
-                  onClick={() => {
-                    this.toggle();
-                    this.props.clearErr();
-                  }}
-                >
-                  Cancel
-                </Button>
+              <InputGroup>
+                <Input
+                  placeholder="username"
+                  className="input-login"
+                  id="id"
+                  required
+                  onChange={this.handleChange}
+                />
+              </InputGroup>
+              <InputGroup>
+                <Input
+                  placeholder="Password"
+                  type="password"
+                  className="input-login"
+                  id="password"
+                  required
+                  onChange={this.handleChange}
+                />
+              </InputGroup>
+              {loginErr ? (
+                <p className="to-center text-white mt-3">{loginErr}</p>
+              ) : null}
+              <button
+                color="primary"
+                className="button-modal "
+                onClick={async () => {
+                  await this.handleSubmit(id, password);
+                  userco();
+                }}
+              >
+                Login
+              </button>
+              <button
+                color="secondary"
+                className="button-modal "
+                onClick={e => {
+                  // this.toggle();
+                  // this.props.clearErr();
+                }}
+              >
+                Cancel
+              </button>
             </div>
           </ModalBody>
         </Modal>
