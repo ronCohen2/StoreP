@@ -65,16 +65,16 @@ export const CartStatus = async (req: Request, res: Response) => {
     const cart = await Cart.findOne({ UserId });
     if (cart.status === 1) {
       console.log("open cart");
-      res.status(200).send({ cart: cart });
+      res.status(200).send({ status: 1, cart: cart });
     }
     if (cart.status === 2) {
       const newCart = await createCart(UserId);
       console.log("lastcard");
-      res.status(200).send({ lastCart: cart, cart: newCart });
+      res.status(200).send({ status: 2, lastCart: cart, cart: newCart });
     }
   } catch (err) {
     const newCart = await createCart(UserId);
-    res.status(200).send({ cart: newCart });
+    res.status(200).send({ status: 3, cart: newCart });
   }
 };
 

@@ -5,9 +5,10 @@ import axios from "axios";
 export const getCartItems = (cartId: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.post("http://localhost:3001/cart/getItems", {
+      const res = await axios.post("http://localhost:3001/Cart/getItems", {
         cartId
       });
+      console.log(res.data);
       dispatch({ type: "CART_ITEMS", payload: res.data });
     } catch (error) {
       dispatch({ type: "CART_ERR" });
@@ -93,8 +94,9 @@ export const GetCartStatus = (UserId: String) => {
       const res = await axios.post("http://localhost:3001/Cart/cartStatus", {
         UserId
       });
-      console.log("fgd " + res.data);
-      dispatch({ type: "CART_ID", payload: res.data.cart });
+      console.log(res.data);
+      await dispatch({ type: "CART_ID", payload: res.data.cart });
+      return res.data.cart;
     } catch (error) {
       alert("err");
     }

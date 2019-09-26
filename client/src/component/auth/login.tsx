@@ -37,16 +37,8 @@ class Login extends React.Component<any, any> {
   render() {
     const { id, password } = this.state;
     const { loginErr, userConnected } = this.props.auth;
-
-    let userco = async () => {
-      if (userConnected) {
-        console.log("asad");
-        const { _id } = this.props.auth.user;
-        await this.props.getStatus(this.props.auth.user._id);
-        await this.props.getCartItems(this.props.cart.cartId);
-        // this.toggle();
-      }
-    };
+    const { status } = this.props.cart;
+    console.log(status);
     return (
       <div>
         <label color="danger" onClick={this.toggle} className="pr-4">
@@ -88,7 +80,6 @@ class Login extends React.Component<any, any> {
                 className="button-modal "
                 onClick={async () => {
                   await this.handleSubmit(id, password);
-                  userco();
                 }}
               >
                 Login
@@ -97,8 +88,8 @@ class Login extends React.Component<any, any> {
                 color="secondary"
                 className="button-modal "
                 onClick={e => {
-                  // this.toggle();
-                  // this.props.clearErr();
+                  this.toggle();
+                  this.props.clearErr();
                 }}
               >
                 Cancel

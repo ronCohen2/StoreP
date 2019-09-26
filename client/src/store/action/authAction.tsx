@@ -1,7 +1,7 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
-import { GetCartStatus } from "./cartAction";
+import { GetCartStatus, getCartItems } from "./cartAction";
 import { promised } from "q";
 import { promises } from "fs";
 
@@ -58,8 +58,11 @@ export const login = (id: Number, password: any) => {
         id,
         password
       });
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      
+
+      await dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+      const cart = await dispatch(GetCartStatus(res.data.user._id));
+      console.log(cart);
+      await dispatch(getCartItems(cart._id));
     } catch (err) {
       dispatch({ type: "LOGIN_ERR", payload: err.data });
     }

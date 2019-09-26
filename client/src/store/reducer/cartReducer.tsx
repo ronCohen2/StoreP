@@ -4,7 +4,7 @@ import { Icart } from "../../type/reducer";
 const initialState: Icart = {
   cartId: null,
   status: null,
-  items: [],
+  items: null,
   order: null,
   cartError: null,
   addError: null,
@@ -22,7 +22,7 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
     case "CART_ITEMS":
       return {
         ...state,
-        items: state.items.push(payload.payload)
+        items: payload.payload
       };
     case "CART_ERR":
       return {
