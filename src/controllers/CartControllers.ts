@@ -45,7 +45,7 @@ export let deleteItem = async (req: Request, res: Response) => {
   if (deletedCount > 0) {
     res.status(200).send({ msg: "delete item success." });
   } else {
-    res.status(400).send({ err: "Error in delete item to the cart." });
+    res.status(400).send({ err: "Error in delete item from the cart." });
   }
 };
 

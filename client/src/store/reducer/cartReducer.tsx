@@ -43,7 +43,7 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
       return {
         ...state,
         items: state.items.filter(
-          (item: any) => item.productId !== payload.payload
+          (item: any) => item.product !== payload.payload
         )
       };
     case "DELETE_CART_ITEM_ERROR":
