@@ -9,22 +9,50 @@ import {
   Input,
   Table
 } from "reactstrap";
-class order extends Component {
+import { connect } from "react-redux";
+import { order as Order } from "../../../store/action/cartAction";
+
+class order extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      street: null,
+      city: null
+    };
   }
+
   handleChange = (e: any) => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+
+  setToStreet = () => {
+    const { street } = this.props.auth.user;
+    this.setState({
+      street: street
+    });
+  };
+  setToCity = () => {
+    const { city } = this.props.auth.user;
+    this.setState({
+      city
+    });
+  };
+  checkShipDate = (e: any) => {
+    console.log(e.target.value);
+  };
+  onSubmit = (e: any) => {
+    e.preventdefault();
+    console.log(this.state);
+  };
   render() {
+    const { items } = this.props.cart;
     return (
       <Container>
         <Form>
-          <Row>
-            <Col lg="6">
+          <Row className="">
+            <Col>
               <h4>Billing details</h4>
               <FormGroup>
                 <Label for="city">City</Label>
@@ -32,8 +60,9 @@ class order extends Component {
                   id="city"
                   placeholder="e.g Tel Aviv"
                   onChange={this.handleChange}
+                  value={this.state.city}
                   required
-                  onDoubleClick={() => alert("sdf")}
+                  onDoubleClick={() => this.setToCity()}
                 />
               </FormGroup>
               <FormGroup>
@@ -42,7 +71,9 @@ class order extends Component {
                   id="Street"
                   placeholder="e.g Rothschild"
                   onChange={this.handleChange}
+                  value={this.state.street}
                   required
+                  onDoubleClick={() => this.setToStreet()}
                 />
               </FormGroup>
               <FormGroup>
@@ -50,12 +81,14 @@ class order extends Component {
                 <Input
                   type="date"
                   id="date"
-                  onChange={this.handleChange}
+                  onChange={e => this.checkShipDate(e)}
                   required
                 />
               </FormGroup>
             </Col>
-            <Col lg="6">
+          </Row>
+          <Row>
+            <Col>
               <h4>Additional information</h4>
               <FormGroup>
                 <Label for="CreditCard">Credit Card</Label>
@@ -96,26 +129,70 @@ class order extends Component {
                 </div>
               </FormGroup>
             </Col>
-            <input type="submit" value="" />
+          </Row>
+          <Row>
+            <Col>
+              <Table borded>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th> Quantinty</th>
+                    <th> Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {items
+                    ? items.map((item: any, key: Number) => {
+                        return (
+                          <tr>
+                            <td>{item.name}</td>
+                            <td>{item.quantity}</td>
+                            <td>{item.totalPrice}</td>
+                          </tr>
+                        );
+                      })
+                    : null}
+                </tbody>
+              </Table>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <input
+                type="submit"
+                value="Order"
+                onClick={e => this.onSubmit(e)}
+              />
+            </Col>
           </Row>
         </Form>
-        <Row>
-          <Col>
-            <Table>
-              <thead>
-                <tr>
-                  <th>Product</th>
-                  <th> Quantinty</th>
-                  <th> Price</th>
-                </tr>
-              </thead>
-              <tbody>{/* all cart items */}</tbody>
-            </Table>
-          </Col>
-        </Row>
       </Container>
     );
   }
 }
-
-export default order;
+const mapStateToProps = (state: any) => {
+  return {
+    cart: state.cart,
+    auth: state.auth
+  };
+};
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    order: (
+      userId: String,
+      cartId: String,
+      totalPrice: Number,
+      city: String,
+      street: String,
+      shipDate: any,
+      creditCard: Number
+    ) =>
+      dispatch(
+        Order(userId, cartId, totalPrice, city, street, shipDate, creditCard)
+      )
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(order);

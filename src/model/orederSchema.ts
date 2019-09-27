@@ -9,7 +9,7 @@ const orderSchema = new mongoose.Schema({
   cartId: {
     type: String,
     required: true
-    //FIX- ref to cart 
+    //FIX- ref to cart
   },
   totalPrice: {
     type: Number,
@@ -24,7 +24,7 @@ const orderSchema = new mongoose.Schema({
     // required: true
   },
   shipDate: {
-    type: Date,
+    type: String,
     required: true
   },
   data: {

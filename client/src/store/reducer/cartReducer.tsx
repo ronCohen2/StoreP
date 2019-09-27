@@ -8,7 +8,8 @@ const initialState: Icart = {
   order: null,
   cartError: null,
   addError: null,
-  orderErr: null
+  orderErr: null,
+  totalPrice: 0
 };
 const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
   switch (payload.type) {
@@ -32,7 +33,8 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
     case "ADD_CART_ITEM":
       return {
         ...state,
-        items: state.items.concat(payload.payload)
+        items: state.items.concat(payload.payload),
+        totalPrice: state.totalPrice + payload.payload.totalPrice
       };
     case "ADD_CART_ITEM_ERR":
       return {

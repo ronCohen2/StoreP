@@ -20,6 +20,7 @@ export interface Icart {
   cartError: any;
   addError: any;
   orderErr: any;
+  totalPrice: any;
 }
 
 export interface Iproduct {

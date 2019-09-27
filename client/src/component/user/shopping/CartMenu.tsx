@@ -7,7 +7,8 @@ import {
   deleteCartItem,
   removeCartItems
 } from "../../../store/action/cartAction";
-
+import { withRouter, Redirect } from "react-router";
+import { compose } from "redux";
 class Slide extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -31,17 +32,32 @@ class Slide extends React.Component<any, any> {
     return (
       <>
         {userConnected ? (
-          <Menu right width={"30%"} noOverlay className="">
+          <Menu right width={"25%"} noOverlay className="">
             <h1>My Cart</h1>
-            <Button onClick={() => {}}>Clear Cart</Button>
+            <Button
+              className="clearCart"
+              onClick={() => {
+                this.props.removeCartItems(cartId);
+              }}
+            >
+              Clear Cart
+            </Button>
+            <Button
+              onClick={() => {
+                this.props.history.push("/order");
+              }}
+            >
+              Order
+            </Button>
             {items
               ? items.map((item: any, key: any) => {
-                  console.log(item);
                   return (
                     <div key={key}>
                       <span>{key + 1} )</span>
                       <span className="pr-4">{item.name}</span>
                       <span className="pr-4">{item.quantity}</span>
+                      <span className="pr-4">{item.totalPrice}</span>
+
                       <span
                         className="pr-4"
                         onClick={() =>
@@ -78,4 +94,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Slide);
+)(withRouter(Slide));

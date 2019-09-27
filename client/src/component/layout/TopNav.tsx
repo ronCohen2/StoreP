@@ -38,7 +38,7 @@ class TopNav extends React.Component<any, any> {
 
     return (
       <Container>
-        <Row className="mt-3 mb-3  bg-white">
+        <Row className="pt-4   mb-3  bg-white">
           <Col sm="12" md="3">
             <img src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/uploads/2019/03/logo.png" />
           </Col>
