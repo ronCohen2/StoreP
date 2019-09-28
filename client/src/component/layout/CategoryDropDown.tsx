@@ -7,6 +7,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { getAllCategory } from "../../store/action/productAction";
+import { withRouter } from "react-router";
 
 class CategoryDropDown extends React.Component<any, any> {
   constructor(props: any) {
@@ -15,10 +16,10 @@ class CategoryDropDown extends React.Component<any, any> {
 
   componentDidMount() {
     this.props.getCategoryList();
-    // console.log(this.props.products);
   }
   render() {
     const { category }: any = this.props.products;
+    const { history } = this.props;
     return (
       <div>
         <UncontrolledDropdown className="navb">
@@ -30,7 +31,11 @@ class CategoryDropDown extends React.Component<any, any> {
               ? category.map((name: any, key: string) => {
                   return (
                     <div>
-                      <DropdownItem className="mt-3 mr-3 ml-3" key={key}>
+                      <DropdownItem
+                        className="mt-3 mr-3 ml-3"
+                        key={key}
+                        onClick={() => history.push(`/category/${name._id}`)}
+                      >
                         {name.categoryName}
                       </DropdownItem>
                       <DropdownItem divider />
@@ -57,4 +62,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   maStateToProps,
   mapDispatchToProps
-)(CategoryDropDown);
+)(withRouter(CategoryDropDown));

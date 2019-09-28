@@ -83,9 +83,11 @@ export const order = (
         shipDate,
         creditCard
       });
-      dispatch({ type: "ORDER", payload: res });
+      dispatch({ type: "ORDER", payload: res.data });
+      alert("order success");
     } catch (error) {
-      dispatch({ type: "ORDER_ERR", payload: error });
+      console.log(error);
+      dispatch({ type: "ORDER_ERR", payload: error.response.data });
     }
   };
 };
@@ -101,6 +103,18 @@ export const GetCartStatus = (UserId: String) => {
       return res.data.cart;
     } catch (error) {
       alert("err");
+    }
+  };
+};
+export const checkShipDate = (shipDate: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post("http://localhost:3001/Cart/checkDate", {
+        shipDate
+      });
+      dispatch({ type: "DATE", payload: res.data.msg });
+    } catch (err) {
+      dispatch({ type: "DATE", payload: err.response.data.msg });
     }
   };
 };

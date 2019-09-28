@@ -11,7 +11,12 @@ const initialState: Iproduct = {
 
 const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
   switch (payload.type) {
-    case "GET_PRODUCTS_USER":
+    case "GET_PRODUCTS":
+      return {
+        ...state,
+        allProducts: payload.payload
+      };
+    case "GET_PRODUCTS_CATEGORY":
       return {
         ...state,
         allProducts: payload.payload
@@ -26,20 +31,16 @@ const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
         ...state,
         category: payload.payload
       };
-    case "GET_PRODUCT_BY_CATEGORY":
-      return {
-        ...state,
-        productsByCategory: payload.payload
-      };
+
     case "SEARCH_PRODUCT":
       return {
         ...state,
         search: payload.payload
       };
-    case "PRODUCT_ERR":
+    case "SEARCH_ERR":
       return {
         ...state,
-        err: "Err :error  in get data from server ."
+        search: null
       };
 
     default:

@@ -6,26 +6,24 @@ import {
 } from "../../../store/action/productAction";
 import ProductCard from "./ProductCard";
 import { Container } from "reactstrap";
-import { RouteProps, Redirect } from "react-router";
-
+import { RouteProps, Redirect, withRouter } from "react-router";
 import "./Shopping.css";
 class ProductByCategory extends Component<any & RouteProps, any> {
   constructor(props: any) {
     super(props);
     this.state = {};
   }
-  componentDidMount() {
-    const { id }: any = this.props;
-    this.props.getProduct(id);
+  componentWillReceiveProps() {
+    this.props.getProduct(this.props.match.params.id);
   }
   render() {
-    const { productsByCategory }: any = this.props.product;
+    const { allProducts }: any = this.props.product;
     const { err }: any = this.props.product;
     return (
       <Container>
         <div className="shopProduct ">
-          {productsByCategory
-            ? productsByCategory.map((products: Object, key: any) => {
+          {allProducts
+            ? allProducts.map((products: Object, key: any) => {
                 return <ProductCard data={products} key={key} />;
               })
             : null}
@@ -47,4 +45,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ProductByCategory);
+)(withRouter(ProductByCategory));

@@ -16,6 +16,7 @@ import {
 import SignInlayout from "./SignIn";
 import { connect } from "react-redux";
 import SignOut from "./signOut";
+import { withRouter } from "react-router";
 
 class TopNav extends React.Component<any, any> {
   constructor(props: any) {
@@ -23,7 +24,8 @@ class TopNav extends React.Component<any, any> {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      search: null
     };
   }
   toggle() {
@@ -32,6 +34,9 @@ class TopNav extends React.Component<any, any> {
       isOpen: !isOpen
     });
   }
+  handleChange = (e: any) => {
+    this.setState({ search: e.target.value });
+  };
   render() {
     const { isOpen }: any = this.state;
     const { userConnected } = this.props.auth;
@@ -44,9 +49,16 @@ class TopNav extends React.Component<any, any> {
           </Col>
           <Col sm="12" md="7">
             <InputGroup>
-              <Input />
+              <Input onChange={this.handleChange} />
               <InputGroupAddon addonType="prepend">
-                <Button color="secondary">Search</Button>
+                <Button
+                  color="secondary"
+                  onClick={() =>
+                    this.props.history.push(`/search/${this.state.search}`)
+                  }
+                >
+                  Search
+                </Button>
               </InputGroupAddon>
             </InputGroup>
           </Col>
@@ -69,4 +81,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TopNav);
+)(withRouter(TopNav));

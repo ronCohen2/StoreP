@@ -17,6 +17,7 @@ import Footer from "./component/layout/Footer";
 import shopCategory from "./component/user/shopping/shopCategory";
 import Slide from "./component/user/shopping/CartMenu";
 import RegisterStep2 from "./component/auth/RegisterStep2";
+import Search from "./component/layout/Search";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -35,6 +36,7 @@ class Store extends Component<any, any> {
             <Route path="/shop" component={shopping} />
             <Route path="/category/:id" component={shopCategory} />
             <Route path="/itemDetails/:id" component={itemDetails} />
+            <Route path="/search/:product" component={Search} />
             <Route path="/contact" component={contact} />
             <Route path="/about" component={contact} />
             <Route path="/login" exact component={login} />

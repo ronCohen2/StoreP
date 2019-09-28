@@ -21,6 +21,7 @@ export interface Icart {
   addError: any;
   orderErr: any;
   totalPrice: any;
+  date: any;
 }
 
 export interface Iproduct {

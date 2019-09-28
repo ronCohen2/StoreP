@@ -90,10 +90,6 @@ export let createOrder = async (req: Request, res: Response) => {
     creditCard
   } = req.body;
 
-  const checkDate = await Order.find({ shipDate });
-  if (checkDate.length > 3) {
-    return res.status(400).send({ Err: "Delivery date full." });
-  }
   const newOrder = new Order({
     userId,
     cartId,
@@ -107,7 +103,7 @@ export let createOrder = async (req: Request, res: Response) => {
     await newOrder.save();
     res.status(200).send({ msg: "Order success.", Order: newOrder });
   } catch (err) {
-    res.send(err);
+    res.status(400).send({ msg: err });
   }
 };
 
@@ -137,5 +133,15 @@ export let getOrders = async (req: Request, res: Response) => {
     res.status(200).send(item);
   } catch {
     res.status(400).send("no");
+  }
+};
+
+export let checkDate = async (req: Request, res: Response) => {
+  const { shipDate } = req.body;
+  const checkDate = await Order.find({ shipDate });
+  if (checkDate.length < 4) {
+    return res.status(200).send({ msg: true });
+  } else {
+    return res.status(400).send({ msg: false });
   }
 };

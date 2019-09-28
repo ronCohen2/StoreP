@@ -71,7 +71,6 @@ export const removeProduct = (productId: String) => {
         `http://localhost:3001/admin/category/${productId}`
       );
     } catch (err) {
-      console.log(err);
       dispatch({
         type: "REMOVE_PRODUCT_ERR",
         payload: err.response.data

@@ -12,7 +12,7 @@ const initialState: IAdmin = {
 
 const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
   switch (payload.type) {
-    case "GET_PRODUCTS":
+    case "GET_PRODUCTS_ADMIN":
       return {
         ...state,
         allProducts: payload.payload

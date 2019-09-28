@@ -18,8 +18,7 @@ class CategoryHome extends Component<any, any> {
     this.props.getProductByCategory(id);
   }
   render() {
-    const { productsByCategory }: any = this.props.product;
-    console.log(productsByCategory);
+    const { allProducts }: any = this.props.product;
     return (
       <Container className="mt-4">
         <h2>Electronic Products</h2>
@@ -31,8 +30,8 @@ class CategoryHome extends Component<any, any> {
             />
           </Col>
           <Col sm="12" md="8">
-            {productsByCategory
-              ? productsByCategory.map((product: any, index: Number) => {
+            {allProducts
+              ? allProducts.map((product: any, index: Number) => {
                   return (
                     <Col
                       md="4"

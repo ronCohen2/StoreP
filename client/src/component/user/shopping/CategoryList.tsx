@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAllCategory } from "../../../store/action/productAction";
+import {
+  getAllCategory,
+  getProductsByCategory
+} from "../../../store/action/productAction";
 import { Card, CardText, CardHeader, Col } from "reactstrap";
+import { withRouter } from "react-router";
 class CategoryList extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -10,20 +14,28 @@ class CategoryList extends Component<any, any> {
   componentDidMount() {
     this.props.getCategoryList();
   }
+  redirect = (page: String) => {
+    this.props.history.push(page);
+  };
   render() {
     const { category }: any = this.props.products;
     return (
       <div className=" mb-4">
         <Card>
           <CardHeader>Category</CardHeader>
+          <CardText onClick={() => this.redirect("/shop")}>
+            All Products
+          </CardText>
           {category
-            ? category.map((category: any, key: Number) => {
+            ? category.map((cat: any, key: Number) => {
                 return (
                   <CardText
                     className="border-bottom pb-3 pt-3 "
-                    onClick={() => console.log(category._id)}
+                    onClick={() => {
+                      this.redirect(`/category/${cat._id}`);
+                    }}
                   >
-                    {category.categoryName}
+                    {cat.categoryName}
                   </CardText>
                 );
               })
@@ -41,10 +53,11 @@ const maStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getCategoryList: () => dispatch(getAllCategory())
+    getCategoryList: () => dispatch(getAllCategory()),
+    getProductsByCategory: (id: String) => dispatch(getProductsByCategory(id))
   };
 };
 export default connect(
   maStateToProps,
   mapDispatchToProps
-)(CategoryList);
+)(withRouter(CategoryList));

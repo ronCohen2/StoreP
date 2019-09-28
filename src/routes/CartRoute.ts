@@ -16,6 +16,8 @@ Cart.post("/cartStatus", controller.CartStatus);
 
 Cart.post("/createOrder", controller.createOrder);
 
+Cart.post("/checkDate", controller.checkDate);
+
 //dev
 // Cart.post("/CreateCart", controller.CreateCart);
 

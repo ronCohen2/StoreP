@@ -10,7 +10,10 @@ import {
   Table
 } from "reactstrap";
 import { connect } from "react-redux";
-import { order as Order } from "../../../store/action/cartAction";
+import {
+  order as Order,
+  checkShipDate
+} from "../../../store/action/cartAction";
 
 class order extends Component<any, any> {
   constructor(props: any) {
@@ -40,14 +43,26 @@ class order extends Component<any, any> {
     });
   };
   checkShipDate = (e: any) => {
-    console.log(e.target.value);
+    this.props.checkShipDate(e.target.value);
   };
+
   onSubmit = (e: any) => {
-    e.preventdefault();
-    console.log(this.state);
+    e.preventDefault();
+    const { city, street, shipDate, creditCard } = this.state;
+    const { cartId, totalPrice } = this.props.cart;
+    const userId = this.props.auth.user._id;
+    this.props.order(
+      userId,
+      cartId,
+      totalPrice,
+      city,
+      street,
+      shipDate,
+      creditCard
+    );
   };
   render() {
-    const { items } = this.props.cart;
+    const { items, date } = this.props.cart;
     return (
       <Container>
         <Form>
@@ -65,6 +80,10 @@ class order extends Component<any, any> {
                   onDoubleClick={() => this.setToCity()}
                 />
               </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
               <FormGroup>
                 <Label for="Street">Street</Label>
                 <Input
@@ -76,15 +95,27 @@ class order extends Component<any, any> {
                   onDoubleClick={() => this.setToStreet()}
                 />
               </FormGroup>
+            </Col>
+          </Row>
+          <Row>
+            <Col sm="10">
               <FormGroup>
                 <Label for="date">Order Date</Label>
                 <Input
                   type="date"
-                  id="date"
-                  onChange={e => this.checkShipDate(e)}
+                  id="shipDate"
+                  onChange={e => {
+                    this.checkShipDate(e);
+                    this.handleChange(e);
+                  }}
                   required
                 />
               </FormGroup>
+            </Col>
+            <Col>
+              {date === true ? <p>Great Date </p> : null}
+              {date === false ? <p>try another day</p> : null}
+              {date === null ? <p>-</p> : null}
             </Col>
           </Row>
           <Row>
@@ -93,7 +124,7 @@ class order extends Component<any, any> {
               <FormGroup>
                 <Label for="CreditCard">Credit Card</Label>
                 <Input
-                  id="CreditCard"
+                  id="creditCard"
                   placeholder="1234-5678-1234-5678"
                   onChange={this.handleChange}
                   required
@@ -189,7 +220,8 @@ const mapDispatchToProps = (dispatch: any) => {
     ) =>
       dispatch(
         Order(userId, cartId, totalPrice, city, street, shipDate, creditCard)
-      )
+      ),
+    checkShipDate: (shipDate: String) => dispatch(checkShipDate(shipDate))
   };
 };
 export default connect(

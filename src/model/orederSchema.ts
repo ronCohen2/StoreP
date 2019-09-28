@@ -17,7 +17,7 @@ const orderSchema = new mongoose.Schema({
   },
   city: {
     type: String,
-    required: true
+    required: [true, "City is required."]
   },
   street: {
     type: String
@@ -32,8 +32,9 @@ const orderSchema = new mongoose.Schema({
     default: Date.now()
   },
   creditCard: {
-    type: Number,
-    required: true
+    type: [Number, "Credit Card can only number"],
+    required: true,
+    max: [16, "max is 16 digit "]
     // max: 4
   }
 });

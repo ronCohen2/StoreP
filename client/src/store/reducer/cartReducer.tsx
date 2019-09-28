@@ -9,6 +9,7 @@ const initialState: Icart = {
   cartError: null,
   addError: null,
   orderErr: null,
+  date: null,
   totalPrice: 0
 };
 const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
@@ -61,12 +62,19 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
     case "ORDER":
       return {
         ...state,
-        order: payload.payload.Order
+        order: payload.payload
       };
     case "ORDER_ERR":
+      console.log(payload.payload);
       return {
         ...state,
+        order: null,
         orderErr: payload.payload
+      };
+    case "DATE":
+      return {
+        ...state,
+        date: payload.payload
       };
 
     default:
