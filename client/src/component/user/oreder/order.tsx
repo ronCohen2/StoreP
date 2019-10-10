@@ -7,7 +7,8 @@ import {
   FormGroup,
   Label,
   Input,
-  Table
+  Table,
+  Alert
 } from "reactstrap";
 import { connect } from "react-redux";
 import {
@@ -49,7 +50,7 @@ class order extends Component<any, any> {
   onSubmit = (e: any) => {
     e.preventDefault();
     const { city, street, shipDate, creditCard } = this.state;
-    const { cartId, totalPrice } = this.props.cart;
+    const { cartId, totalPrice,data } = this.props.cart;
     const userId = this.props.auth.user._id;
     this.props.order(
       userId,
@@ -58,15 +59,30 @@ class order extends Component<any, any> {
       city,
       street,
       shipDate,
-      creditCard
+      creditCard,this.toHomePage
     );
+    
   };
+  toHomePage = ()=>{
+    this.props.history.push("/");
+  }
   render() {
-    const { items, date } = this.props.cart;
+    const { items, date, orderErr } = this.props.cart;
+    console.log(orderErr);
     return (
       <Container>
-        <Form>
+        <form>
+        {
+               orderErr ? (
+               orderErr.map((err:String,key:String)=>{
+                 return(
+                   <Alert className="mt-1" color="danger">{err}</Alert>
+                 )
+               })
+               ) : null
+             }
           <Row className="">
+            
             <Col>
               <h4>Billing details</h4>
               <FormGroup>
@@ -76,8 +92,8 @@ class order extends Component<any, any> {
                   placeholder="e.g Tel Aviv"
                   onChange={this.handleChange}
                   value={this.state.city}
-                  required
                   onDoubleClick={() => this.setToCity()}
+                  required
                 />
               </FormGroup>
             </Col>
@@ -130,7 +146,9 @@ class order extends Component<any, any> {
                   required
                 />
               </FormGroup>
-              <FormGroup>
+            </Col>
+          </Row>
+          {/* <FormGroup>
                 <Label for="CreditCard">Cardholder Name</Label>
                 <Input
                   id="name"
@@ -160,7 +178,7 @@ class order extends Component<any, any> {
                 </div>
               </FormGroup>
             </Col>
-          </Row>
+          </Row> */}
           <Row>
             <Col>
               <Table borded>
@@ -196,7 +214,11 @@ class order extends Component<any, any> {
               />
             </Col>
           </Row>
-        </Form>
+          <Row>
+            <Col>
+                       </Col>
+          </Row>
+        </form>
       </Container>
     );
   }
@@ -216,10 +238,12 @@ const mapDispatchToProps = (dispatch: any) => {
       city: String,
       street: String,
       shipDate: any,
-      creditCard: Number
+      creditCard: Number,
+      toHomePage:any
+      
     ) =>
       dispatch(
-        Order(userId, cartId, totalPrice, city, street, shipDate, creditCard)
+        Order(userId, cartId, totalPrice, city, street, shipDate, creditCard,toHomePage)
       ),
     checkShipDate: (shipDate: String) => dispatch(checkShipDate(shipDate))
   };

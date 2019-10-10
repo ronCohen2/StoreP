@@ -70,7 +70,8 @@ export const order = (
   city: String,
   street: String,
   shipDate: any,
-  creditCard: Number
+  creditCard: Number,
+  toHomePage: any
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
@@ -84,9 +85,11 @@ export const order = (
         creditCard
       });
       dispatch({ type: "ORDER", payload: res.data });
+      dispatch({ type: "CLEAN_ORDER_ERR", payload: res.data });
+      dispatch(GetCartStatus(userId));
+      toHomePage();
       alert("order success");
     } catch (error) {
-      console.log(error);
       dispatch({ type: "ORDER_ERR", payload: error.response.data });
     }
   };

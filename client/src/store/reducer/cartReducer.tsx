@@ -18,7 +18,8 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
       return {
         ...state,
         cartId: payload.payload._id,
-        status: payload.payload.status
+        status: payload.payload.status,
+        items: []
       };
     }
     case "CART_ITEMS":
@@ -70,6 +71,11 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
         ...state,
         order: null,
         orderErr: payload.payload
+      };
+    case "CLEAN_ORDER_ERR":
+      return {
+        ...state,
+        orderErr: null
       };
     case "DATE":
       return {

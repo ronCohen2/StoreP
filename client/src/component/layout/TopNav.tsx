@@ -48,19 +48,23 @@ class TopNav extends React.Component<any, any> {
             <img src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/uploads/2019/03/logo.png" />
           </Col>
           <Col sm="12" md="7">
-            <InputGroup>
-              <Input onChange={this.handleChange} />
-              <InputGroupAddon addonType="prepend">
-                <Button
-                  color="secondary"
-                  onClick={() =>
-                    this.props.history.push(`/search/${this.state.search}`)
-                  }
-                >
-                  Search
-                </Button>
-              </InputGroupAddon>
-            </InputGroup>
+            <form>
+              <InputGroup>
+                <Input onChange={this.handleChange} />
+                <InputGroupAddon addonType="prepend">
+                  <Button
+                    type="submit"
+                    color="secondary"
+                    onClick={e => {
+                      e.preventDefault();
+                      this.props.history.push(`/search/${this.state.search}`);
+                    }}
+                  >
+                    Search
+                  </Button>
+                </InputGroupAddon>
+              </InputGroup>
+            </form>
           </Col>
           <Col sm="12" md="2">
             {userConnected ? <SignOut /> : <SignInlayout />}

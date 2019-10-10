@@ -18,7 +18,7 @@ class shopCategory extends Component<any, any> {
     console.log(err);
     return (
       <Container>
-        <Row>
+        <Row className="mt-4 mb-4">
           <Col md="3">
             <CategoryList />
             <Filter />

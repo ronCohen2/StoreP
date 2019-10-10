@@ -3,6 +3,8 @@ import CartItem from "../model/cartItemSchema";
 import Products from "../model/ProuductSchema";
 import Cart from "../model/cartSchema";
 import Order from "../model/orederSchema";
+import * as mongoose from "mongoose";
+import { object } from "prop-types";
 
 export let GetCartItems = async (req: Request, res: Response) => {
   const { cartId } = req.body;
@@ -63,7 +65,8 @@ export let empty = async (req: Request, res: Response) => {
 export const CartStatus = async (req: Request, res: Response) => {
   const { UserId } = req.body;
   try {
-    const cart = await Cart.findOne({ UserId });
+    const cart = await Cart.findOne({ UserId }).sort({ date: -1 });
+    console.log(cart);
     if (cart.status === 1) {
       console.log("open cart");
       res.status(200).send({ status: 1, cart: cart });
@@ -90,6 +93,13 @@ export let createOrder = async (req: Request, res: Response) => {
     creditCard
   } = req.body;
 
+  const checkDate = await Order.find({ shipDate });
+  if (checkDate.length > 3) {
+    return res
+      .status(400)
+      .send(["this ship date is full ,please try another day"]);
+  }
+
   const newOrder = new Order({
     userId,
     cartId,
@@ -101,9 +111,14 @@ export let createOrder = async (req: Request, res: Response) => {
   });
   try {
     await newOrder.save();
-    res.status(200).send({ msg: "Order success.", Order: newOrder });
+    closeCart(cartId);
+    res.status(200).send({ Success: true, Order: newOrder });
   } catch (err) {
-    res.status(400).send({ msg: err });
+    let error: any = [];
+    for (let field in err.errors) {
+      error.push(err.errors[field].message);
+    }
+    res.status(400).send(error);
   }
 };
 
@@ -143,5 +158,17 @@ export let checkDate = async (req: Request, res: Response) => {
     return res.status(200).send({ msg: true });
   } else {
     return res.status(400).send({ msg: false });
+  }
+};
+
+export let closeCart = async (cartId: String) => {
+  try {
+    const cart = await Cart.findByIdAndUpdate(cartId, {
+      $set: {
+        status: 2
+      }
+    });
+  } catch {
+    return false;
   }
 };

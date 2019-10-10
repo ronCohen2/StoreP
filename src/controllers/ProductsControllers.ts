@@ -24,8 +24,12 @@ export let getAllCategoty = async (req: Request, res: Response) => {
 export let getProductsByCategory = async (req: Request, res: Response) => {
   const categoryId = req.params.id;
   const products = await Products.find({ categoryId: categoryId });
+  const category = await Category.find({ _id: categoryId });
   if (products.length > 0) {
-    res.status(200).send(products);
+    res.status(200).send({
+      products,
+      category
+    });
   } else {
     res.status(400).send({ msg: "category is  empty" });
   }

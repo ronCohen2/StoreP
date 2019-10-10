@@ -6,40 +6,42 @@ import { getProductsByCategory } from "../../../store/action/productAction";
 import "./home";
 import ProductCard from "./ProductCard";
 import { withRouter } from "react-router-dom";
-
+import Axios from "axios";
 class CategoryHome extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      product: null,
+      categoryName: null,
+      image: null
+    };
   }
-  componentDidMount() {
+  async componentWillMount() {
     const { id }: any = this.props;
-    console.log(id);
-    this.props.getProductByCategory(id);
+    const res = await Axios.get(
+      `http://localhost:3001/Products/category/${id}`
+    );
+    this.setState({
+      product: res.data.products,
+      categoryName: res.data.category[0].categoryName,
+      image: res.data.category[0].image
+    });
   }
   render() {
-    const { allProducts }: any = this.props.product;
+    const { product }: any = this.state;
+    const { categoryName, image } = this.state;
     return (
       <Container className="mt-4">
-        <h2>Electronic Products</h2>
-        <Row className="cat rounded">
+        <h2>{categoryName} Products</h2>
+        <Row className="cat rounded mb-4">
           <Col sm="12" md="4">
-            <img
-              src="https://www.luzuk.com/demo/supermarket-ecommerce/wp-content/themes/supermarket-ecommerce-pro/images/ecatprobanner.jpg"
-              className="CatyegoryImg"
-            />
+            <img src={image} className="CatyegoryImg" />
           </Col>
           <Col sm="12" md="8">
-            {allProducts
-              ? allProducts.map((product: any, index: Number) => {
+            {product
+              ? product.map((product: any, index: Number) => {
                   return (
-                    <Col
-                      md="4"
-                      className="float-left mt-3"
-                      onClick={() => {
-                        // this.props.history.push("/Home");
-                      }}
-                    >
+                    <Col md="4" className="float-left mt-3">
                       <ProductCard
                         img={product.image}
                         name={product.productName}
@@ -60,12 +62,8 @@ const mapStateToProps = (state: any) => {
     product: state.product
   };
 };
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    getProductByCategory: (id: String) => dispatch(getProductsByCategory(id))
-  };
-};
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )(CategoryHome);

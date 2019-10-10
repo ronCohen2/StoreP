@@ -11,7 +11,7 @@ class shopping extends Component {
   render() {
     return (
       <Container>
-        <Row className="mt-4">
+        <Row className="mt-4 mb-4">
           <Col md="3">
             <CategoryList />
             <Filter />

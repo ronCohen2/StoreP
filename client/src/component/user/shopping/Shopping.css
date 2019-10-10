@@ -3,6 +3,7 @@
 }
 .productCard2 {
   float: left;
+  margin-bottom: 20px;
 }
 .slidecontainer {
   width: 100%; /* Width of the outside container */
@@ -53,4 +54,11 @@
   height: 25px; /* Slider handle height */
   background: #4caf50; /* Green background */
   cursor: pointer; /* Cursor on hover */
+}
+.MenuButton {
+  /* position: absolute;
+  bottom: 3%;
+  grid: flex;
+
+  left: 2%; */
 }

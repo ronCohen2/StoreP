@@ -20,22 +20,20 @@ const orderSchema = new mongoose.Schema({
     required: [true, "City is required."]
   },
   street: {
-    type: String
-    // required: true
+    type: String,
+    required: [true, "Street is required."]
   },
   shipDate: {
     type: String,
-    required: true
+    required: [true, "Ship date  is required."]
   },
   data: {
     type: Date,
     default: Date.now()
   },
   creditCard: {
-    type: [Number, "Credit Card can only number"],
-    required: true,
-    max: [16, "max is 16 digit "]
-    // max: 4
+    type: Number,
+    required: [true, "Credit card  is required."]
   }
 });
 const Order = mongoose.model<IOrder>("Order", orderSchema);

@@ -9,12 +9,29 @@ import {
   CardText,
   Label
 } from "reactstrap";
+import { connect } from "react-redux";
+import { filter } from "minimatch";
+
 class Filter extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      filterPrice: null || 150
+      filterPrice: 1
     };
+  }
+
+  componentWillReceiveProps(nextProps: any) {
+    const { allProducts } = this.props.product;
+
+    console.log("test" + allProducts);
+    if (this.props !== nextProps && allProducts) {
+      var max = allProducts.reduce((prev: any, current: any) => {
+        return prev.price > current.price ? prev : current;
+      });
+      this.setState({
+        filterPrice: max.price
+      });
+    }
   }
 
   updateTextInput = (val: any) => {
@@ -26,7 +43,6 @@ class Filter extends Component<any, any> {
     });
   };
   render() {
-    const maxPrice: Number = 123;
     const { filterPrice } = this.state;
 
     return (
@@ -35,17 +51,27 @@ class Filter extends Component<any, any> {
         <CardBody>
           <CardText>
             <div className="slidecontainer">
+              {/* {filterPrice ? ( */}
               <input
                 type="range"
-                min="1"
-                max="100"
+                min="0"
+                max={filterPrice}
                 className="slider"
                 id="myRange"
                 onChange={() => {
-                  this.changeFilterPrice(
+                  // this.changeFilterPrice(
+                  //   (document.getElementById("myRange") as HTMLInputElement)
+                  //     .value
+                  // );
+                  console.log(
                     (document.getElementById("myRange") as HTMLInputElement)
                       .value
                   );
+                  this.setState({
+                    filterPrice: (document.getElementById(
+                      "myRange"
+                    ) as HTMLInputElement).value
+                  });
                 }}
               />
             </div>
@@ -57,5 +83,12 @@ class Filter extends Component<any, any> {
     );
   }
 }
-
-export default Filter;
+const mapStateToProps = (state: any) => {
+  return {
+    product: state.product
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(Filter);

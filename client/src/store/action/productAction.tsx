@@ -20,7 +20,7 @@ export const getProductsByCategory = (categoryId: String) => {
       const res = await axios.get(
         `http://localhost:3001/Products/category/${categoryId}`
       );
-      dispatch({ type: "GET_PRODUCTS_CATEGORY", payload: res.data });
+      dispatch({ type: "GET_PRODUCTS_CATEGORY", payload: res.data.products });
     } catch (err) {
       dispatch({ type: "PRODUCT_ERR" });
     }
@@ -44,9 +44,7 @@ export const getProductsDetails = (productId: String) => {
 export const getAllCategory = () => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.get(
-        `http://localhost:3001/Products//allCategory`
-      );
+      const res = await axios.get(`http://localhost:3001/Products/allCategory`);
       dispatch({ type: "ALL_CATEGORY", payload: res.data });
     } catch (err) {
       dispatch({ type: "PRODUCT_ERR" });

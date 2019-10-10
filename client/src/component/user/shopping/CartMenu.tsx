@@ -35,7 +35,8 @@ class Slide extends React.Component<any, any> {
           <Menu right width={"25%"} noOverlay className="">
             <h1>My Cart</h1>
             <Button
-              className="clearCart"
+              // className="clearCart"
+              className="MenuButton"
               onClick={() => {
                 this.props.removeCartItems(cartId);
               }}
@@ -43,6 +44,7 @@ class Slide extends React.Component<any, any> {
               Clear Cart
             </Button>
             <Button
+              className="MenuButton"
               onClick={() => {
                 this.props.history.push("/order");
               }}

@@ -9,14 +9,14 @@ class Search extends Component<any, any> {
     super(props);
     this.state = {};
   }
-  componentWillReceiveProps() {
+  componentDidUpdate() {
     this.props.searchProduct(this.props.match.params.product);
   }
   render() {
     const { search } = this.props.product;
     return (
       <Container>
-        <Row>
+        <Row className="mt-4 mb-4">
           <Col>
             {search ? (
               search.map((product: any, key: any) => {

@@ -18,7 +18,6 @@ class ProductByCategory extends Component<any & RouteProps, any> {
   }
   render() {
     const { allProducts }: any = this.props.product;
-    const { err }: any = this.props.product;
     return (
       <Container>
         <div className="shopProduct ">
