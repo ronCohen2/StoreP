@@ -1,5 +1,14 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Input } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Input,
+  Form,
+  FormGroup,
+  Label,
+  Button
+} from "reactstrap";
 import { connect } from "react-redux";
 
 class contact extends Component {
@@ -7,65 +16,59 @@ class contact extends Component {
     super(props);
     this.state = {};
   }
+  handleChange = (e: any) => {
+    this.setState({
+      [e.target.id]: e.target.value
+    });
+  };
   render() {
     return (
-      <Container className="banner">
-        <Row>
-          <Col sm="12" md="5">
-            <div className="p-4">
+      <Container>
+        <Row className="mt-4 mb-4">
+          <Col sm="12" md="6" className="border">
+            <div>
+              <h1 className="to-center m-3">Contact</h1>
               <p>
-                Address :<span className="ml-5">Isreal , Tel aviv</span>
+                Address :<span className="">Isreal , Tel aviv</span>
               </p>
               <p>
-                Email :<span className="ml-5">RonC665@gmail.com</span>
+                Email :<span className="">RonC665@gmail.com</span>
               </p>
               <p>
-                Phone :<span className="ml-5">054-336-9400</span>
+                Phone :<span className="">054-336-9400</span>
               </p>
             </div>
           </Col>
-          <Col sm="12" md="7">
-            <div className="contactForm ">
-              <form>
-                <h3 className="pt-4 pb-2 text-white d-flex justify-content-center ">
-                  Contact Now{" "}
-                </h3>
-                <input
+          <Col sm="12" md="6">
+            <Form className="border">
+              <h1 className="to-center m-3">Contact</h1>
+              <FormGroup>
+                <Input
                   type="text"
+                  id="name"
                   placeholder="Name"
-                  className="inputContact "
-                  required
+                  onChange={this.handleChange}
                 />
-                <input
-                  type="text"
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  type="email"
+                  id="email"
                   placeholder="Email"
-                  className="inputContact"
-                  required
+                  onChange={this.handleChange}
                 />
-                <div>
-                  <textarea
-                    name=""
-                    id=""
-                    cols={57}
-                    rows={6}
-                    placeholder="youe text.."
-                    className="rounded "
-                    required
-                  />
-                </div>
-                <div>
-                  <input
-                    type="submit"
-                    value="Submit"
-                    className=" rounded ml-5 mt-3 mb-4"
-                  />
-                </div>
-              </form>
-            </div>
+              </FormGroup>
+              <FormGroup>
+                <Input
+                  type="textarea"
+                  id="text"
+                  placeholder="your text.."
+                  onChange={this.handleChange}
+                />
+              </FormGroup>
+              <Button>Send</Button>
+            </Form>
           </Col>
-        </Row>
-        <Row>
-          <div />
         </Row>
       </Container>
     );

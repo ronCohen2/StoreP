@@ -46,6 +46,7 @@ class CategoryHome extends Component<any, any> {
                         img={product.image}
                         name={product.productName}
                         price={product.price}
+                        id={product._id}
                       />
                     </Col>
                   );

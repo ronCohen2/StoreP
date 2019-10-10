@@ -28,8 +28,12 @@
   margin: 0;
 }
 .contactForm {
-  margin: 10px;
   background-color: #605ca8;
   border-radius: 20px;
   margin: auto;
+}
+.contact_details {
+  background-color: lavender;
+  border-radius: 20px;
+  height: 100%;
 }
