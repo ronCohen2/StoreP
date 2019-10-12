@@ -65,3 +65,24 @@ export const searchProducts = (product: String) => {
     }
   };
 };
+
+export const newContact = (
+  name: String,
+  email: String,
+  text: String,
+  toHomePage: any
+) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(`http://localhost:3001/Products/contact`, {
+        name,
+        email,
+        text
+      });
+      alert("contact success");
+      toHomePage();
+    } catch (err) {
+      dispatch({ type: "SEARCH_ERR" });
+    }
+  };
+};

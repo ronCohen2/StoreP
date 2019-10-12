@@ -44,6 +44,15 @@ export interface Icart extends mongoose.Document {
   items?: any;
   date: any;
 }
+export interface IContact extends mongoose.Document {
+  name: String;
+  // date: any;
+  email: String;
+  text: String;
+  status: Boolean;
+  items?: any;
+  date: any;
+}
 
 export interface IOrder extends mongoose.Document {
   userId: String;

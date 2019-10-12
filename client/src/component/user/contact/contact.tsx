@@ -10,18 +10,27 @@ import {
   Button
 } from "reactstrap";
 import { connect } from "react-redux";
+import { newContact } from "../../../store/action/productAction";
 
-class contact extends Component {
+class contact extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: null,
+      email: null,
+      text: null
+    };
   }
   handleChange = (e: any) => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+  toHomePage = () => {
+    this.props.history.push("/");
+  };
   render() {
+    const { name, email, text } = this.state;
     return (
       <Container>
         <Row className="mt-4 mb-4">
@@ -48,6 +57,7 @@ class contact extends Component {
                   id="name"
                   placeholder="Name"
                   onChange={this.handleChange}
+                  required
                 />
               </FormGroup>
               <FormGroup>
@@ -64,9 +74,16 @@ class contact extends Component {
                   id="text"
                   placeholder="your text.."
                   onChange={this.handleChange}
+                  required
                 />
               </FormGroup>
-              <Button>Send</Button>
+              <input
+                type="submit"
+                onClick={(e: any) => {
+                  e.preventDefault();
+                  this.props.addContact(name, email, text, this.toHomePage);
+                }}
+              />
             </Form>
           </Col>
         </Row>
@@ -74,7 +91,12 @@ class contact extends Component {
     );
   }
 }
-const mapDispatchToProps = (dispatc: any) => {};
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    addContact: (name: String, email: String, text: String, toHomePage: any) =>
+      dispatch(newContact(name, email, text, toHomePage))
+  };
+};
 export default connect(
   null,
   mapDispatchToProps

@@ -12,3 +12,5 @@ Products.get("/allCategory", controllear.getAllCategoty);
 Products.get("/category/:id", controllear.getProductsByCategory);
 //search product
 Products.get("/search/:product", controllear.searchProduct);
+
+Products.post("/contact", controllear.contact);

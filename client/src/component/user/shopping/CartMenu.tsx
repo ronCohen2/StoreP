@@ -32,11 +32,16 @@ class Slide extends React.Component<any, any> {
     return (
       <>
         {userConnected ? (
-          <Menu right width={"25%"} noOverlay className="">
+          <Menu
+            right
+            width={"25%"}
+            noOverlay
+            customBurgerIcon={
+              <img src="https://image.flaticon.com/icons/png/512/34/34627.png" />
+            }
+          >
             <h1>My Cart</h1>
             <Button
-              // className="clearCart"
-              className="MenuButton"
               onClick={() => {
                 this.props.removeCartItems(cartId);
               }}
@@ -44,7 +49,6 @@ class Slide extends React.Component<any, any> {
               Clear Cart
             </Button>
             <Button
-              className="MenuButton"
               onClick={() => {
                 this.props.history.push("/order");
               }}

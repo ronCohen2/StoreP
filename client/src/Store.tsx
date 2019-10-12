@@ -18,6 +18,7 @@ import shopCategory from "./component/user/shopping/shopCategory";
 import Slide from "./component/user/shopping/CartMenu";
 import RegisterStep2 from "./component/auth/RegisterStep2";
 import Search from "./component/layout/Search";
+import dashbord from "./component/admin/dashbord";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -43,7 +44,7 @@ class Store extends Component<any, any> {
             <Route path="/register" component={register} />
             <Route path="/register2" component={RegisterStep2} />
             <Route path="/order" component={order} />
-            <Route path="/shoppingCart" component={shoppingCart} />
+            <Route path="/admin" component={dashbord} />
             <Route path="/" component={noMatch} />
           </Switch>
           <Footer />

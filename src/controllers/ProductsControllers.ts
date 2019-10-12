@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import Products from "../model/ProuductSchema";
 import Category from "../model/categorySchema";
+import Contact from "../model/contactSchema";
 
 export let getAllProducts = async (req: Request, res: Response) => {
   const products = await Products.find();
@@ -44,5 +45,19 @@ export let searchProduct = async (req: Request, res: Response) => {
     res.status(200).send(products);
   } else {
     res.status(400).send({ msg: "not products similer" });
+  }
+};
+export let contact = async (req: Request, res: Response) => {
+  const { name, email, text } = req.body;
+  try {
+    const newContact = await new Contact({
+      name,
+      email,
+      text
+    });
+    await newContact.save();
+    res.status(200).send(newContact);
+  } catch {
+    res.status(400).send("err in add contact");
   }
 };

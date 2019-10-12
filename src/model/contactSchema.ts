@@ -1,4 +1,5 @@
 import * as mongoose from "mongoose";
+import { IContact } from "./modelInterfece";
 const Schema = mongoose.Schema;
 const contactSchema = new mongoose.Schema({
   name: {
@@ -18,5 +19,5 @@ const contactSchema = new mongoose.Schema({
     default: false
   }
 });
-const contact = mongoose.model("contact", contactSchema);
-export default contact;
+const Contact = mongoose.model<IContact>("Contact", contactSchema);
+export default Contact;

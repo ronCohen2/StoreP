@@ -79,11 +79,12 @@ export const removeProduct = (productId: String) => {
   };
 };
 // add category
-export const addCategory = (categoryName: String) => {
+export const addCategory = (categoryName: String, image: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       const res = await axios.post(`http://localhost:3001/admin/category`, {
-        categoryName
+        categoryName,
+        image
       });
       console.log(res.data);
     } catch (err) {
