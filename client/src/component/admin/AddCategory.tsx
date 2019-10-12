@@ -26,15 +26,17 @@ class AddCategory extends Component<any, any> {
     });
   };
   handleSubmit = (e: any) => {
-    // e.preventDefault();
-    // console.log("sdfds");
+    const { name, image } = this.state;
+    e.preventDefault();
+    this.props.AddCategory(name, image);
+    this.setState({ name: "", image: "" });
   };
   render() {
     return (
-      <Container>
+      <Container className="border">
         <Row>
-          <Col sm="12" md="3">
-            <Form>
+          <Col>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label for="name">Name</Label>
                 <Input
@@ -42,6 +44,7 @@ class AddCategory extends Component<any, any> {
                   id="name"
                   placeholder="Category Name "
                   onChange={this.handleChange}
+                  value={this.state.name}
                   required
                 />
               </FormGroup>
@@ -52,6 +55,7 @@ class AddCategory extends Component<any, any> {
                   id="image"
                   placeholder="src"
                   onChange={this.handleChange}
+                  value={this.state.image}
                   required
                 />
               </FormGroup>

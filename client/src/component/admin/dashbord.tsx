@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import AddCategory from "./AddCategory";
 import AddProductAdmin from "./AddProductAdmin";
+import ContactMessage from "./ContactMessage";
+import { Row, Col, Container } from "reactstrap";
 class dashbord extends Component {
   constructor(props: any) {
     super(props);
@@ -8,10 +10,19 @@ class dashbord extends Component {
   }
   render() {
     return (
-      <div>
-        <AddCategory />
-        <AddProductAdmin />
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <AddCategory />
+          </Col>
+          <Col>
+            <AddProductAdmin />
+          </Col>
+          <Col>
+            <ContactMessage />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }

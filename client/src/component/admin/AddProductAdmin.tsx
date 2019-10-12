@@ -28,9 +28,9 @@ class AddProductAdmin extends Component<any, any> {
   };
   render() {
     return (
-      <Container>
+      <Container className="border">
         <Row>
-          <Col sm="12" md="3">
+          <Col>
             <Form>
               <FormGroup>
                 <Label for="name">Name</Label>
