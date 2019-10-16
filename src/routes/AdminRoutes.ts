@@ -11,9 +11,9 @@ Admin.post("/ProductsByCategory", controller.allProductsByCategory);
 
 Admin.post("/", controller.addProducts);
 
-Admin.put("/", controller.editProducts);
+Admin.post("/edit", controller.editProducts);
 
-Admin.delete("/removeProduct/:id", controller.removeProducts);
+Admin.get("/removeProduct/:id", controller.removeProducts);
 
 Admin.post("/category", controller.addCategory);
 

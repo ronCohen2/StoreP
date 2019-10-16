@@ -31,6 +31,11 @@ class contact extends Component<any, any> {
   };
   render() {
     const { name, email, text } = this.state;
+    const { userConnected } = this.props.auth;
+    // if (userConnected) {
+    //   const { firstName } = this.props.auth.user;
+    //   this.setState({ name: firstName });
+    // }
     return (
       <Container>
         <Row className="mt-4 mb-4">
@@ -57,6 +62,7 @@ class contact extends Component<any, any> {
                   id="name"
                   placeholder="Name"
                   onChange={this.handleChange}
+                  value={this.state.name}
                   required
                 />
               </FormGroup>
@@ -91,6 +97,11 @@ class contact extends Component<any, any> {
     );
   }
 }
+const mapStateToProps = (stata: any) => {
+  return {
+    auth: stata.auth
+  };
+};
 const mapDispatchToProps = (dispatch: any) => {
   return {
     addContact: (name: String, email: String, text: String, toHomePage: any) =>
@@ -98,6 +109,6 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(contact);

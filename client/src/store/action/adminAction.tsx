@@ -52,6 +52,7 @@ export const addProduct = (
         type: "ADD_PRODUCTS",
         payload: res.data.newProduct
       });
+      alert("success");
     } catch (err) {
       dispatch({
         type: "ADD_PRODUCTS_ERR",
@@ -62,14 +63,27 @@ export const addProduct = (
 };
 
 //edit product
-
+export const editProduct = (id: String, obj: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(`http://localhost:3001/admin/edit`, {
+        id,
+        obj
+      });
+      alert("Edit success");
+    } catch (err) {
+      console.log("err in edit ");
+    }
+  };
+};
 //remove products
 export const removeProduct = (productId: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.delete(
-        `http://localhost:3001/admin/category/${productId}`
+      const res = await axios.get(
+        `http://localhost:3001/admin/removeProduct/${productId}`
       );
+      dispatch({ type: "REMOVE_PRODUCT_ADMIN", payload: productId });
     } catch (err) {
       dispatch({
         type: "REMOVE_PRODUCT_ERR",

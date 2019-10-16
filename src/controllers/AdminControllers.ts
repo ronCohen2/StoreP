@@ -31,9 +31,9 @@ export let addProducts = async (req: Request, res: Response) => {
 };
 
 export let editProducts = async (req: Request, res: Response) => {
-  const { id }: { id: String } = req.body;
+  const { id, obj } = req.body;
   if (id) {
-    const products = await Products.findByIdAndUpdate({ _id: id }, req.body);
+    const products = await Products.findByIdAndUpdate({ _id: id }, obj);
     res.status(200).send({ msg: "product updated" });
   } else {
     res.status(400).send({ msg: "error in update product" });

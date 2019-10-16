@@ -3,6 +3,7 @@ import AddCategory from "./AddCategory";
 import AddProductAdmin from "./AddProductAdmin";
 import ContactMessage from "./ContactMessage";
 import { Row, Col, Container } from "reactstrap";
+import EditProduct from "./EditProduct";
 class dashbord extends Component {
   constructor(props: any) {
     super(props);
@@ -20,6 +21,11 @@ class dashbord extends Component {
           </Col>
           <Col>
             <ContactMessage />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <EditProduct />
           </Col>
         </Row>
       </Container>

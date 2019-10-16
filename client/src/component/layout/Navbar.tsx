@@ -12,6 +12,9 @@ import {
 } from "reactstrap";
 import { NavLink } from "react-router-dom";
 import CategoryDropDown from "./CategoryDropDown";
+import AdminTab from "./AdminTab";
+import { connect } from "react-redux";
+
 export default class NavbarC extends React.Component {
   constructor(props: any) {
     super(props);
@@ -68,6 +71,9 @@ export default class NavbarC extends React.Component {
                         About
                       </NavLink>
                     </NavItem>
+                  </Col>
+                  <Col className="">
+                    <AdminTab />
                   </Col>
                 </Row>
               </Nav>

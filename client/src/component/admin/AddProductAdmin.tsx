@@ -10,12 +10,17 @@ import {
   Input,
   Button
 } from "reactstrap";
-import { addCategory } from "../../store/action/adminAction";
+import { addCategory, addProduct } from "../../store/action/adminAction";
 
 class AddProductAdmin extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      name: undefined,
+      category: undefined,
+      price: undefined,
+      image: undefined
+    };
   }
   handleChange = (e: any) => {
     this.setState({
@@ -23,22 +28,25 @@ class AddProductAdmin extends Component<any, any> {
     });
   };
   handleSubmit = (e: any) => {
-    // e.preventDefault();
-    // console.log("sdfds");
+    const { name, category, price, image } = this.state;
+    e.preventDefault();
+    this.props.AddProduct(name, category, price, image);
+    this.setState({ name: "", category: "", price: "", image: "" });
   };
   render() {
+    const { name, category, price, image } = this.state;
     return (
       <Container className="border">
         <Row>
           <Col>
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <FormGroup>
                 <Label for="name">Name</Label>
                 <Input
                   type="text"
                   id="name"
-                  placeholder="Category Name "
                   onChange={this.handleChange}
+                  value={name}
                   required
                 />
               </FormGroup>
@@ -48,15 +56,17 @@ class AddProductAdmin extends Component<any, any> {
                   type="text"
                   id="category"
                   onChange={this.handleChange}
+                  value={category}
                   required
                 />
               </FormGroup>
               <FormGroup>
                 <Label for="price">Price</Label>
                 <Input
-                  type="text"
+                  type="number"
                   id="price"
                   onChange={this.handleChange}
+                  value={price}
                   required
                 />
               </FormGroup>
@@ -65,8 +75,8 @@ class AddProductAdmin extends Component<any, any> {
                 <Input
                   type="text"
                   id="image"
-                  placeholder="src"
                   onChange={this.handleChange}
+                  value={image}
                   required
                 />
               </FormGroup>
@@ -80,8 +90,12 @@ class AddProductAdmin extends Component<any, any> {
 }
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    AddCategory: (name: String, image: String) =>
-      dispatch(addCategory(name, image))
+    AddProduct: (
+      name: String,
+      category: String,
+      price: Number,
+      image: String
+    ) => dispatch(addProduct(name, category, price, image))
   };
 };
 export default connect(

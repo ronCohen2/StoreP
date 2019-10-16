@@ -42,7 +42,6 @@ class AddCategory extends Component<any, any> {
                 <Input
                   type="text"
                   id="name"
-                  placeholder="Category Name "
                   onChange={this.handleChange}
                   value={this.state.name}
                   required
@@ -53,7 +52,6 @@ class AddCategory extends Component<any, any> {
                 <Input
                   type="text"
                   id="image"
-                  placeholder="src"
                   onChange={this.handleChange}
                   value={this.state.image}
                   required
