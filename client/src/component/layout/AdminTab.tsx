@@ -31,15 +31,15 @@ const AdminTab = (props: any) => {
         Admin
       </DropdownToggle>
       <DropdownMenu>
-        <DropdownItem onClick={() => history.push("/admin/add-product")}>
+        <DropdownItem onClick={() => history.push("/add-product")}>
           Add Product
         </DropdownItem>
         <DropdownItem divider />
-        <DropdownItem onClick={() => history.push("/")}>
+        <DropdownItem onClick={() => history.push("/edit")}>
           Edit Product
         </DropdownItem>
         <DropdownItem divider />
-        <DropdownItem onClick={() => history.push("/admin/add-category")}>
+        <DropdownItem onClick={() => history.push("/add-category")}>
           Add Category
         </DropdownItem>
       </DropdownMenu>

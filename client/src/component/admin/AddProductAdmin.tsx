@@ -40,6 +40,8 @@ class AddProductAdmin extends Component<any, any> {
         <Row>
           <Col>
             <Form onSubmit={this.handleSubmit}>
+              <h3 className="text-muted">Add New Product</h3>
+
               <FormGroup>
                 <Label for="name">Name</Label>
                 <Input

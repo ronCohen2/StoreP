@@ -22,6 +22,7 @@ import dashbord from "./component/admin/dashbord";
 import Edit from "./component/admin/Edit";
 import AddCategory from "./component/admin/AddCategory";
 import AddProductAdmin from "./component/admin/AddProductAdmin";
+import EditProduct from "./component/admin/EditProduct";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -48,8 +49,9 @@ class Store extends Component<any, any> {
             <Route path="/register2" component={RegisterStep2} />
             <Route path="/order" component={order} />
             <Route path="/admin" component={dashbord} />
-            <Route path="/Admin/Add-category" component={AddCategory} />
+            <Route path="/Add-category" component={AddCategory} />
             <Route path="/Add-Product" component={AddProductAdmin} />
+            <Route path="/edit" exact component={EditProduct} />
             <Route path="/Edit/:id" component={Edit} />
             <Route path="/" component={noMatch} />
           </Switch>

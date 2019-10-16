@@ -37,6 +37,7 @@ class AddCategory extends Component<any, any> {
         <Row>
           <Col>
             <Form onSubmit={this.handleSubmit}>
+              <h3 className="text-muted">Add New Category</h3>
               <FormGroup>
                 <Label for="name">Name</Label>
                 <Input
