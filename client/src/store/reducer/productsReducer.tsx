@@ -34,10 +34,10 @@ const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
       };
 
     case "REMOVE_PRODUCT_ADMIN":
-      const { search } = state;
+      const { allProducts } = state;
       return {
         ...state,
-        search: search.filter((search: any) => search._id !== payload.payload)
+        allProducts: allProducts.filter((search: any) => search._id !== payload.payload)
       };
     case "SEARCH_PRODUCT":
       return {

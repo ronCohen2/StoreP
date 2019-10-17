@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
 import "./index.css";
 import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,11 +15,24 @@ const store = createStore(
   rootReducer,
   composeWithDevTools(compose(applyMiddleware(thunk)))
 );
-ReactDOM.render(
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <AlertProvider template={AlertTemplate} {...options}>
+//       <App />
+//     </AlertProvider>
+//   </Provider>,
+//   document.getElementById("root")
+// );
+const Root = () => (
+  // <AlertProvider template={AlertTemplate} {...options}>
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
+
+  // </AlertProvider>
 );
 
-serviceWorker.unregister();
+render(<Root />, document.getElementById("root"));
+
+// serviceWorker.unregister();

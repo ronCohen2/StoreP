@@ -1,6 +1,7 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const getAllProducts = () => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
@@ -52,8 +53,10 @@ export const addProduct = (
         type: "ADD_PRODUCTS",
         payload: res.data.newProduct
       });
-      alert("success");
+      swal("Good job!", "You Add New Product!", "success");
     } catch (err) {
+      swal("Error!", "Error in add product.", "error");
+
       dispatch({
         type: "ADD_PRODUCTS_ERR",
         payload: err.response.data.err
@@ -70,7 +73,7 @@ export const editProduct = (id: String, obj: any) => {
         id,
         obj
       });
-      alert("Edit success");
+      swal("Good job!", "You Edit this Product!", "success");
     } catch (err) {
       console.log("err in edit ");
     }
@@ -86,8 +89,8 @@ export const removeProduct = (productId: String) => {
       dispatch({ type: "REMOVE_PRODUCT_ADMIN", payload: productId });
     } catch (err) {
       dispatch({
-        type: "REMOVE_PRODUCT_ERR",
-        payload: err.response.data
+        type: "REMOVE_PRODUCT_ERR"
+        // payload: err.response.data.msg
       });
     }
   };
@@ -100,7 +103,7 @@ export const addCategory = (categoryName: String, image: String) => {
         categoryName,
         image
       });
-      console.log(res.data);
+      swal("Good job!", "You Add New Category!", "success");
     } catch (err) {
       dispatch({
         type: "ADD_CATEGORY_ERR",

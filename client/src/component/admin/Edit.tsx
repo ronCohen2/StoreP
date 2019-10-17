@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import { getProductsDetails } from "../../store/action/productAction";
 import { editProduct } from "../../store/action/adminAction";
+import swal from "sweetalert";
 
 class Edit extends Component<any, any> {
   constructor(props: any) {
@@ -36,10 +37,14 @@ class Edit extends Component<any, any> {
             <Row>
               <Col sm="12" md="4">
                 <div className="border">
-                  <img src={productDetails[0].image} />
+                  <img
+                    src={productDetails[0].image}
+                    className="productImage-admin"
+                  />
                 </div>
               </Col>
               <Col sm="12" md="8">
+                <h3>Edit Product</h3>
                 <FormGroup>
                   <Label for="name">Name</Label>
                   <Input
@@ -72,13 +77,27 @@ class Edit extends Component<any, any> {
                 </FormGroup>
                 <Button
                   onClick={() => {
+                    console.log(this.state);
+
                     const obj = {
                       name: productDetails[0].productName,
                       price: productDetails[0].price,
                       image: productDetails[0].image
                     };
-                    const aa = Object.assign(obj, this.state);
-                    this.props.editProduct(productDetails[0]._id, aa);
+                    if (
+                      this.state.name ||
+                      this.state.price ||
+                      this.state.image
+                    ) {
+                      const aa = Object.assign(obj, this.state);
+                      this.props.editProduct(productDetails[0]._id, aa);
+                    } else {
+                      swal(
+                        "Error:",
+                        "Please Change some feild to edit !",
+                        "error"
+                      );
+                    }
                   }}
                 >
                   Edit

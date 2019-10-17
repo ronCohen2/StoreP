@@ -11,13 +11,16 @@ import {
   Button
 } from "reactstrap";
 import { addCategory, addProduct } from "../../store/action/adminAction";
+import CategoryDropDown from "../layout/CategoryDropDown";
+import "./Admin.css";
+import swal from "sweetalert";
 
 class AddProductAdmin extends Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
       name: undefined,
-      category: undefined,
+      categoryName: undefined,
       price: undefined,
       image: undefined
     };
@@ -28,13 +31,15 @@ class AddProductAdmin extends Component<any, any> {
     });
   };
   handleSubmit = (e: any) => {
-    const { name, category, price, image } = this.state;
+    const { name, categoryName, price, image } = this.state;
     e.preventDefault();
-    this.props.AddProduct(name, category, price, image);
-    this.setState({ name: "", category: "", price: "", image: "" });
+    this.props.AddProduct(name, categoryName, price, image);
+    this.setState({ name: "", categoryName: "", price: "", image: "" });
   };
+
   render() {
-    const { name, category, price, image } = this.state;
+    const { name, categoryName, price, image } = this.state;
+    const { category } = this.props.product;
     return (
       <Container className="border">
         <Row>
@@ -53,14 +58,24 @@ class AddProductAdmin extends Component<any, any> {
                 />
               </FormGroup>
               <FormGroup>
-                <Label for="category">Category</Label>
-                <Input
-                  type="text"
-                  id="category"
+                <Label for="categoryName">Category</Label>
+                <select
+                  className="border"
+                  id="categoryName"
                   onChange={this.handleChange}
-                  value={category}
                   required
-                />
+                >
+                  <option>Category</option>
+                  {category
+                    ? category.map((category: any, key: Number) => {
+                        return (
+                          <option value={category._id}>
+                            {category.categoryName}
+                          </option>
+                        );
+                      })
+                    : null}
+                </select>
               </FormGroup>
               <FormGroup>
                 <Label for="price">Price</Label>
@@ -90,6 +105,11 @@ class AddProductAdmin extends Component<any, any> {
     );
   }
 }
+const mapStateToProps = (state: any) => {
+  return {
+    product: state.product
+  };
+};
 const mapDispatchToProps = (dispatch: any) => {
   return {
     AddProduct: (
@@ -101,6 +121,6 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AddProductAdmin);

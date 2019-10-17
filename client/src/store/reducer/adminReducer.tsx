@@ -36,7 +36,7 @@ const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
     case "REMOVE_PRODUCT_ERR":
       return {
         ...state,
-        removeProductError: payload.payload
+        removeProductError:null
       };
     case "ADD_CATEGORY_ERR":
       return {

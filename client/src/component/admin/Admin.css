@@ -2,3 +2,11 @@
   width: 40px;
   height: 60px;
 }
+#categoryName {
+  width: 100%;
+  padding: 8px;
+  border: 0;
+}
+.productImage-admin{
+  width:100%;
+}

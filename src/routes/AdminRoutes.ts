@@ -26,8 +26,9 @@ Admin.post("/1", (req: Request, res: Response) => {
   client.messages
     .create({
       body: "Hello from Node",
-      to: "+972543369400", // Text this number
+      to: "+972543369400", // Text this   
       from: "+12039413066" // From a valid Twilio number
     })
     .then((message: any) => console.log(message.sid));
 });
+  
