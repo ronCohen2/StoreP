@@ -7,8 +7,57 @@ import { registerValidation } from "../validation/registerValidation";
 import { loginValidation } from "../validation/loginValidation";
 import { CartStatus } from "./CartControllers";
 const keys = require("../config/keys");
+import { isEmail } from "validator";
+export let registerStep1 = async (req: Request, res: Response) => {
+  const { userId, email, password, confirmPass } = req.body;
+  const user = await User.find({ ID: userId });
+  if (user.length > 0) return res.status(400).send("user is already exist");
+  if (password !== confirmPass)
+    return res.status(400).send("Password in not equal");
+  //fix -email validation
+  // if (validator.isEmail(email) == false)
+  //   return res.status(400).send("Email is invalid");
+  // console.log("sd" + isEmail(email));
+  // Hash Password
+  const salt = await bcrypt.genSalt(10);
+  const hashed = await bcrypt.hash(password, salt);
+  try {
+    const newUser = await new User({
+      ID: userId,
+      email,
+      password: hashed,
+      firstName: null,
+      lastName: null,
+      city: null,
+      street: null,
+      status: 1
+    });
+    await newUser.save();
+    res.status(200).send({ status: 1, success: true, newUser });
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
+export let registerStep2 = async (req: Request, res: Response) => {
+  const { fname, lname, city, street, id } = req.body;
+  try {
+    const user = User.findByIdAndUpdate(id, {
+      $set: {
+        firstName: fname,
+        lastName: lname,
+        city,
+        street,
+        status: 2
+      }
+    });
+    res.status(200).send({ status: 2, success: true });
+  } catch (err) {
+    res.status(400).send(err);
+  }
+};
 
-// export let  = async (req: Request, res: Response) => {
+export let registerStep3 = async (req: Request, res: Response) => {};
+
 // export let registerverification = async (req: Request, res: Response) => {
 //   const { ID, email, password, password2 } = req.body;
 //   const error = await registerValidation(req.body);

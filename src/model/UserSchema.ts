@@ -1,6 +1,8 @@
 import * as mongoose from "mongoose";
 import { IUser } from "./modelInterfece";
 import * as jwt from "jsonwebtoken";
+import { isEmail } from "validator";
+
 const keys = require("../config/keys");
 
 const UserSchema = new mongoose.Schema({
@@ -12,21 +14,20 @@ const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
     minlength: 2,
-    maxlength: 15,
-    required: true
+    maxlength: 15
+    // required: true
   },
   lastName: {
     type: String,
     minlength: 2,
-    maxlength: 15,
-    required: true
+    maxlength: 15
+    // required: true
   },
   email: {
     type: String,
-    minlength: 5,
-    maxlength: 50,
-    required: true,
-    unique: true
+    unique: true,
+    trim:true,
+    required: "Email address is required"
   },
   password: {
     type: String,
@@ -37,18 +38,23 @@ const UserSchema = new mongoose.Schema({
   city: {
     type: String,
     minlength: 2,
-    maxlength: 20,
-    required: true
+    maxlength: 20
+    // required: true
   },
   street: {
     type: String,
     minlength: 2,
-    maxlength: 20,
-    required: true
+    maxlength: 20
+    // required: true
   },
   role: {
     type: Boolean,
-    required: true
+    default: false
+  },
+  status: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 UserSchema.methods.generateToken = (
