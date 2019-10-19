@@ -21,13 +21,13 @@ app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 
 //
 app.use(cors());
 
 // parse application/json
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(logger("dev"));
 
 app.use(express.static(path.join(__dirname, "../public")));

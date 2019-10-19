@@ -42,6 +42,7 @@ export const addProduct = (
   image: String
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    console.log(productName, categoryId, price, image);
     try {
       const res = await axios.post("http://localhost:3001/admin/", {
         productName,
@@ -49,7 +50,7 @@ export const addProduct = (
         price,
         image
       });
-      await dispatch({
+      dispatch({
         type: "ADD_PRODUCTS",
         payload: res.data.newProduct
       });
