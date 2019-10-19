@@ -6,11 +6,13 @@ import {
   InputGroup,
   Input,
   Button,
-  Form
+  Form,
+  Alert
 } from "reactstrap";
 import "./auth.css";
 import { connect } from "react-redux";
 import { Rstep1 } from "../../store/action/authAction";
+import { withRouter } from "react-router";
 
 class RegisterStep1 extends Component<any, any> {
   constructor(props: any) {
@@ -27,13 +29,15 @@ class RegisterStep1 extends Component<any, any> {
       [e.target.id]: e.target.value
     });
   };
+
   handleSubmit = async (e: any) => {
     const { userId, email, password, confirmPassword } = this.state;
     e.preventDefault();
     await this.props.RegisterS1(userId, email, password, confirmPassword);
-    console.log("sumit");
   };
+
   render() {
+    const { registerErr } = this.props.auth;
     return (
       <Container className="p-4  mt-3 mb-3 border ">
         <Form onSubmit={this.handleSubmit}>
@@ -46,6 +50,7 @@ class RegisterStep1 extends Component<any, any> {
             <Col className="">
               <InputGroup>
                 <Input
+                  type="number"
                   placeholder="Id"
                   className="input-register"
                   id="userId"
@@ -62,6 +67,7 @@ class RegisterStep1 extends Component<any, any> {
                   placeholder="Email"
                   className="input-register "
                   id="email"
+                  type="email"
                   onChange={this.handleChange}
                   required
                 />
@@ -96,6 +102,11 @@ class RegisterStep1 extends Component<any, any> {
               </InputGroup>
             </Col>
           </Row>
+          {registerErr
+            ? registerErr.map((err: any, key: Number) => {
+                return <Alert color="danger">{err}</Alert>;
+              })
+            : null}
           <Button className="to-end">Next</Button>
         </Form>
       </Container>
@@ -103,7 +114,9 @@ class RegisterStep1 extends Component<any, any> {
   }
 }
 const mapStateToProps = (state: any) => {
-  return {};
+  return {
+    auth: state.auth
+  };
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
@@ -118,4 +131,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RegisterStep1);
+)(withRouter(RegisterStep1));

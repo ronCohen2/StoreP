@@ -14,14 +14,14 @@ const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
     minlength: 2,
-    maxlength: 15,
-    required: true
+    maxlength: 15
+    // required: true
   },
   lastName: {
     type: String,
     minlength: 2,
-    maxlength: 15,
-    required: true
+    maxlength: 15
+    // required: true
   },
   email: {
     type: String,
@@ -38,19 +38,19 @@ const UserSchema = new mongoose.Schema({
   city: {
     type: String,
     minlength: 2,
-    maxlength: 20,
-    required: [true, "city  is required"]
+    maxlength: 20
+    // required: [true, "city  is required"]
   },
   street: {
     type: String,
     minlength: 2,
-    maxlength: 20,
-    required: true
+    maxlength: 20
+    // required: true
   },
   phone: {
     type: Number,
-    trim: true,
-    required: true
+    trim: true
+    // required: true
   },
   role: {
     type: Boolean,

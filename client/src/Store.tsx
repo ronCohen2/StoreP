@@ -25,6 +25,7 @@ import EditProduct from "./component/admin/EditProduct";
 import RegisterStep1 from "./component/auth/RegisterStep1";
 import RegisterStep2 from "./component/auth/RegisterStep2";
 import RegisterStep3 from "./component/auth/RegisterStep3";
+import Register from "./component/auth/Register";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -46,9 +47,7 @@ class Store extends Component<any, any> {
             <Route path="/search/:product" component={Search} />
             <Route path="/contact" component={contact} />
             <Route path="/about" component={contact} />
-            <Route path="/register-1" component={RegisterStep1} />
-            <Route path="/register-2" component={RegisterStep2} />
-            <Route path="/register-3" component={RegisterStep3} />
+            <Route path="/register" component={Register} />
             <Route path="/order" component={order} />
             <Route path="/admin" component={dashbord} />
             <Route path="/Add-category" component={AddCategory} />

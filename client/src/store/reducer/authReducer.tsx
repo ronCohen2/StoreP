@@ -6,8 +6,10 @@ const initialState: IAuth = {
   user: undefined,
   registerErr: undefined,
   loginErr: undefined,
-  step: 1,
-  Register_details: undefined
+  step: 0,
+  Register_details: undefined,
+  id: undefined,
+  phone: undefined
 };
 
 const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
@@ -15,7 +17,14 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
     case "REGISTER_STEP1":
       return {
         ...state,
-        step: 2
+        step: 1,
+        id: payload.payload.id
+      };
+    case "REGISTER_STEP2":
+      return {
+        ...state,
+        step: 2,
+        phone: payload.payload.phone
       };
     case "REGISTER_STEP1_ERR":
       return {

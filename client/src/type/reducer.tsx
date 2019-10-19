@@ -5,6 +5,8 @@ export interface IAuth {
   loginErr: any;
   step: Number;
   Register_details: any;
+  id: any;
+  phone: any;
 }
 export interface IAdmin {
   allProducts: [];

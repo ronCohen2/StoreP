@@ -21,27 +21,33 @@ export const Rstep1 = (
       });
       await dispatch({ type: "REGISTER_STEP1", payload: res.data });
     } catch (err) {
-      await dispatch({ type: "REGISTER_STEP1_ERR", payload: err.respons.data });
+      await dispatch({
+        type: "REGISTER_STEP1_ERR",
+        payload: err.response.data
+      });
     }
   };
 };
-export const register = (
-  token: String,
+export const Rstep2 = (
   city: String,
   street: String,
   fname: String,
-  lname: String
+  lname: String,
+  phone: Number,
+  id: String
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.post("http://localhost:3001/Auth/register", {
-        token,
+      const res = await axios.post("http://localhost:3001/Auth/RegisterStep2", {
         city,
         street,
         fname,
-        lname
+        lname,
+        phone,
+        id
       });
-      dispatch({ type: "REGISTER_SUCCESS", payload: res.data.token });
+      dispatch({ type: "REGISTER_STEP2", payload: res.data });
+      console.log(res.data);
     } catch (error) {
       dispatch({ type: "REGISTER_ERR", payload: error.data });
     }

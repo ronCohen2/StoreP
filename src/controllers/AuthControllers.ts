@@ -13,32 +13,38 @@ import { isEmail } from "validator";
 export let registerStep1 = async (req: Request, res: Response) => {
   const { userId, email, password, confirmPassword } = req.body;
   const user = await User.find({ ID: userId });
-  if (user.length > 0) return res.status(400).send("user is already exist");
-  if (password !== confirmPassword)
-    return res.status(400).send("Password in not equal");
-  //fix -email validation
-  // if (validator.isEmail(email) == false)
-  //   return res.status(400).send("Email is invalid");
-  // console.log("sd" + isEmail(email));
-  // Hash Password
-  const salt = await bcrypt.genSalt(10);
-  const hashed = await bcrypt.hash(password, salt);
+  const err = [];
+  if (user.length > 0) {
+    err.push("user is already exist");
+  }
+  if (password !== confirmPassword) {
+    err.push("Password in not equal");
+  }
+  const UserEmail = await User.find({ email });
+  if (UserEmail.length > 0) {
+    err.push("Email is already exist");
+  }
+  if (err.length > 0) {
+     return res.status(400).send(err);
+  }
   try {
+    const salt = await bcrypt.genSalt(10);
+    const hashed = await bcrypt.hash(password, salt);
     const newUser = await new User({
       ID: userId,
       email,
       password: hashed,
-      firstName: null,
-      lastName: null,
-      city: null,
-      street: null,
-      phone: null,
+      firstName: undefined,
+      lastName: undefined,
+      city: undefined,
+      street: undefined,
+      phone: undefined,
       status: 1
     });
     await newUser.save();
-    res.status(200).send({ status: 1, success: true, id: newUser._id });
-  } catch (err) {
-    res.status(400).send("error");
+    res.status(200).send({ status: 1, id: newUser._id });
+  } catch (er) {
+    res.status(400).send(err);
   }
 };
 export let registerStep2 = async (req: Request, res: Response) => {
@@ -55,7 +61,7 @@ export let registerStep2 = async (req: Request, res: Response) => {
       }
     });
     await user.save();
-    res.status(200).send({ status: 2, success: true, user });
+    res.status(200).send({ status: 2, phone: user.phone });
   } catch (err) {
     res.status(400).send(err);
   }
