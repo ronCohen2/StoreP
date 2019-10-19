@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { string, any } from "prop-types";
-import { registerVerif } from "../../../store/action/authAction";
 import { ThunkDispatch } from "redux-thunk";
 import Carousel from "./Carousel";
 import CategoryHome from "./CategoryHome";

@@ -1,48 +1,54 @@
 import React, { Component } from "react";
 import {
-  Button,
-  Input,
-  InputGroup,
-  Container,
   Row,
   Col,
+  Container,
+  InputGroup,
+  Input,
+  Button,
   Form
 } from "reactstrap";
 import "./auth.css";
-import { connect } from 'react-redux'
+import { connect } from "react-redux";
+import { Rstep1 } from "../../store/action/authAction";
 
-class RegisterStep2 extends React.Component<any, any> {
+class RegisterStep1 extends Component<any, any> {
   constructor(props: any) {
     super(props);
-    this.state = {};
+    this.state = {
+      userId: null,
+      email: null,
+      password: null,
+      confirmPassword: null
+    };
   }
-  handleSubmit = (e: any) => {
-    e.preventDefault();
-    console.log("sdf");
-  };
-
   handleChange = (e: any) => {
     this.setState({
       [e.target.id]: e.target.value
     });
   };
+  handleSubmit = async (e: any) => {
+    const { userId, email, password, confirmPassword } = this.state;
+    e.preventDefault();
+    await this.props.RegisterS1(userId, email, password, confirmPassword);
+    console.log("sumit");
+  };
   render() {
     return (
-      <Container className="border">
+      <Container className="p-4  mt-3 mb-3 border ">
         <Form onSubmit={this.handleSubmit}>
           <Row className="m-3">
-            <Col className="to-center ">Sign up</Col>
-            <Col className="to-center font-weight-bold">User Details</Col>
+            <Col className="to-center font-weight-bold">Sign up</Col>
+            <Col className="to-center">User Details</Col>
             <Col className="to-center">Phone Verfication</Col>
           </Row>
           <Row>
-            <Col>
+            <Col className="">
               <InputGroup>
                 <Input
-                  placeholder="City"
-                  type="text"
-                  className="input-register "
-                  id="city"
+                  placeholder="Id"
+                  className="input-register"
+                  id="userId"
                   onChange={this.handleChange}
                   required
                 />
@@ -53,9 +59,9 @@ class RegisterStep2 extends React.Component<any, any> {
             <Col>
               <InputGroup>
                 <Input
-                  placeholder="Street"
+                  placeholder="Email"
                   className="input-register "
-                  id="street"
+                  id="email"
                   onChange={this.handleChange}
                   required
                 />
@@ -66,10 +72,10 @@ class RegisterStep2 extends React.Component<any, any> {
             <Col>
               <InputGroup>
                 <Input
-                  placeholder="First Name"
-                  type="text"
+                  placeholder="Password"
+                  type="password"
                   className="input-register "
-                  id="fname"
+                  id="password"
                   onChange={this.handleChange}
                   required
                 />
@@ -80,33 +86,17 @@ class RegisterStep2 extends React.Component<any, any> {
             <Col>
               <InputGroup>
                 <Input
-                  placeholder=" Last name"
-                  type="text"
+                  placeholder=" Confirm Password"
+                  type="password"
                   className="input-register "
-                  id="lname"
+                  id="confirmPassword"
                   onChange={this.handleChange}
                   required
                 />
               </InputGroup>
             </Col>
           </Row>
-          <Row>
-            <Col>
-              <InputGroup>
-                <Input
-                  placeholder="Phone Number"
-                  type="text"
-                  className="input-register "
-                  id="phone"
-                  onChange={this.handleChange}
-                  required
-                />
-              </InputGroup>
-            </Col>
-          </Row>
-          <div className="d-flex justify-content-end">
-            <Button className="d-flex justify-content-end">Next</Button>
-          </div>
+          <Button className="to-end">Next</Button>
         </Form>
       </Container>
     );
@@ -117,10 +107,15 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    RegisterStep1: () => dispatch()
+    RegisterS1: (
+      userId: Number,
+      email: String,
+      password: String,
+      confirmPassword: String
+    ) => dispatch(Rstep1(userId, email, password, confirmPassword))
   };
 };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(RegisterStep2);
+)(RegisterStep1);

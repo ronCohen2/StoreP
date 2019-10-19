@@ -9,6 +9,7 @@ export interface IUser extends mongoose.Document {
   password: String;
   city: String;
   street: String;
+  phone: Number;
   role: Boolean;
   status: Number;
   generateToken: (

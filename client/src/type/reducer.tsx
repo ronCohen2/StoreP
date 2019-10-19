@@ -1,9 +1,10 @@
 export interface IAuth {
-  registerToken: any;
   userConnected: Boolean;
   user: any;
   registerErr: any;
   loginErr: any;
+  step: Number;
+  Register_details: any;
 }
 export interface IAdmin {
   allProducts: [];

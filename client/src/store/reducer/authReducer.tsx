@@ -2,21 +2,22 @@ import { IAuth } from "../../type/reducer";
 import { Reducer } from "redux";
 
 const initialState: IAuth = {
-  registerToken: null,
   userConnected: false,
   user: undefined,
   registerErr: undefined,
-  loginErr: undefined
+  loginErr: undefined,
+  step: 1,
+  Register_details: undefined
 };
 
 const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
   switch (payload.type) {
-    case "REGISTER_VERIFICATION":
+    case "REGISTER_STEP1":
       return {
         ...state,
-        registerToken: payload.payload
+        step: 2
       };
-    case "REGISTER_ERR":
+    case "REGISTER_STEP1_ERR":
       return {
         ...state,
         registerErr: payload.payload

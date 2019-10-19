@@ -5,27 +5,24 @@ import { GetCartStatus, getCartItems } from "./cartAction";
 import { promised } from "q";
 import { promises } from "fs";
 
-export const registerVerif = (
-  ID: Number,
+export const Rstep1 = (
+  userId: Number,
   email: String,
   password: String | Number,
-  password2: String | Number
+  confirmPassword: String | Number
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-    const res = await axios.post(
-      "http://localhost:3001/Auth/registerverification",
-      {
-        ID,
+    try {
+      const res = await axios.post("http://localhost:3001/Auth/registerStep1", {
+        userId,
         email,
         password,
-        password2
-      }
-    );
-    if (!res.data.seccess) {
-      return dispatch({ type: "REGISTER_ERR", payload: res.data.Error });
+        confirmPassword
+      });
+      await dispatch({ type: "REGISTER_STEP1", payload: res.data });
+    } catch (err) {
+      await dispatch({ type: "REGISTER_STEP1_ERR", payload: err.respons.data });
     }
-    console.log("sd");
-    dispatch({ type: "REGISTER_VERIFICATION", payload: res.data.token });
   };
 };
 export const register = (

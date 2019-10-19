@@ -16,8 +16,7 @@
 .input-register {
   padding: 20px !important;
   margin: 20px !important;
-  background-color: transparent !important;
-  color: white !important;
+  color: grey !important;
   border-radius: 50px !important;
 }
 .flex1 {
@@ -26,6 +25,10 @@
 }
 .to-center {
   justify-content: center !important;
+}
+
+.to-end {
+  justify-content: flex-end; 
 }
 
 .button-modal {

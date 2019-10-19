@@ -14,38 +14,43 @@ const UserSchema = new mongoose.Schema({
   firstName: {
     type: String,
     minlength: 2,
-    maxlength: 15
-    // required: true
+    maxlength: 15,
+    required: true
   },
   lastName: {
     type: String,
     minlength: 2,
-    maxlength: 15
-    // required: true
+    maxlength: 15,
+    required: true
   },
   email: {
     type: String,
     unique: true,
-    trim:true,
+    trim: true,
     required: "Email address is required"
   },
   password: {
     type: String,
     minlength: 5,
     maxlength: 200,
-    required: true
+    required: [true, "password  is required"]
   },
   city: {
     type: String,
     minlength: 2,
-    maxlength: 20
-    // required: true
+    maxlength: 20,
+    required: [true, "city  is required"]
   },
   street: {
     type: String,
     minlength: 2,
-    maxlength: 20
-    // required: true
+    maxlength: 20,
+    required: true
+  },
+  phone: {
+    type: Number,
+    trim: true,
+    required: true
   },
   role: {
     type: Boolean,
