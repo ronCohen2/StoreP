@@ -40,13 +40,6 @@ class AddProductAdmin extends Component<any, any> {
       image: e.target.files[0]
     });
   };
-  // uploadImage = async() => {
-  //   console.log("sdfsdf");
-  //   const { image } = this.state;
-  //   const data = new FormData();
-  //   data.append("file", image);
-  //   axios.post("http://localhost:3001/Admin/Upload", data, {});
-  // };
 
   handleSubmit = async (e: any) => {
     const { name, categoryName, price, image } = this.state;

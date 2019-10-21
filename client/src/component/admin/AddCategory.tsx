@@ -10,7 +10,7 @@ import {
   Input,
   Button
 } from "reactstrap";
-import { addCategory } from "../../store/action/adminAction";
+import { addCategory, UploadImage } from "../../store/action/adminAction";
 
 class AddCategory extends Component<any, any> {
   constructor(props: any) {
@@ -25,11 +25,23 @@ class AddCategory extends Component<any, any> {
       [e.target.id]: e.target.value
     });
   };
+  handleChangeFile = (e: any) => {
+    this.setState({
+      image: e.target.files[0]
+    });
+  };
   handleSubmit = (e: any) => {
     const { name, image } = this.state;
     e.preventDefault();
-    this.props.AddCategory(name, image);
-    this.setState({ name: "", image: "" });
+    const promsie1 = new Promise(reslove => {
+      reslove(this.props.UploadImage(image));
+    });
+    promsie1.then(() => {
+      const { fileName } = this.props.admin;
+      const { name } = this.state;
+      this.props.AddCategory(name, fileName);
+      this.setState({ name: "", image: "" });
+    });
   };
   render() {
     return (
@@ -51,10 +63,9 @@ class AddCategory extends Component<any, any> {
               <FormGroup>
                 <Label for="image">Image</Label>
                 <Input
-                  type="text"
+                  type="file"
                   id="image"
-                  onChange={this.handleChange}
-                  value={this.state.image}
+                  onChange={this.handleChangeFile}
                   required
                 />
               </FormGroup>
@@ -66,13 +77,19 @@ class AddCategory extends Component<any, any> {
     );
   }
 }
+const mapStateToProps = (state: any) => {
+  return {
+    admin: state.admin
+  };
+};
 const mapDispatchToProps = (dispatch: any) => {
   return {
     AddCategory: (name: String, image: String) =>
-      dispatch(addCategory(name, image))
+      dispatch(addCategory(name, image)),
+    UploadImage: (image: any) => dispatch(UploadImage(image))
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(AddCategory);

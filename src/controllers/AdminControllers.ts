@@ -4,6 +4,7 @@ import Products from "../model/ProuductSchema";
 import category from "../model/categorySchema";
 import * as express from "express";
 var multer = require("multer");
+const fs = require("fs");
 
 var storage = multer.diskStorage({
   destination: function(req: any, file: any, callback: any) {
@@ -69,6 +70,14 @@ export let editProducts = async (req: Request, res: Response) => {
 export let removeProducts = async (req: Request, res: Response) => {
   const id: String = req.params.id;
   try {
+    //remove product image
+    const ProductImage = await Products.find({ _id: id }).select("image");
+    const path = `public/image/${ProductImage[0].image}`;
+    fs.unlink(path, (err: any) => {
+      if (err) {
+        return res.status(500).send({ msg: "error in remove product " });
+      }
+    });
     const products = await Products.findByIdAndRemove({ _id: id });
     res.status(200).send({ msg: "product removed" });
   } catch (err) {

@@ -130,6 +130,7 @@ export const addCategory = (categoryName: String, image: String) => {
         type: "ADD_CATEGORY_ERR",
         payload: err.response.data
       });
+      swal("Error!", "Error in add Category.", "error");
     }
   };
 };
