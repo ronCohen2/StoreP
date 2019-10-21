@@ -56,7 +56,6 @@ export let registerStep1 = async (req: Request, res: Response) => {
 };
 export let registerStep2 = async (req: Request, res: Response) => {
   const { fname, lname, city, street, phone, id } = req.body;
-  console.log(req.body);
   try {
     const user = await User.findByIdAndUpdate(id, {
       $set: {
@@ -69,100 +68,57 @@ export let registerStep2 = async (req: Request, res: Response) => {
       }
     });
     await user.save();
-    res.status(200).send({ status: 2, phone: user.phone });
+    console.log(user);
+    res.status(200).send({ status: 2 });
   } catch (err) {
     res.status(400).send(err);
   }
 };
 
-export let registerStep3 = (req: Request, res: Response) => {
+export let registerStep3 = async (req: Request, res: Response) => {
   const { phone } = req.body;
-  nexmo.verify.request(
+  console.log(phone);
+  await nexmo.verify.request(
     {
       number: phone,
-      brand: "sadasd",
+      brand: "Shop-",
       code_length: "4"
     },
     (err: any, result: any) => {
       if (err) {
         console.error(err);
-        res.status(200).send("/");
+        res.status(400).send(err);
       } else {
-        const verifyRequestId = result.request_id;
+        var verifyRequestId = result.request_id;
         console.log("request_id", verifyRequestId);
+        res.status(200).send({ id: verifyRequestId });
       }
     }
   );
-  //     }
-  //   );
-  // }, 1000);
-
-  // ver();
 };
-// const ver = () => {
-//   var accountSid = "ACcd57674ec7272b2c0740bca6e3844009"; // Your Account SID from www.twilio.com/console
-//   var authToken = "3ca63a7db04297bd38ca0056371a9dd8"; // Your Auth Token from www.twilio.com/console
-//   const sid = "VA9ac46fa93b2d96f7f5044c61459997c7";
-//   client.verify
-//     .services(sid)
-//     .verifications.create({ to: "+972543369400", channel: "sms" })
-//     .then((verification: any) => console.log(verification.sid));
-// };
-// ver();
-// export let registerverification = async (req: Request, res: Response) => {
-//   const { ID, email, password, password2 } = req.body;
-//   const error = await registerValidation(req.body);
-//   if (error.length > 0) {
-//     return res.status(202).send({ success: false, Error: error });
-//   }
-//   jwt.sign(
-//     {
-//       id: ID,
-//       email,
-//       password
-//     },
-//     keys.secretOrKey,
-//     { expiresIn: 3600 },
-//     (err, token) => {
-//       res.status(200).json({ seccess: true, token: "Bearer " + token });
-//     }
-//   );
-// };
-
-// export let Register = async (req: Request, res: Response) => {
-//   const { token, city, street, fname, lname } = req.body;
-//   //Parse token
-//   let decode = jwt.verify(token, keys.secretOrKey);
-//   const { id, email, password }: any = decode;
-//   //Find User
-//   const user = await User.findOne({ ID: id });
-//   //Cheack if user exist
-//   if (user) return res.status(400).send({ err: "User is alreadt exist." });
-//   // Hash Password
-//   const salt = await bcrypt.genSalt(10);
-//   const hashed = await bcrypt.hash(password, salt);
-
-//   try {
-//     //Create new User
-//     const newUser = new User({
-//       city,
-//       street,
-//       firstName: fname,
-//       lastName: lname,
-//       email,
-//       password: hashed,
-//       ID: id,
-//       role: false
-//     });
-//     //Save User
-//     await newUser.save();
-//     res.status(200).send({ status: true, token, user: newUser });
-//   } catch (err) {
-//     // FIX - error object
-//     res.send(err);
-//   }
-// };
-
+export const CheckVerfication = async (req: Request, res: Response) => {
+  const { verifyRequestId, code } = req.body;
+  await nexmo.verify.check(
+    {
+      request_id: verifyRequestId,
+      code: code
+    },
+    (err: any, result: any) => {
+      const { status } = result;
+      switch (status) {
+        case "0":
+          return res.status(200).send("ok");
+        case "6":
+          return res.status(400).send("Request  is verified already");
+        case "16":
+          return res
+            .status(400)
+            .send("The code provided does not match the expected value");
+        default:
+      }
+    }
+  );
+};
 export const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
   const errors = await loginValidation(req.body);

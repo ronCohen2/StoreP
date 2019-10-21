@@ -33,13 +33,33 @@ export const getAllProductsByCategory = (categoryId: String) => {
     }
   };
 };
+export const UploadImage = (image: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const data = new FormData();
+      data.append("file", image);
+      const res = await axios.post(
+        "http://localhost:3001/Admin/Upload",
+        data,
+        {}
+      );
+      dispatch({
+        type: "UPLOAD_IMAGE_PRODUCT",
+        payload: res.data.filename
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 //add products
 
 export const addProduct = (
   productName: String,
   categoryId: String,
   price: Number,
-  image: String
+  image: any
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     console.log(productName, categoryId, price, image);

@@ -12,11 +12,11 @@ class Register extends Component<any, any> {
   render() {
     const { step } = this.props.auth;
     switch (step) {
-      //   case 0:
-      //     return <RegisterStep1 />;
-      //   case 1:
-      //     return <RegisterStep2 />;
       case 0:
+        return <RegisterStep1 />;
+      case 1:
+        return <RegisterStep2 />;
+      case 2:
         return <RegisterStep3 />;
       default:
     }

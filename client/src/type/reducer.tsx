@@ -5,8 +5,10 @@ export interface IAuth {
   loginErr: any;
   step: Number;
   Register_details: any;
-  id: any;
-  phone: any;
+  id: String;
+  phone: String;
+  userId: String;
+  password: String;
 }
 export interface IAdmin {
   allProducts: [];
@@ -14,6 +16,7 @@ export interface IAdmin {
   addProductErr: any;
   removeProductError: any;
   eddCategoryError: any;
+  fileName: String;
 }
 export interface Icart {
   status: any;

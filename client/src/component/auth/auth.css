@@ -28,7 +28,7 @@
 }
 
 .to-end {
-  justify-content: flex-end; 
+  justify-content: flex-end;
 }
 
 .button-modal {
@@ -119,4 +119,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
   top: 0;
   left: 0;
   width: 100%;
+}
+.Verfication-image {
+  width: 30%;
 }

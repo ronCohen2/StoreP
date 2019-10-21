@@ -7,7 +7,8 @@ const initialState: IAdmin = {
   productsByCategory: undefined,
   addProductErr: null,
   removeProductError: null,
-  eddCategoryError: null
+  eddCategoryError: null,
+  fileName: ""
 };
 
 const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
@@ -32,16 +33,21 @@ const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
         ...state,
         addProductErr: payload.payload
       };
-   
+
     case "REMOVE_PRODUCT_ERR":
       return {
         ...state,
-        removeProductError:null
+        removeProductError: null
       };
     case "ADD_CATEGORY_ERR":
       return {
         ...state,
         eddCategoryError: payload.payload
+      };
+    case "UPLOAD_IMAGE_PRODUCT":
+      return {
+        ...state,
+        fileName: payload.payload
       };
     default:
       return state;

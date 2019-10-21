@@ -2,8 +2,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
 import { GetCartStatus, getCartItems } from "./cartAction";
-import { promised } from "q";
-import { promises } from "fs";
+import swal from "sweetalert";
 
 export const Rstep1 = (
   userId: Number,
@@ -19,7 +18,8 @@ export const Rstep1 = (
         password,
         confirmPassword
       });
-      await dispatch({ type: "REGISTER_STEP1", payload: res.data });
+      const obj = { userId, password, id: res.data.id };
+      await dispatch({ type: "REGISTER_STEP1", payload: obj });
     } catch (err) {
       await dispatch({
         type: "REGISTER_STEP1_ERR",
@@ -46,10 +46,44 @@ export const Rstep2 = (
         phone,
         id
       });
-      dispatch({ type: "REGISTER_STEP2", payload: res.data });
-      console.log(res.data);
+      dispatch({ type: "REGISTER_STEP2", payload: phone });
     } catch (error) {
       dispatch({ type: "REGISTER_ERR", payload: error.data });
+    }
+  };
+};
+export const Rstep3 = (phone: Number) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post("http://localhost:3001/Auth/registerStep3", {
+        phone
+      });
+      dispatch({ type: "REGISTER_STEP3", payload: res.data.id });
+    } catch (err) {
+      dispatch({ type: "REGISTER_ERR", payload: err.data });
+    }
+  };
+};
+export const CheckCode = (
+  verifyRequestId: String,
+  code: Number,
+  userId: Number,
+  password: String,
+  toHomePage: any
+) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post("http://localhost:3001/Auth/CheckCode", {
+        verifyRequestId,
+        code
+      });
+      dispatch({ type: "REGISTER_STEP4" });
+      swal("Welcome!", "Success Register!", "success");
+      dispatch(login(userId, password));
+      toHomePage();
+    } catch (err) {
+      dispatch({ type: "REGISTER_ERR", payload: err.data });
+      swal("Error!", `${err.response.data}`, "error");
     }
   };
 };

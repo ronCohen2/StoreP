@@ -5,5 +5,6 @@ export const Auth = Router();
 Auth.post("/registerStep1", controller.registerStep1);
 Auth.post("/registerStep2", controller.registerStep2);
 Auth.post("/registerStep3", controller.registerStep3);
+Auth.post("/CheckCode", controller.CheckVerfication);
 Auth.post("/Login", controller.login);
 Auth.get("/user", controller.getUser);

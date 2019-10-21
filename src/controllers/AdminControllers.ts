@@ -2,6 +2,32 @@ import { Request, Response } from "express";
 import * as mongoose from "mongoose";
 import Products from "../model/ProuductSchema";
 import category from "../model/categorySchema";
+import * as express from "express";
+var multer = require("multer");
+
+var storage = multer.diskStorage({
+  destination: function(req: any, file: any, callback: any) {
+    callback(null, "public/image");
+  },
+  filename: function(req: any, file: any, callback: any) {
+    callback(null, Date.now() + "-" + file.originalname);
+  }
+});
+var upload = multer({ storage: storage }).single("file");
+
+interface IUserRequest extends express.Request {
+  file: any;
+}
+export let uploadImage = (req: IUserRequest, res: Response) => {
+  upload(req, res, function(err: any) {
+    if (err instanceof multer.MulterError) {
+      return res.status(500).json(err);
+    } else if (err) {
+      return res.status(500).json(err);
+    }
+    return res.status(200).send(req.file);
+  });
+};
 
 export let allProducts = async (req: Request, res: Response) => {
   const products = await Products.find();
