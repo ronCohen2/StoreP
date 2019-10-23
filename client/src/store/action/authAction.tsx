@@ -69,21 +69,23 @@ export const CheckCode = (
   code: Number,
   userId: Number,
   password: String,
+  id: String,
   toHomePage: any
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       const res = await axios.post("http://localhost:3001/Auth/CheckCode", {
         verifyRequestId,
-        code
+        code,
+        id
       });
-      dispatch({ type: "REGISTER_STEP4" });
-      swal("Welcome!", "Success Register!", "success");
       dispatch(login(userId, password));
+      // dispatch({ type: "REGISTER_STEP4", payloade: res.data });
+      swal("Welcome!", "Success Register!", "success");
       toHomePage();
     } catch (err) {
-      dispatch({ type: "REGISTER_ERR", payload: err.data });
-      swal("Error!", `${err.response.data}`, "error");
+      // dispatch({ type: "REGISTER_ERR", payload: err.data });
+      // swal("Error!", `${err.response.data}`, "error");
     }
   };
 };

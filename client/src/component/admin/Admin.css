@@ -7,6 +7,12 @@
   padding: 8px;
   border: 0;
 }
-.productImage-admin{
-  width:100%;
+.productImage-admin {
+  width: 100%;
+}
+.editImage {
+  width: 80px;
+  margin: 0;
+}
+.uploadImageButton{
 }

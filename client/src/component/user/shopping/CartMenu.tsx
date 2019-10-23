@@ -58,11 +58,11 @@ class Slide extends React.Component<any, any> {
             {items
               ? items.map((item: any, key: any) => {
                   return (
-                    <div key={key}>
+                    <div key={key} className="border">
                       <span>{key + 1} )</span>
                       <span className="pr-4">{item.name}</span>
                       <span className="pr-4">{item.quantity}</span>
-                      <span className="pr-4">{item.totalPrice}</span>
+                      <span className="pr-4">{item.totalPrice}₪</span>
 
                       <span
                         className="pr-4"
@@ -70,7 +70,7 @@ class Slide extends React.Component<any, any> {
                           this.props.deleteItem(cartId, item.product)
                         }
                       >
-                        X
+                        <i className="fas fa-times "></i>
                       </span>
                     </div>
                   );

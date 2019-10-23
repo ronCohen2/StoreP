@@ -98,27 +98,35 @@ export let registerStep3 = async (req: Request, res: Response) => {
   );
 };
 export const CheckVerfication = async (req: Request, res: Response) => {
-  const { verifyRequestId, code } = req.body;
-  await nexmo.verify.check(
-    {
-      request_id: verifyRequestId,
-      code: code
-    },
-    (err: any, result: any) => {
-      const { status } = result;
-      switch (status) {
-        case "0":
-          return res.status(200).send("ok");
-        case "6":
-          return res.status(400).send("Request  is verified already");
-        case "16":
-          return res
-            .status(400)
-            .send("The code provided does not match the expected value");
-        default:
+  const { verifyRequestId, code, id } = req.body;
+  console.log("id", id);
+  try {
+    await nexmo.verify.check(
+      {
+        request_id: verifyRequestId,
+        code: code
+      },
+      async (err: any, result: any) => {
+        const { status } = result;
+        switch (status) {
+          case "0":
+            const user = await User.findByIdAndUpdate(id, {
+              $set: {
+                status: 3
+              }
+            });
+            await user.save();
+            return res.status(200).send("ok");
+          case "6":
+            return res.status(400).send("Request  is verified already");
+          case "16":
+            return res
+              .status(400)
+              .send("The code provided does not match the expected value");
+        }
       }
-    }
-  );
+    );
+  } catch {}
 };
 export const login = async (req: Request, res: Response) => {
   const { id, password } = req.body;
@@ -129,13 +137,13 @@ export const login = async (req: Request, res: Response) => {
   try {
     const user = await User.findOne({ ID: id });
     const UserHash: any = user.password;
-    const { role, email } = user;
+    const { role, email, status } = user;
     const validPassword = await bcrypt.compare(password, UserHash);
     if (!validPassword) {
       return res.status(400).send({ msg: "User or Password WRONG !" });
     }
     const token = user.generateToken(id, email, password, role);
-    res.status(200).json({ seccess: true, token: token, user });
+    res.status(200).json({ seccess: true, token: token, user, status });
     return user;
   } catch {
     res.status(400).send({ msg: "User or Password WRONG !" });

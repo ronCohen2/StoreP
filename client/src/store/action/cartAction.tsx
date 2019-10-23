@@ -31,7 +31,9 @@ export const addCartItem = (
         name
       });
       dispatch({ type: "ADD_CART_ITEM", payload: res.data });
+      swal("Good job!", " Product add to cart !", "success");
     } catch (error) {
+      swal("Error!", "error in add product to cart!", "error");
       dispatch({ type: "ADD_CART_ITEM_ERR", payload: error });
     }
   };

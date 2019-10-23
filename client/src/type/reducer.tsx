@@ -9,6 +9,7 @@ export interface IAuth {
   phone: String;
   userId: String;
   password: String;
+  Verid: String;
 }
 export interface IAdmin {
   allProducts: [];

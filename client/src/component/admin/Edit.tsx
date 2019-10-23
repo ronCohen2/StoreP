@@ -38,7 +38,7 @@ class Edit extends Component<any, any> {
               <Col sm="12" md="4">
                 <div className="border">
                   <img
-                    src={productDetails[0].image}
+                    src={require(`../../../../public/image/${productDetails[0].image}`)}
                     className="productImage-admin"
                   />
                 </div>

@@ -11,7 +11,8 @@ const initialState: IAuth = {
   id: "",
   phone: "",
   userId: "",
-  password: ""
+  password: "",
+  Verid: ""
 };
 
 const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
@@ -33,12 +34,11 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
     case "REGISTER_STEP3":
       return {
         ...state,
-        id: payload.payload
+        Verid: payload.payload
       };
     case "REGISTER_STEP3":
       return {
-        ...state,
-        step: 3
+        ...state
       };
     case "REGISTER_STEP4":
       return {
@@ -46,7 +46,8 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
         userId: "",
         password: "",
         phone: "",
-        id: ""
+        // id: "",
+        step: 3
       };
     case "REGISTER_STEP1_ERR":
       return {
@@ -66,7 +67,8 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
         userConnected: true,
         user: payload.payload.user,
         token: payload.payload.token,
-        loginErr: null
+        loginErr: null,
+        step: payload.payload.status
       };
     case "LOGIN_ERR": {
       return {

@@ -16,8 +16,7 @@ import { searchProducts } from "../../store/action/productAction";
 import "./Admin.css";
 import { removeProduct, getAllProducts } from "../../store/action/adminAction";
 import { withRouter } from "react-router";
-import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 class EditProduct extends Component<any, any> {
   constructor(props: any) {
@@ -43,52 +42,6 @@ class EditProduct extends Component<any, any> {
       <Container className="border ">
         <Row>
           <Col>
-            <Form onChange={this.handleSubmit}>
-              <InputGroup>
-                <Input
-                  id="search"
-                  onChange={this.handleChange}
-                  placeholder="Search Product"
-                  value={this.state.name}
-                  required
-                />
-                <InputGroupAddon addonType="append">
-                  <Button color="secondary">Search</Button>
-                </InputGroupAddon>
-              </InputGroup>
-            </Form>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            {/* {search
-              ? search.map((option: any, key: Number) => {
-                  return (
-                    <div>
-                      <img className="Search_image" src={option.image} />
-                      <span>{option.productName}</span>
-                      <span className="float-right">
-                        <span
-                          onClick={() =>
-                            this.props.history.push(`/edit/${option._id}`)
-                          }
-                        >
-                          edit
-                        </span>
-                        <span
-                          // onClick={() => this.props.RemoveProduct(option._id)}
-                        >
-                          X
-                        </span>
-                      </span>
-                    </div>
-                  );
-                })
-              : null} */}
-          </Col>
-        </Row>
-        <Row>
-          <Col>
             <Table bordered>
               <thead>
                 <tr>
@@ -96,24 +49,34 @@ class EditProduct extends Component<any, any> {
                   <th> Name</th>
                   <th>id</th>
                   <th>Edit </th>
-                  <th>Remove </th>
                 </tr>
               </thead>
               {allProducts
-                ?allProducts.map((product: any, key: Number) => {
-                  console.log(product);
+                ? allProducts.map((product: any, key: any) => {
+                    console.log(product);
                     return (
                       <tr>
-                        <th scope="row">{key}</th>
+                        <th scope="row">{key + 1}</th>
                         <td>{product.productName}</td>
                         <td>{product._id}</td>
-                        <td  onClick={() => this.props.history.push(`/edit/${product._id}`)}> <i className="fas fa-edit"></i> </td>
-                        <td onClick={() => this.props.RemoveProduct(product._id)}><i className="fas fa-trash-alt"></i>
-</td>
+                        <td
+                          className="to-center"
+                          onClick={() =>
+                            this.props.history.push(`/edit/${product._id}`)
+                          }
+                        >
+                          <i className="fas fa-edit"></i>
+                        </td>
+                        <td
+                          className="to-center"
+                          onClick={() => this.props.RemoveProduct(product._id)}
+                        >
+                          <i className="fas fa-trash-alt"></i>
+                        </td>
                       </tr>
                     );
                   })
-               : null}
+                : null}
             </Table>
           </Col>
         </Row>

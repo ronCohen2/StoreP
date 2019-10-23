@@ -1,6 +1,7 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
+import swal from "sweetalert";
 
 //All products
 export const getAllProducts = () => {
@@ -79,7 +80,7 @@ export const newContact = (
         email,
         text
       });
-      alert("contact success");
+      swal("TNX!", " Request accepted", "success");
       toHomePage();
     } catch (err) {
       dispatch({ type: "SEARCH_ERR" });

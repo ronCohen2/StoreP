@@ -66,13 +66,6 @@ export default class NavbarC extends React.Component {
                     </NavItem>
                   </Col>
                   <Col className="">
-                    <NavItem>
-                      <NavLink to={"/about"} className="d-2 text-white">
-                        About
-                      </NavLink>
-                    </NavItem>
-                  </Col>
-                  <Col className="">
                     <AdminTab />
                   </Col>
                 </Row>

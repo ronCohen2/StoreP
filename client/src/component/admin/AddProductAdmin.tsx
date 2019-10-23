@@ -109,20 +109,8 @@ class AddProductAdmin extends Component<any, any> {
                 <Input
                   type="file"
                   id="image"
+                  className="uploadImageButton"
                   onChange={this.handleChangeFile}
-                  // const file = e.target.files[0];
-                  // var file = new FormData();
-                  // file.append("file", e.target.files[0]);
-                  // axios
-                  //   .post("http://localhost:3001/Admin/Upload", file, {
-                  //     // receive two parameter endpoint url ,form data
-                  //   })
-                  //   .then(res => {
-                  //     // then print response status
-                  //     console.log(res.statusText);
-                  //   });
-
-                  // value={image}
                   required
                 />
               </FormGroup>

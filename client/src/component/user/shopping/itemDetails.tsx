@@ -44,7 +44,10 @@ class itemDetails extends Component<any & RouteProps, any> {
                 laoreet tincidunt. Sed faucibus bibendum felis, a volutpat urna
                 congue non. Mauris ac ante a arcu aliquam sollicitudin.
               </p>
-              <QuantintyModal name={productDetails[0].productName} />
+              <QuantintyModal
+                name={productDetails[0].productName}
+                id={productDetails[0]._id}
+              />
             </Col>
           </Row>
         ) : (

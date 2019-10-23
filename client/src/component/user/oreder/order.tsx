@@ -131,8 +131,12 @@ class order extends Component<any, any> {
               </FormGroup>
             </Col>
             <Col>
-              {date === true ? <p>Great Date </p> : null}
-              {date === false ? <p>try another day</p> : null}
+              {date === true ? (
+                <i className="far fa-calendar-check fa-3x mt-3 mr-4"></i>
+              ) : null}
+              {date === false ? (
+                <i className="far fa-calendar-times fa-3x mt-3 mr-4"></i>
+              ) : null}
               {date === null ? <p>-</p> : null}
             </Col>
           </Row>
@@ -216,7 +220,6 @@ class order extends Component<any, any> {
               />
             </Col>
           </Row>
-          <Row></Row>
         </form>
       </Container>
     );

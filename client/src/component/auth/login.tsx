@@ -39,7 +39,12 @@ class Login extends React.Component<any, any> {
   };
   handleSubmit = async (e: any, id: Number, password: any) => {
     e.preventDefault();
-    await this.props.login(id, password);
+    const promise = new Promise(reslove => {
+      reslove(this.props.login(id, password));
+    }).then(() => {
+      const { step } = this.props.auth;
+      console.log("is" + step);
+    });
   };
 
   render() {
@@ -103,6 +108,7 @@ class Login extends React.Component<any, any> {
                   color="secondary"
                   className="button-modal "
                   onClick={e => {
+                    this.props.clearErr();
                     this.toggle();
                     this.props.clearErr();
                   }}

@@ -32,14 +32,15 @@ class RegisterStep3 extends Component<any, any> {
   };
   handleSubmit = (e: any) => {
     const { code } = this.state;
-    const { userId, password } = this.props.auth;
-    const verifyRequestId = this.props.auth.id;
+    const { userId, password, id } = this.props.auth;
+    const verifyRequestId = this.props.auth.Verid;
     e.preventDefault();
     this.props.checkCode(
       verifyRequestId,
       code,
       userId,
       password,
+      id,
       this.toHomepage
     );
   };
@@ -107,10 +108,11 @@ const mapDispatchToProps = (dispatch: any) => {
       code: Number,
       userId: Number,
       password: String,
+      id: String,
       toHomePage: any
     ) =>
       await dispatch(
-        CheckCode(verifyRequestId, code, userId, password, toHomePage)
+        CheckCode(verifyRequestId, code, userId, password, id, toHomePage)
       )
   };
 };

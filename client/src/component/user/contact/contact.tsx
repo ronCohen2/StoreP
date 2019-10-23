@@ -11,6 +11,7 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { newContact } from "../../../store/action/productAction";
+import MapContact from "./MapContact";
 
 class contact extends Component<any, any> {
   constructor(props: any) {
@@ -26,11 +27,15 @@ class contact extends Component<any, any> {
       [e.target.id]: e.target.value
     });
   };
+  handleSubmit = (e: any) => {
+    e.preventDefault();
+    const { name, email, text } = this.state;
+    this.props.addContact(name, email, text, this.toHomePage);
+  };
   toHomePage = () => {
     this.props.history.push("/");
   };
   render() {
-    const { name, email, text } = this.state;
     const { userConnected } = this.props.auth;
     // if (userConnected) {
     //   const { firstName } = this.props.auth.user;
@@ -54,7 +59,7 @@ class contact extends Component<any, any> {
             </div>
           </Col>
           <Col sm="12" md="6">
-            <Form className="border">
+            <Form onSubmit={this.handleSubmit} className="border">
               <h1 className="to-center m-3">Contact</h1>
               <FormGroup>
                 <Input
@@ -72,6 +77,7 @@ class contact extends Component<any, any> {
                   id="email"
                   placeholder="Email"
                   onChange={this.handleChange}
+                  required
                 />
               </FormGroup>
               <FormGroup>
@@ -83,16 +89,11 @@ class contact extends Component<any, any> {
                   required
                 />
               </FormGroup>
-              <input
-                type="submit"
-                onClick={(e: any) => {
-                  e.preventDefault();
-                  this.props.addContact(name, email, text, this.toHomePage);
-                }}
-              />
+              <Button>Send!</Button>
             </Form>
           </Col>
         </Row>
+        <MapContact />
       </Container>
     );
   }
