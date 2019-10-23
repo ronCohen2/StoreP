@@ -4,13 +4,14 @@
 .modal-bg {
   background-color: #343748 !important;
   border: 1px solid white;
-  padding: 50px !important;
+}
+.ModalPadding {
+  padding: 15px;
 }
 .input-login {
   background-color: transparent !important;
   color: white !important;
   border: 1px solid white !important;
-  margin: 10px !important;
 }
 
 .input-register {
@@ -36,7 +37,8 @@
   border-radius: 20px !important;
   background: white !important;
   color: black !important;
-  margin: 20px !important;
+  margin-left: 45px;
+  margin-top: 15px;
   padding: 7px 30px !important;
 }
 .bm-burger-button {

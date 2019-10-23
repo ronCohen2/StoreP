@@ -1,12 +1,19 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalBody, Input, InputGroup } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalBody,
+  Input,
+  InputGroup,
+  ModalHeader,
+  Form,
+  Alert
+} from "reactstrap";
 import "./auth.css";
 import { connect } from "react-redux";
 import { login } from "../../store/action/authAction";
 import { GetCartStatus, getCartItems } from "../../store/action/cartAction";
-import CartStatus from "./CartStatus";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import e from "express";
 
 class Login extends React.Component<any, any> {
   constructor(props: any) {
@@ -30,7 +37,8 @@ class Login extends React.Component<any, any> {
       [e.target.id]: e.target.value
     });
   };
-  handleSubmit = async (id: Number, password: any) => {
+  handleSubmit = async (e: any, id: Number, password: any) => {
+    e.preventDefault();
     await this.props.login(id, password);
   };
 
@@ -50,50 +58,59 @@ class Login extends React.Component<any, any> {
           className="p-5 rounded  "
         >
           <ModalBody className="modal-bg">
-            <h3 className="d-flex justify-content-center text-white">Login</h3>
-            <div>
-              <InputGroup>
-                <Input
-                  placeholder="username"
-                  className="input-login"
-                  id="id"
-                  required
-                  onChange={this.handleChange}
-                />
-              </InputGroup>
-              <InputGroup>
-                <Input
-                  placeholder="Password"
-                  type="password"
-                  className="input-login"
-                  id="password"
-                  required
-                  onChange={this.handleChange}
-                />
-              </InputGroup>
-              {loginErr ? (
-                <p className="to-center text-white mt-3">{loginErr}</p>
-              ) : null}
-              <button
-                color="primary"
-                className="button-modal "
-                onClick={async () => {
-                  await this.handleSubmit(id, password);
-                }}
-              >
+            <Form onSubmit={e => this.handleSubmit(e, id, password)}>
+              <div className="d-flex justify-content-end ">
+                <i
+                  onClick={() => {
+                    this.toggle();
+                    this.props.clearErr();
+                  }}
+                  className="far fa-times-circle fa-2x"
+                ></i>
+              </div>
+              <h3 className="d-flex justify-content-center text-white">
                 Login
-              </button>
-              <button
-                color="secondary"
-                className="button-modal "
-                onClick={e => {
-                  this.toggle();
-                  this.props.clearErr();
-                }}
-              >
-                Cancel
-              </button>
-            </div>
+              </h3>
+              <div className="ModalPadding">
+                <InputGroup>
+                  <Input
+                    placeholder="username"
+                    className="input-login mb-4"
+                    id="id"
+                    required
+                    onChange={this.handleChange}
+                  />
+                </InputGroup>
+                <InputGroup>
+                  <Input
+                    placeholder="Password"
+                    type="password"
+                    className="input-login"
+                    id="password"
+                    required
+                    onChange={this.handleChange}
+                  />
+                </InputGroup>
+                {loginErr ? (
+                  <Alert color="dark" className="mt-3">
+                    {loginErr}
+                  </Alert>
+                ) : null}
+                <button color="primary" className="button-modal ">
+                  Login
+                </button>
+                <button
+                  color="secondary"
+                  className="button-modal "
+                  onClick={e => {
+                    this.toggle();
+                    this.props.clearErr();
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
+            </Form>
           </ModalBody>
         </Modal>
       </div>

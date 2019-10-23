@@ -21,8 +21,8 @@
   height: 29%;
   margin-left: -15%;
 }
-.cat {
-  background-color: #eee9e9;
+.HomeCategoryContainer {
+  background-color: #eee9e94f;
   max-height: 100%;
   padding: 0px;
   margin: 0;

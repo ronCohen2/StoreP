@@ -33,7 +33,7 @@ class RegisterStep2 extends React.Component<any, any> {
 
   render() {
     return (
-      <Container className="border">
+      <Container className="border mt-3 ">
         <Form onSubmit={this.handleSubmit}>
           <Row className="m-3">
             <Col className="to-center ">Sign up</Col>

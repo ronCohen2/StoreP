@@ -37,7 +37,7 @@ class CategoryHome extends Component<any, any> {
     return (
       <Container className="mt-4">
         <h2>{categoryName} Products</h2>
-        <Row className="cat rounded mb-4">
+        <Row className="HomeCategoryContainer border rounded mb-4">
           <Col sm="12" md="4">
             <img src={image} className="CatyegoryImg" />
           </Col>

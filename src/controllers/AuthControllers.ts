@@ -76,7 +76,8 @@ export let registerStep2 = async (req: Request, res: Response) => {
 };
 
 export let registerStep3 = async (req: Request, res: Response) => {
-  const { phone } = req.body;
+  let { phone } = req.body;
+  phone = "972" + phone;
   console.log(phone);
   await nexmo.verify.request(
     {

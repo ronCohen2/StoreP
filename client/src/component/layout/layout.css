@@ -4,3 +4,9 @@
   color: red !important;
   margin-top: -4px !important;
 }
+.SearchNotFound {
+  width: 220px;
+  height: 150px;
+  /* display: flex; */
+  /* justify-content: center !important; */
+}

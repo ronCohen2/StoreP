@@ -47,7 +47,7 @@ class RegisterStep3 extends Component<any, any> {
   render() {
     const { phone } = this.props.auth;
     return (
-      <Container className="border mt-4 ">
+      <Container className="border mt-3  ">
         <Form onSubmit={this.handleSubmit}>
           <Row className="m-3">
             <Col className="to-center ">Sign up</Col>

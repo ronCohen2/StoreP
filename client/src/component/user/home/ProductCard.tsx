@@ -14,7 +14,7 @@ function ProductCard(props: any) {
   return (
     <>
       <Card
-        className="ProductCard rounded"
+        className="ProductCard "
         onClick={() => {
           props.history.push(`/itemDetails/${props.id}`);
         }}
@@ -25,8 +25,7 @@ function ProductCard(props: any) {
           height="100%"
           src={require(`../../../../../public/image/${props.img}`)}
         />
-        <CardTitle>{props.name}</CardTitle>
-        <CardSubtitle>{props.price}</CardSubtitle>
+        <CardTitle className="to-center">{props.name}</CardTitle>
       </Card>
     </>
   );
