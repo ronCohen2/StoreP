@@ -26,7 +26,7 @@ class itemDetails extends Component<any & RouteProps, any> {
           <Row>
             <Col sm="12" md="6">
               <img
-                src={productDetails[0].image}
+                src={require(`../../../../../public/image/${productDetails[0].image}`)}
                 className="poductDetailsIMG border "
               />
             </Col>

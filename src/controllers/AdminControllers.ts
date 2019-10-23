@@ -78,6 +78,7 @@ export let removeProducts = async (req: Request, res: Response) => {
         return res.status(500).send({ msg: "error in remove product " });
       }
     });
+    //remove product from DB
     const products = await Products.findByIdAndRemove({ _id: id });
     res.status(200).send({ msg: "product removed" });
   } catch (err) {

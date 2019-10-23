@@ -19,7 +19,12 @@ function ProductCard(props: any) {
           props.history.push(`/itemDetails/${props.id}`);
         }}
       >
-        <CardImg top width="100%" height="100%" src={props.img} />
+        <CardImg
+          top
+          width="100%"
+          height="100%"
+          src={require(`../../../../../public/image/${props.img}`)}
+        />
         <CardTitle>{props.name}</CardTitle>
         <CardSubtitle>{props.price}</CardSubtitle>
       </Card>

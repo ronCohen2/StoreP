@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Switch } from "react-router";
 import home from "./component/user/home/home";
@@ -22,10 +23,10 @@ import Edit from "./component/admin/Edit";
 import AddCategory from "./component/admin/AddCategory";
 import AddProductAdmin from "./component/admin/AddProductAdmin";
 import EditProduct from "./component/admin/EditProduct";
-import RegisterStep1 from "./component/auth/RegisterStep1";
-import RegisterStep2 from "./component/auth/RegisterStep2";
-import RegisterStep3 from "./component/auth/RegisterStep3";
 import Register from "./component/auth/Register";
+// import Receipt from "./component/user/oreder/Receipt";
+import Receipt from "./component/user/oreder/Receipt";
+import { PDFViewer } from "@react-pdf/renderer";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -49,6 +50,7 @@ class Store extends Component<any, any> {
             <Route path="/about" component={contact} />
             <Route path="/register" component={Register} />
             <Route path="/order" component={order} />
+            <Route path="/Receipt" component={Receipt} />
             <Route path="/admin" component={dashbord} />
             <Route path="/Add-category" component={AddCategory} />
             <Route path="/Add-Product" component={AddProductAdmin} />

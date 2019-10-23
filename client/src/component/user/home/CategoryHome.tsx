@@ -16,13 +16,17 @@ class CategoryHome extends Component<any, any> {
       image: null
     };
   }
-  async componentWillMount() {
+  async componentDidMount() {
     const { id }: any = this.props;
     const res = await Axios.get(
       `http://localhost:3001/Products/category/${id}`
     );
+    let { products } = res.data;
+    if (products.length > 6) {
+      products = products.slice(0, 6);
+    }
     this.setState({
-      product: res.data.products,
+      product: products,
       categoryName: res.data.category[0].categoryName,
       image: res.data.category[0].image
     });
@@ -63,8 +67,12 @@ const mapStateToProps = (state: any) => {
     product: state.product
   };
 };
-
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    getProductsByCategory: (id: String) => dispatch(getProductsByCategory(id))
+  };
+};
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(CategoryHome);

@@ -40,7 +40,7 @@ class Login extends React.Component<any, any> {
 
     return (
       <div>
-        <label color="danger" onClick={this.toggle} className="pr-4">
+        <label color="danger" onClick={this.toggle} className="pr-4 ">
           Login
         </label>
 
@@ -50,7 +50,7 @@ class Login extends React.Component<any, any> {
           className="p-5 rounded  "
         >
           <ModalBody className="modal-bg">
-            <h3 className="d-flex justify-content-center">Login</h3>
+            <h3 className="d-flex justify-content-center text-white">Login</h3>
             <div>
               <InputGroup>
                 <Input

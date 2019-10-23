@@ -19,11 +19,20 @@ const ProductCard = withRouter((props: any) => {
   const { cartId } = props.cart;
   const { _id, productName } = props.data;
   const { userConnected } = props.auth;
+  // const logo = `../../../../../public/image/${props.data.image}`;
+  const logo = "src/component/user/shopping/1571684830058-user.png";
+  console.log(props.data);
   return (
     <div>
       <Col md="3" className="productCard2 ">
         <Card className="productCard2 rounded">
-          <CardImg top width="100%" height="100%" src={props.data.image} />
+          <CardImg
+            top
+            width="100%"
+            height="100%"
+            src={require(`../../../../../public/image/${props.data.image}`)}
+            className="ProductCard-image"
+          />
           <CardTitle>{props.data.productName}</CardTitle>
           <CardSubtitle>{props.data.price}</CardSubtitle>
           <Button

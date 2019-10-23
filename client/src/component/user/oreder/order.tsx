@@ -15,6 +15,8 @@ import {
   order as Order,
   checkShipDate
 } from "../../../store/action/cartAction";
+import { withRouter } from "react-router";
+import swal from "sweetalert";
 
 class order extends Component<any, any> {
   constructor(props: any) {
@@ -50,7 +52,8 @@ class order extends Component<any, any> {
   onSubmit = (e: any) => {
     e.preventDefault();
     const { city, street, shipDate, creditCard } = this.state;
-    const { cartId, totalPrice,data } = this.props.cart;
+    const { cartId, totalPrice, data } = this.props.cart;
+    const { items } = this.props.cart;
     const userId = this.props.auth.user._id;
     this.props.order(
       userId,
@@ -59,30 +62,29 @@ class order extends Component<any, any> {
       city,
       street,
       shipDate,
-      creditCard,this.toHomePage
+      creditCard,
+      this.toHomePage
     );
-    
   };
-  toHomePage = ()=>{
-    this.props.history.push("/");
-  }
+  toHomePage = () => {
+    this.props.history.push("/receipt");
+  };
   render() {
     const { items, date, orderErr } = this.props.cart;
     console.log(orderErr);
     return (
       <Container>
         <form>
-        {
-               orderErr ? (
-               orderErr.map((err:String,key:String)=>{
-                 return(
-                   <Alert className="mt-1" color="danger">{err}</Alert>
-                 )
-               })
-               ) : null
-             }
+          {orderErr
+            ? orderErr.map((err: String, key: String) => {
+                return (
+                  <Alert className="mt-1" color="danger">
+                    {err}
+                  </Alert>
+                );
+              })
+            : null}
           <Row className="">
-            
             <Col>
               <h4>Billing details</h4>
               <FormGroup>
@@ -103,7 +105,7 @@ class order extends Component<any, any> {
               <FormGroup>
                 <Label for="Street">Street</Label>
                 <Input
-                  id="Street"
+                  id="street"
                   placeholder="e.g Rothschild"
                   onChange={this.handleChange}
                   value={this.state.street}
@@ -214,10 +216,7 @@ class order extends Component<any, any> {
               />
             </Col>
           </Row>
-          <Row>
-            <Col>
-                       </Col>
-          </Row>
+          <Row></Row>
         </form>
       </Container>
     );
@@ -239,11 +238,19 @@ const mapDispatchToProps = (dispatch: any) => {
       street: String,
       shipDate: any,
       creditCard: Number,
-      toHomePage:any
-      
+      toHomePage: any
     ) =>
       dispatch(
-        Order(userId, cartId, totalPrice, city, street, shipDate, creditCard,toHomePage)
+        Order(
+          userId,
+          cartId,
+          totalPrice,
+          city,
+          street,
+          shipDate,
+          creditCard,
+          toHomePage
+        )
       ),
     checkShipDate: (shipDate: String) => dispatch(checkShipDate(shipDate))
   };
@@ -251,4 +258,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(order);
+)(withRouter(order));

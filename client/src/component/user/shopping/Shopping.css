@@ -55,10 +55,8 @@
   background: #4caf50; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
-.MenuButton {
-  /* position: absolute;
-  bottom: 3%;
-  grid: flex;
 
-  left: 2%; */
+.ProductCard-image {
+  height: 150px;
+  width: 100%;
 }

@@ -1,6 +1,7 @@
 import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
+import swal from "sweetalert";
 
 export const getCartItems = (cartId: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
@@ -87,8 +88,9 @@ export const order = (
       dispatch({ type: "ORDER", payload: res.data });
       dispatch({ type: "CLEAN_ORDER_ERR", payload: res.data });
       dispatch(GetCartStatus(userId));
+      swal("Good job!", " Order Success!", "success");
+
       toHomePage();
-      alert("order success");
     } catch (error) {
       dispatch({ type: "ORDER_ERR", payload: error.response.data });
     }
