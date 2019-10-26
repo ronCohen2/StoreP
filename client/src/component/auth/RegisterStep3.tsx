@@ -10,7 +10,11 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
-import { Rstep3, CheckCode } from "../../store/action/authAction";
+import {
+  Rstep3,
+  CheckCode,
+  getPhoneNumber
+} from "../../store/action/authAction";
 
 class RegisterStep3 extends Component<any, any> {
   constructor(props: any) {
@@ -23,12 +27,14 @@ class RegisterStep3 extends Component<any, any> {
     });
   };
 
-  componentDidMount() {
-    const { phone } = this.props.auth;
-    this.props.SendVerfication(phone);
+  async componentDidMount() {
+    const { ID } = this.props.auth.user || this.props.auth.userId;
+    await this.props.getPhoneNumber(ID);
+    const { phone } = await this.props.auth;
+    await this.props.SendVerfication(phone);
   }
   toHomepage = () => {
-    this.props.history.push("/shop");
+    this.props.history.push("/category/all");
   };
   handleSubmit = (e: any) => {
     const { code } = this.state;
@@ -113,7 +119,8 @@ const mapDispatchToProps = (dispatch: any) => {
     ) =>
       await dispatch(
         CheckCode(verifyRequestId, code, userId, password, id, toHomePage)
-      )
+      ),
+    getPhoneNumber: (id: String) => dispatch(getPhoneNumber(id))
   };
 };
 export default connect(

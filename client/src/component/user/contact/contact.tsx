@@ -12,6 +12,7 @@ import {
 import { connect } from "react-redux";
 import { newContact } from "../../../store/action/productAction";
 import MapContact from "./MapContact";
+import "./contact.css";
 
 class contact extends Component<any, any> {
   constructor(props: any) {
@@ -43,7 +44,9 @@ class contact extends Component<any, any> {
     // }
     return (
       <Container>
+     
         <Row className="mt-4 mb-4">
+ 
           <Col sm="12" md="6" className="border">
             <div>
               <h1 className="to-center m-3">Contact</h1>
@@ -92,9 +95,13 @@ class contact extends Component<any, any> {
               <Button>Send!</Button>
             </Form>
           </Col>
-        </Row>
-        <MapContact />
-      </Container>
+          </Row>
+
+          <Row>
+             <MapContact />
+
+            </Row>
+        </Container>
     );
   }
 }

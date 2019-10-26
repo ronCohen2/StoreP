@@ -18,10 +18,9 @@ class RegisterStep2 extends React.Component<any, any> {
     this.state = {};
   }
   handleSubmit = (e: any) => {
-    const { fname, lname, city, street, phone } = this.state;
-    const { id } = this.props.auth;
-    console.log(this.state, id);
     e.preventDefault();
+    const { fname, lname, city, street, phone } = this.state;
+    const { id } = this.props.auth.user || this.props.auth;
     this.props.Rstep2(fname, lname, city, street, phone, id);
   };
 

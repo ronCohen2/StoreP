@@ -1,26 +1,27 @@
 import { Router } from "express";
 import * as controller from "../controllers/CartControllers";
 import cart from "../model/cartSchema";
+import auth from "../middlewares/auth";
 
 export const Cart = Router();
 
-Cart.post("/getItems", controller.GetCartItems);
+Cart.post("/getItems", [auth], controller.GetCartItems);
 
-Cart.post("/addItem", controller.addItem);
+Cart.post("/addItem", [auth], controller.addItem);
 
-Cart.post("/deleteItem", controller.deleteItem);
+Cart.post("/deleteItem", [auth], controller.deleteItem);
 
-Cart.post("/removeAllItems", controller.empty);
+Cart.post("/removeAllItems", [auth], controller.empty);
 
-Cart.post("/cartStatus", controller.CartStatus);
+Cart.post("/cartStatus", [auth], controller.CartStatus);
 
-Cart.post("/createOrder", controller.createOrder);
+Cart.post("/createOrder", [auth], controller.createOrder);
 
-Cart.post("/checkDate", controller.checkDate);
+Cart.post("/checkDate", [auth], controller.checkDate);
 
 //dev
 // Cart.post("/CreateCart", controller.CreateCart);
 
-Cart.get("/GetCart", controller.GetCart);
+Cart.get("/GetCart", [auth], controller.GetCart);
 
-Cart.get("/getOrders", controller.getOrders);
+Cart.get("/getOrders", [auth], controller.getOrders);

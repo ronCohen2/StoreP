@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import CartItem from "../model/cartItemSchema";
+import CartItem from "../model/CartItemSchema";
 import Products from "../model/ProuductSchema";
 import Cart from "../model/cartSchema";
 import Order from "../model/orederSchema";
@@ -9,7 +9,7 @@ import { object } from "prop-types";
 export let GetCartItems = async (req: Request, res: Response) => {
   const { cartId } = req.body;
   try {
-    const item = await CartItem.find({ cartId });
+    const item = await CartItem.find({ cartId }).populate("image");
     res.status(200).send(item);
   } catch {
     res.status(400).send("no");
@@ -21,16 +21,31 @@ export let addItem = async (req: Request, res: Response) => {
   try {
     const cart = await Cart.find({ _id: cartId });
     const product = await Products.find({ _id: productId }).select("price");
-    let price: any = product[0].price;
-    const newItem = new CartItem({
-      name,
-      cartId,
-      product: productId,
-      quantity,
-      totalPrice: price * quantity
-    });
-    newItem.save();
-    res.status(200).send(newItem);
+    const productInCart = await CartItem.find({ cartId, product: productId });
+    if (productInCart.length === 0) {
+      let price: any = product[0].price;
+      const newItem = new CartItem({
+        name,
+        cartId,
+        product: productId,
+        quantity: quantity,
+        totalPrice: price * quantity
+      });
+      newItem.save();
+      res.status(200).send({ update: false, newItem });
+    } else if (productInCart.length > 0) {
+      const UpdateQuantity = await CartItem.findByIdAndUpdate(
+        productInCart[0]._id,
+        {
+          $inc: {
+            quantity: req.body.quantity
+          }
+        }
+      );
+      await UpdateQuantity.save();
+      console.log({ update: true, UpdateQuantity });
+      res.status(200).send({ update: true, UpdateQuantity });
+    }
   } catch {
     res.status(400).send({ err: "Error in add item to the cart." });
   }
@@ -172,4 +187,3 @@ export let closeCart = async (cartId: String) => {
     return false;
   }
 };
-

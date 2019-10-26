@@ -13,7 +13,7 @@ import "./auth.css";
 import { connect } from "react-redux";
 import { login } from "../../store/action/authAction";
 import { GetCartStatus, getCartItems } from "../../store/action/cartAction";
-import e from "express";
+import { withRouter } from "react-router";
 
 class Login extends React.Component<any, any> {
   constructor(props: any) {
@@ -40,17 +40,15 @@ class Login extends React.Component<any, any> {
   handleSubmit = async (e: any, id: Number, password: any) => {
     e.preventDefault();
     const promise = new Promise(reslove => {
-      reslove(this.props.login(id, password));
-    }).then(() => {
-      const { step } = this.props.auth;
-      console.log("is" + step);
-    });
+      reslove(this.props.login(id, password, this.toRegister));
+    }).then(() => {});
   };
-
+  toRegister = () => {
+    this.props.history.push("/register");
+  };
   render() {
     const { id, password } = this.state;
     const { loginErr, userConnected } = this.props.auth;
-
     return (
       <div>
         <label color="danger" onClick={this.toggle} className="pr-4 ">
@@ -131,7 +129,8 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    login: (id: Number, password: any) => dispatch(login(id, password)),
+    login: (id: Number, password: any, toRegister: any) =>
+      dispatch(login(id, password, toRegister)),
     clearErr: () => dispatch({ type: "CLEAR_LOGIN_ERR" }),
     getStatus: (UserId: String) => {
       dispatch(GetCartStatus(UserId));
@@ -142,4 +141,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login);
+)(withRouter(Login));

@@ -11,7 +11,7 @@ class Products extends Component<any, any> {
     super(props);
     this.state = {
       currentPage: 1,
-      ProductPerPage: 6
+      ProductPerPage: 8
     };
   }
   componentWillMount() {

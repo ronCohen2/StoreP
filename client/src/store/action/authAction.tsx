@@ -3,6 +3,7 @@ import { AnyAction } from "redux";
 import axios from "axios";
 import { GetCartStatus, getCartItems } from "./cartAction";
 import swal from "sweetalert";
+import Cookies from "js-cookie";
 
 export const Rstep1 = (
   userId: Number,
@@ -79,8 +80,7 @@ export const CheckCode = (
         code,
         id
       });
-      dispatch(login(userId, password));
-      // dispatch({ type: "REGISTER_STEP4", payloade: res.data });
+      dispatch(login(userId, password, null));
       swal("Welcome!", "Success Register!", "success");
       toHomePage();
     } catch (err) {
@@ -90,22 +90,46 @@ export const CheckCode = (
   };
 };
 
-export const login = (id: Number, password: any) => {
+export const login = (id: Number, password: any, toRegister: any) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       const res = await axios.post("http://localhost:3001/Auth/login", {
         id,
         password
       });
-
-      await dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      const cart = await dispatch(GetCartStatus(res.data.user._id));
-      console.log(cart);
-      await dispatch(getCartItems(cart._id));
+      if (res.data.status === 3) {
+        Cookies.set("Token", res.data.token);
+        // console.log(Cookies.get("Token"));
+        await dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
+        const cart = await dispatch(GetCartStatus(res.data.user._id));
+        await dispatch(getCartItems(cart._id));
+      } else if (res.data.status < 3 && res.data.status !== null) {
+        // NEED FINISH REGISTER
+        await dispatch({ type: "SET_STATUS", payload: res.data });
+        toRegister();
+      }
     } catch (err) {
       dispatch({ type: "LOGIN_ERR", payload: err.data });
     }
   };
 };
-
+export const getPhoneNumber = (id: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post("http://localhost:3001/Auth/getPhone", {
+        id
+      });
+      dispatch({ type: "ADD_PHONE_NUMBER", payload: res.data });
+    } catch (err) {
+      // dispatch({ type: "DATE", payload: err.response.data.msg });
+    }
+  };
+};
 // create log out action
+export const Logout = (sendToHome: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    Cookies.remove("Token");
+    dispatch({ type: "LOG_OUT" });
+    sendToHome();
+  };
+};

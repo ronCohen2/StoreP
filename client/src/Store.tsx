@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Switch } from "react-router";
 import home from "./component/user/home/home";
-import shopping from "./component/user/shopping/shopping";
 import contact from "./component/user/contact/contact";
 import About from "./component/user/contact/About";
 import itemDetails from "./component/user/shopping/itemDetails";
@@ -42,7 +41,6 @@ class Store extends Component<any, any> {
           <NavbarC />
           <Switch>
             <Route path="/" exact component={home} />
-            <Route path="/shop" component={shopping} />
             <Route path="/category/:id" component={shopCategory} />
             <Route path="/itemDetails/:id" component={itemDetails} />
             <Route path="/search/:product" component={Search} />

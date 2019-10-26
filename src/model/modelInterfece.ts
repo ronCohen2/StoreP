@@ -28,7 +28,7 @@ export interface IProduct extends mongoose.Document {
   productName: String;
   categoryId: String;
   price: Number;
-  image: String;
+  image: any;
 }
 
 export interface IcartItem extends mongoose.Document {

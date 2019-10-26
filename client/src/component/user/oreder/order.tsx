@@ -55,16 +55,20 @@ class order extends Component<any, any> {
     const { cartId, totalPrice, data } = this.props.cart;
     const { items } = this.props.cart;
     const userId = this.props.auth.user._id;
-    this.props.order(
-      userId,
-      cartId,
-      totalPrice,
-      city,
-      street,
-      shipDate,
-      creditCard,
-      this.toHomePage
-    );
+    if (totalPrice > 0) {
+      this.props.order(
+        userId,
+        cartId,
+        totalPrice,
+        city,
+        street,
+        shipDate,
+        creditCard,
+        this.toHomePage
+      );
+    } else {
+      swal("WARNING!", "Your cart is empty!", "error");
+    }
   };
   toHomePage = () => {
     this.props.history.push("/receipt");

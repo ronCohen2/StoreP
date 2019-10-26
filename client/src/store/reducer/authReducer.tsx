@@ -43,11 +43,23 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
     case "REGISTER_STEP4":
       return {
         ...state,
-        userId: "",
-        password: "",
-        phone: "",
-        // id: "",
+
+        // phone: "",
+        // // id: "",
         step: 3
+      };
+    case "SET_STATUS": {
+      return {
+        ...state,
+        step: payload.payload.status,
+        id: payload.payload.user._id
+      };
+    }
+    case "ADD_PHONE_NUMBER":
+      return {
+        ...state,
+        phone: payload.payload.phone,
+        id: payload.payload.id
       };
     case "REGISTER_STEP1_ERR":
       return {
@@ -62,11 +74,11 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
         user: payload.payload.user // fix password
       };
     case "LOGIN_SUCCESS":
+      console.log(payload);
       return {
         ...state,
         userConnected: true,
         user: payload.payload.user,
-        token: payload.payload.token,
         loginErr: null,
         step: payload.payload.status
       };
@@ -83,6 +95,21 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
       return {
         ...state,
         loginErr: null
+      };
+    }
+    case "LOG_OUT": {
+      return {
+        userConnected: false,
+        user: undefined,
+        registerErr: undefined,
+        loginErr: undefined,
+        step: 0,
+        Register_details: undefined,
+        id: "",
+        phone: "",
+        userId: "",
+        password: "",
+        Verid: ""
       };
     }
 

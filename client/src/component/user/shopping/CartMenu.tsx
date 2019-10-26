@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { connect } from "react-redux";
-import { Table, Row, Col, Container, Button } from "reactstrap";
+import { Table, Row, Col, Container, Button, CardSubtitle } from "reactstrap";
 import itemDetails from "./itemDetails";
 import {
   deleteCartItem,
@@ -9,6 +9,8 @@ import {
 } from "../../../store/action/cartAction";
 import { withRouter, Redirect } from "react-router";
 import { compose } from "redux";
+import { Card, CardTitle, CardText } from "reactstrap";
+
 class Slide extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -20,17 +22,12 @@ class Slide extends React.Component<any, any> {
     event.preventDefault();
   }
 
-  addToTotalPrice = (price: Number) => {
-    this.setState({
-      total: this.state.total + price
-    });
-  };
   render() {
     const { items } = this.props;
     const { userConnected } = this.props.auth;
-    const { cartId } = this.props.cart;
+    const { cartId, totalPrice } = this.props.cart;
     return (
-      <>
+      <div>
         {userConnected ? (
           <Menu
             right
@@ -40,8 +37,9 @@ class Slide extends React.Component<any, any> {
               <img src="https://image.flaticon.com/icons/png/512/34/34627.png" />
             }
           >
-            <h1>My Cart</h1>
+            <h1 className="to-center">My Cart</h1>
             <Button
+              className="ClearButton"
               onClick={() => {
                 this.props.removeCartItems(cartId);
               }}
@@ -49,37 +47,41 @@ class Slide extends React.Component<any, any> {
               Clear Cart
             </Button>
             <Button
+              className="orderButton"
               onClick={() => {
                 this.props.history.push("/order");
               }}
             >
               Order
             </Button>
-            {items
-              ? items.map((item: any, key: any) => {
-                  return (
-                    <div key={key} className="border">
-                      <span>{key + 1} )</span>
-                      <span className="pr-4">{item.name}</span>
-                      <span className="pr-4">{item.quantity}</span>
-                      <span className="pr-4">{item.totalPrice}₪</span>
-
-                      <span
-                        className="pr-4"
-                        onClick={() =>
-                          this.props.deleteItem(cartId, item.product)
-                        }
-                      >
-                        <i className="fas fa-times "></i>
-                      </span>
-                    </div>
-                  );
-                })
-              : null}
-            <label htmlFor="">{this.state.total}</label>
+            <div className="CartItems">
+              {items
+                ? items.map((item: any, key: any) => {
+                    return (
+                      <div className=" mb-2" key={key}>
+                        <Card body className="cardBg">
+                          <CardTitle>
+                            {key + 1} ){item.name} {item.quantity},
+                            {item.totalPrice * item.quantity}₪
+                            <i
+                              onClick={() =>
+                                this.props.deleteItem(cartId, item.product)
+                              }
+                              className="fas fa-times "
+                            ></i>
+                          </CardTitle>
+                        </Card>
+                      </div>
+                    );
+                  })
+                : null}
+            </div>
+            <div className="totalPriceLabel">
+              <label>Total Price :{totalPrice}</label>
+            </div>
           </Menu>
         ) : null}
-      </>
+      </div>
     );
   }
 }

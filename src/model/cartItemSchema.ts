@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import ProductSchema from "../model/ProuductSchema";
+// import ProductSchema from "./ProuductSchema";
 import { IcartItem } from "./modelInterfece";
 const Schema = mongoose.Schema;
 
@@ -9,8 +9,8 @@ const cartItemSchema = new mongoose.Schema({
     required: true
   },
   product: {
-    type: String,
-    // ref: "product",
+    type: Schema.Types.ObjectId,
+    // ref: ProductSchema,
     required: true
   },
   quantity: {

@@ -10,6 +10,8 @@ const keys = require("../config/keys");
 import { isEmail } from "validator";
 const client = require("twilio");
 const Nexmo = require("nexmo");
+// import Cookies from "js-cookie";
+const Cookies = require("js-cookie");
 
 const nexmo = new Nexmo({
   apiKey: "14e1ac25",
@@ -142,18 +144,25 @@ export const login = async (req: Request, res: Response) => {
     if (!validPassword) {
       return res.status(400).send({ msg: "User or Password WRONG !" });
     }
+    // if (status !== 3) {
+    //   return res.status(400).send({ msg: "User or Password WRONG !", status });
+    // }
     const token = user.generateToken(id, email, password, role);
+    res.cookie("Token", token);
+
     res.status(200).json({ seccess: true, token: token, user, status });
     return user;
   } catch {
     res.status(400).send({ msg: "User or Password WRONG !" });
   }
 };
-export let getUser = async (req: Request, res: Response) => {
+export let getPhone = async (req: Request, res: Response) => {
+  const { id } = req.body;
+  console.log(id);
   try {
-    const user = await User.find();
-    res.send(user);
+    const userData = await User.find({ ID: id });
+    res.status(200).send({ phone: userData[0].phone, id: userData[0]._id });
   } catch {
-    res.send("not user");
+    res.status(400).send({ msg: "Error." });
   }
 };

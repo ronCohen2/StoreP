@@ -53,7 +53,7 @@ export default class NavbarC extends React.Component {
                   </Col>
                   <Col>
                     <NavItem>
-                      <NavLink to={"/shop"} className="d-2 text-white">
+                      <NavLink to={"/category/all"} className="d-2 text-white">
                         Shop
                       </NavLink>
                     </NavItem>

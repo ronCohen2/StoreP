@@ -19,7 +19,7 @@ const Footer = (props: any) => {
           <h4 className="text-black">QUICK LINKS</h4>
           <div className="text-muted">
             <p onClick={() => history.push("/")}>Home</p>
-            <p onClick={() => history.push("/shop")}>Shop</p>
+            <p onClick={() => history.push("/category/all")}>Shop</p>
             <p onClick={() => history.push("/about")}>about</p>
             <p onClick={() => history.push("/contact")}>Contact</p>
           </div>

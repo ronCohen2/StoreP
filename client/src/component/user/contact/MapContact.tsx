@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Map, GoogleApiWrapper } from "google-maps-react";
+import { Table, Row, Col, Container, Button } from "reactstrap";
 
 class MapContact extends Component<any, any> {
   constructor(props: any) {
@@ -7,19 +8,20 @@ class MapContact extends Component<any, any> {
     this.state = {};
   }
   render() {
-    const mapStyles = {
-      width: "100%",
-      height: "100%"
+    const mapStyles: any = {
+     width: "800px",
+      height: "250px",
+      
     };
     return (
-      <div style={{ width: "100%", height: "100%" }}>
+      <div className="d-block">
         <Map
           google={this.props.google}
-          zoom={8}
-          // initialCenter={{ lat: 47.444, lng: -122.176 }}
-          // style={{ width: "100%", height: "100%" }}
+          zoom={15}
+          initialCenter={{ lat: 32.073906, lng:34.791918 }}
+          style={mapStyles}
         />
-      </div>
+        </div>
     );
   }
 }

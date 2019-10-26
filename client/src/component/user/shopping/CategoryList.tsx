@@ -25,7 +25,7 @@ class CategoryList extends Component<any, any> {
           <CardHeader>Category</CardHeader>
           <CardText
             className="border-bottom pb-3 pt-3"
-            onClick={() => this.redirect("/shop")}
+            onClick={() => this.redirect("/category/all")}
           >
             All Products
           </CardText>

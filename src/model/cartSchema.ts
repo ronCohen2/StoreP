@@ -1,5 +1,5 @@
 import * as mongoose from "mongoose";
-import cartItemSchema from "../model/cartItemSchema";
+import cartItemSchema from "./CartItemSchema";
 import { Icart } from "./modelInterfece";
 const cartSchema = new mongoose.Schema({
   UserId: {

@@ -1,5 +1,6 @@
 import { Reducer } from "redux";
 import { Icart } from "../../type/reducer";
+import itemDetails from "../../component/user/shopping/itemDetails";
 
 const initialState: Icart = {
   cartId: null,
@@ -27,6 +28,16 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
         ...state,
         items: payload.payload
       };
+    case "CALCULATE_TOTAL_PRICE":
+      return {
+        ...state,
+        totalPrice: state.items.reduce(
+          (sum: any, { totalPrice, quantity }: any) =>
+            sum + totalPrice * quantity,
+          0
+        )
+      };
+
     case "CART_ERR":
       return {
         ...state,
@@ -35,9 +46,25 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
     case "ADD_CART_ITEM":
       return {
         ...state,
-        items: state.items.concat(payload.payload),
+        items: state.items.concat(payload.payload.newItem),
         totalPrice: state.totalPrice + payload.payload.totalPrice
       };
+    case "UPDATE_ QUANTITY":
+      const { _id: id, quantity: qun } = payload.payload;
+      console.log("is" + id, qun);
+      return {
+        ...state,
+        items: state.items.map((item: any) => {
+          if (item._id === id) {
+            return {
+              ...item,
+              quantity: item.quantity === 1 ? item.quantity + qun : qun + 1
+            };
+          }
+          return item;
+        })
+      };
+
     case "ADD_CART_ITEM_ERR":
       return {
         ...state,

@@ -1,5 +1,8 @@
 import * as mongoose from "mongoose";
 import { IProduct } from "./modelInterfece";
+// import CartItemSchema from "./CartItemSchema";
+const Schema = mongoose.Schema;
+
 const ProductsSchema = new mongoose.Schema({
   productName: {
     type: String,
@@ -10,13 +13,15 @@ const ProductsSchema = new mongoose.Schema({
   categoryId: {
     type: String,
     required: true
-    //FIX- ref to category Schema 
+    //FIX- ref to category Schema
   },
   price: {
     type: Number,
     required: true
   },
   image: {
+    _id: Schema.Types.ObjectId,
+    // ref: CartItemSchema,
     type: String,
     required: true
   }

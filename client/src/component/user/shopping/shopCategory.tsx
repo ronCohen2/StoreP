@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Container, Row, Col } from "reactstrap";
-import Filter from "./Filter";
 import Products from "./Products";
 import CategoryList from "./CategoryList";
 import { connect } from "react-redux";
@@ -21,7 +20,6 @@ class shopCategory extends Component<any, any> {
         <Row className="mt-4 mb-4">
           <Col md="3">
             <CategoryList />
-            <Filter />
           </Col>
           <Col md="9">
             <ProductByCategory id={id} />
