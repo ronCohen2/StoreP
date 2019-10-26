@@ -4,13 +4,10 @@ import { Logout } from "../../store/action/authAction";
 import { withRouter } from "react-router";
 let SignOut: React.SFC<any> = (props: any) => {
   const { firstName } = props.auth.user;
-  const toHomePage = () => {
-    props.history.push("/");
-  };
   return (
     <div>
       <span className="pr-4"> Hi {firstName} </span>
-      <span onClick={() => props.logOut(toHomePage)}>Log out</span>
+      <span onClick={props.logOut}>Log out</span>
     </div>
   );
 };
@@ -22,7 +19,7 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    logOut: (toHomePage: any) => dispatch(Logout(toHomePage))
+    logOut: () => dispatch(Logout())
   };
 };
 export default connect(

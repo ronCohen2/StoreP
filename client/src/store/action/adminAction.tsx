@@ -2,7 +2,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
 import swal from "sweetalert";
-
+import Cookies from "js-cookie";
 export const getAllProducts = () => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
@@ -38,11 +38,11 @@ export const UploadImage = (image: any) => {
     try {
       const data = new FormData();
       data.append("file", image);
-      const res = await axios.post(
-        "http://localhost:3001/Admin/Upload",
-        data,
-        {}
-      );
+      const res = await axios.post("http://localhost:3001/Admin/Upload", data, {
+        headers: {
+          token: Cookies.get("Token")
+        }
+      });
       dispatch({
         type: "UPLOAD_IMAGE_PRODUCT",
         payload: res.data.filename
@@ -64,12 +64,20 @@ export const addProduct = (
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     console.log(productName, categoryId, price, image);
     try {
-      const res = await axios.post("http://localhost:3001/admin/", {
-        productName,
-        categoryId,
-        price,
-        image
-      });
+      const res = await axios.post(
+        "http://localhost:3001/admin/",
+        {
+          productName,
+          categoryId,
+          price,
+          image
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
       dispatch({
         type: "ADD_PRODUCTS",
         payload: res.data.newProduct
@@ -90,10 +98,18 @@ export const addProduct = (
 export const editProduct = (id: String, obj: any) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.post(`http://localhost:3001/admin/edit`, {
-        id,
-        obj
-      });
+      const res = await axios.post(
+        `http://localhost:3001/admin/edit`,
+        {
+          id,
+          obj
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
       swal("Good job!", "You Edit this Product!", "success");
     } catch (err) {
       console.log("err in edit ");
@@ -105,7 +121,12 @@ export const removeProduct = (productId: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
       const res = await axios.get(
-        `http://localhost:3001/admin/removeProduct/${productId}`
+        `http://localhost:3001/admin/removeProduct/${productId}`,
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
       );
       dispatch({ type: "REMOVE_PRODUCT_ADMIN", payload: productId });
     } catch (err) {
@@ -120,10 +141,18 @@ export const removeProduct = (productId: String) => {
 export const addCategory = (categoryName: String, image: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.post(`http://localhost:3001/admin/category`, {
-        categoryName,
-        image
-      });
+      const res = await axios.post(
+        `http://localhost:3001/admin/category`,
+        {
+          categoryName,
+          image
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
       swal("Good job!", "You Add New Category!", "success");
     } catch (err) {
       dispatch({

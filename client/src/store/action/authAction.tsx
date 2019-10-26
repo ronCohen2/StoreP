@@ -126,10 +126,9 @@ export const getPhoneNumber = (id: String) => {
   };
 };
 // create log out action
-export const Logout = (sendToHome: any) => {
+export const Logout = () => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     Cookies.remove("Token");
     dispatch({ type: "LOG_OUT" });
-    sendToHome();
   };
 };

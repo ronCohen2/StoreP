@@ -3,6 +3,7 @@ import { AnyAction } from "redux";
 import axios from "axios";
 import swal from "sweetalert";
 import Cookies from "js-cookie";
+import { Logout } from "./authAction";
 
 export const getCartItems = (cartId: String) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
@@ -61,9 +62,10 @@ export const addCartItem = (
       dispatch({ type: "CALCULATE_TOTAL_PRICE", payload: res.data });
       swal("Good job!", " Product add to cart !", "success");
     } catch (error) {
-      if (error.response.data.status == 403) {
-        alert("you need to sign in ");
-        Cookies.remove("Token");
+      const { status } = error.response.data;
+      if (status == 403) {
+        swal("Please SignIn");
+        dispatch(Logout());
       }
       swal("Error!", "error in add product to cart!", "error");
       dispatch({ type: "ADD_CART_ITEM_ERR", payload: error });
@@ -88,6 +90,11 @@ export const deleteCartItem = (cartId: String, productId: String) => {
       dispatch({ type: "DELETE_CART_ITEM", payload: productId });
       dispatch({ type: "CALCULATE_TOTAL_PRICE", payload: res.data });
     } catch (error) {
+      const { status } = error.response.data;
+      if (status == 403) {
+        swal("Please SignIn");
+        dispatch(Logout());
+      }
       dispatch({ type: "DELETE_CART_ITEM_ERROR", payload: error });
     }
   };
@@ -109,6 +116,11 @@ export const removeCartItems = (cartId: String) => {
       dispatch({ type: "REMOVE_ALL_ITEMS" });
       dispatch({ type: "CALCULATE_TOTAL_PRICE", payload: res.data });
     } catch (error) {
+      const { status } = error.response.data;
+      if (status == 403) {
+        swal("Please SignIn");
+        dispatch(Logout());
+      }
       // dispatch({type:""})
     }
   };
@@ -149,6 +161,11 @@ export const order = (
 
       toHomePage();
     } catch (error) {
+      const { status } = error.response.data;
+      if (status == 403) {
+        swal("Please SignIn");
+        dispatch(Logout());
+      }
       dispatch({ type: "ORDER_ERR", payload: error.response.data });
     }
   };
@@ -172,7 +189,11 @@ export const GetCartStatus = (UserId: String) => {
       await dispatch({ type: "CART_ID", payload: res.data.cart });
       return res.data.cart;
     } catch (error) {
-      alert("err");
+      const { status } = error.response.data;
+      if (status == 403) {
+        swal("Please SignIn");
+        dispatch(Logout());
+      }
     }
   };
 };
@@ -192,6 +213,11 @@ export const checkShipDate = (shipDate: String) => {
       );
       dispatch({ type: "DATE", payload: res.data.msg });
     } catch (err) {
+      const { status } = err.response.data;
+      if (status == 403) {
+        swal("Please SignIn");
+        dispatch(Logout());
+      }
       dispatch({ type: "DATE", payload: err.response.data.msg });
     }
   };
