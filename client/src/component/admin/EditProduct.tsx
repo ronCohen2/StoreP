@@ -38,6 +38,12 @@ class EditProduct extends Component<any, any> {
   };
   render() {
     const { search, allProducts } = this.props.product;
+    if (
+      this.props.auth.user === undefined ||
+      this.props.auth.user.role === false
+    ) {
+      this.props.history.push("/");
+    }
     return (
       <Container className="border ">
         <Row>
@@ -86,7 +92,8 @@ class EditProduct extends Component<any, any> {
 }
 const mapStateToProps = (state: any) => {
   return {
-    product: state.product
+    product: state.product,
+    auth: state.auth
   };
 };
 const mapDispatchToProps = (dispatch: any) => {

@@ -57,6 +57,12 @@ class AddProductAdmin extends Component<any, any> {
   render() {
     const { name, categoryName, price, image } = this.state;
     const { category } = this.props.product;
+    if (
+      this.props.auth.user === undefined ||
+      this.props.auth.user.role === false
+    ) {
+      this.props.history.push("/");
+    }
     return (
       <Container className="border">
         <Row>
@@ -125,7 +131,8 @@ class AddProductAdmin extends Component<any, any> {
 const mapStateToProps = (state: any) => {
   return {
     product: state.product,
-    admin: state.admin
+    admin: state.admin,
+    auth: state.auth
   };
 };
 const mapDispatchToProps = (dispatch: any) => {

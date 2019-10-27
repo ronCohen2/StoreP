@@ -11,6 +11,7 @@ import {
   Button
 } from "reactstrap";
 import { addCategory, UploadImage } from "../../store/action/adminAction";
+import { withRouter } from "react-router";
 
 class AddCategory extends Component<any, any> {
   constructor(props: any) {
@@ -43,7 +44,14 @@ class AddCategory extends Component<any, any> {
       this.setState({ name: "", image: "" });
     });
   };
+
   render() {
+    if (
+      this.props.auth.user === undefined ||
+      this.props.auth.user.role === false
+    ) {
+      this.props.history.push("/");
+    }
     return (
       <Container className="border">
         <Row>
@@ -79,7 +87,8 @@ class AddCategory extends Component<any, any> {
 }
 const mapStateToProps = (state: any) => {
   return {
-    admin: state.admin
+    admin: state.admin,
+    auth: state.auth
   };
 };
 const mapDispatchToProps = (dispatch: any) => {
@@ -92,4 +101,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(AddCategory);
+)(withRouter(AddCategory));

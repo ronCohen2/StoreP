@@ -15,7 +15,7 @@ import CategoryDropDown from "./CategoryDropDown";
 import AdminTab from "./AdminTab";
 import { connect } from "react-redux";
 
-export default class NavbarC extends React.Component {
+class NavbarC extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
 
@@ -32,7 +32,7 @@ export default class NavbarC extends React.Component {
   }
   render() {
     const { isOpen }: any = this.state;
-
+    // const { role } = this.props.auth.user;
     return (
       <div className="navb">
         <Navbar light expand="md">
@@ -65,9 +65,12 @@ export default class NavbarC extends React.Component {
                       </NavLink>
                     </NavItem>
                   </Col>
-                  <Col className="">
-                    <AdminTab />
-                  </Col>
+                  {this.props.auth.userConnected &&
+                  this.props.auth.user.role ? (
+                    <Col className="">
+                      <AdminTab />
+                    </Col>
+                  ) : null}
                 </Row>
               </Nav>
             </Collapse>
@@ -77,3 +80,12 @@ export default class NavbarC extends React.Component {
     );
   }
 }
+const mapStateToProps = (state: any) => {
+  return {
+    auth: state.auth
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(NavbarC);
