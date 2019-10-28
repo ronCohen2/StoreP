@@ -11,7 +11,6 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { newContact } from "../../../store/action/productAction";
-import MapContact from "./MapContact";
 import "./contact.css";
 
 class contact extends Component<any, any> {
@@ -94,11 +93,6 @@ class contact extends Component<any, any> {
             </Form>
           </Col>
         </Row>
-
-        {/* <Row>
-             <MapContact />
-
-            </Row> */}
       </Container>
     );
   }
