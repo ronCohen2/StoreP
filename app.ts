@@ -4,7 +4,10 @@ import * as path from "path";
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
-import { errorHandler, errorNotFoundHandler } from "./src/middlewares/errorHandler";
+import {
+  errorHandler,
+  errorNotFoundHandler
+} from "./src/middlewares/errorHandler";
 
 // Routes
 import { Admin } from "./src/routes/AdminRoutes";
@@ -15,12 +18,11 @@ import { Cart } from "./src/routes/CartRoute";
 // Create Express server
 export const app = express();
 const port = process.env.PORT || 3001;
+app.use(express.static("client/build"));
+
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(`../../client/build`));
   app.get("*", (req: any, res: any) => {
-    res.sendFile(
-      path.resolve(__dirname, "../../client/build", "build", "index.html")
-    );
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
 // Express configuration
