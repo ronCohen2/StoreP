@@ -36,7 +36,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(logger("dev"));
 
-app.use(express.static(path.join(__dirname, "../public")));
+// app.use(express.static(path.join(__dirname, "../public")));
 
 // Use routes
 app.use("/admin", Admin);
