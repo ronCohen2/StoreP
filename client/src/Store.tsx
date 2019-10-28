@@ -8,7 +8,7 @@ import About from "./component/user/contact/About";
 import itemDetails from "./component/user/shopping/itemDetails";
 import noMatch from "./component/noMatch";
 import register from "./component/auth/RegisterStep1";
-import login from "./component/auth/Login";
+import login from "./component/auth/login";
 import order from "./component/user/oreder/order";
 import shoppingCart from "./component/user/shopping/shoppingCart";
 import NavbarC from "./component/layout/Navbar";

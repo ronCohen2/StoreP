@@ -12,7 +12,7 @@ import {
 import { Route, Redirect, withRouter } from "react-router";
 import { connect } from "react-redux";
 import { addCartItem } from "../../../store/action/cartAction";
-import Login from "../../auth/Login";
+import Login from "../../auth/login";
 import swal from "sweetalert";
 
 const ProductCard = withRouter((props: any) => {
