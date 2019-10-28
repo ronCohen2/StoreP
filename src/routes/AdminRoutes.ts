@@ -17,5 +17,5 @@ Admin.post("/edit", [auth, admin], controller.editProducts);
 
 Admin.get("/removeProduct/:id", [auth, admin], controller.removeProducts);
 
-Admin.post("/category", [auth, admin], [auth, admin], controller.addCategory);
+Admin.post("/category", [auth, admin], controller.addCategory);
 Admin.post("/Upload", [auth, admin], controller.uploadImage);

@@ -31,10 +31,14 @@ export const addCartItem = (
   cartId: String,
   productId: String,
   quantity: Number,
-  name: String
+  name: String,
+  Role: Boolean
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
+      if (Role === true)
+        return swal("Error!", " Admin cant add product!", "error");
+
       const res = await axios.post(
         "http://localhost:3001/Cart/addItem",
         {
@@ -62,8 +66,7 @@ export const addCartItem = (
       dispatch({ type: "CALCULATE_TOTAL_PRICE", payload: res.data });
       swal("Good job!", " Product add to cart !", "success");
     } catch (error) {
-      const { status } = error.response.data;
-      if (status == 403) {
+      if (error.response.data.status == 403) {
         swal("Please SignIn");
         dispatch(Logout());
       }
@@ -158,14 +161,12 @@ export const order = (
       dispatch({ type: "CLEAN_ORDER_ERR", payload: res.data });
       dispatch(GetCartStatus(userId));
       swal("Good job!", " Order Success!", "success");
-
       toHomePage();
     } catch (error) {
-      const { status } = error.response.data;
-      if (status == 403) {
-        swal("Please SignIn");
-        dispatch(Logout());
-      }
+      // if (error.response.data.status == 403) {
+      //   swal("Please SignIn");
+      //   dispatch(Logout());
+      // }
       dispatch({ type: "ORDER_ERR", payload: error.response.data });
     }
   };
@@ -174,26 +175,18 @@ export const GetCartStatus = (UserId: String) => {
   console.log("Ssd");
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
     try {
-      const res = await axios.post(
-        "http://localhost:3001/Cart/cartStatus",
-        {
-          UserId
-        },
-        {
-          headers: {
-            token: Cookies.get("Token")
-          }
-        }
-      );
+      const res = await axios.post("http://localhost:3001/Cart/cartStatus", {
+        UserId
+      });
       console.log(res.data);
       await dispatch({ type: "CART_ID", payload: res.data.cart });
       return res.data.cart;
     } catch (error) {
-      const { status } = error.response.data;
-      if (status == 403) {
-        swal("Please SignIn");
-        dispatch(Logout());
-      }
+      // const { status } = error.response.data;
+      // if (status == 403) {
+      //   swal("Please SignIn");
+      //   dispatch(Logout());
+      // }
     }
   };
 };
@@ -219,6 +212,27 @@ export const checkShipDate = (shipDate: String) => {
         dispatch(Logout());
       }
       dispatch({ type: "DATE", payload: err.response.data.msg });
+    }
+  };
+};
+export const getReceiptItems = (cartId: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/Cart/getItems",
+        {
+          cartId
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
+      console.log(res.data);
+      dispatch({ type: "RECEIPT_ITEMS", payload: res.data });
+    } catch (error) {
+      // dispatch({ type: "CART_ERR" });
     }
   };
 };

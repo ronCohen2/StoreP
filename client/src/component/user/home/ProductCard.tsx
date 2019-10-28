@@ -20,6 +20,7 @@ function ProductCard(props: any) {
         }}
       >
         <CardImg
+          className="ImageProductHome"
           top
           width="100%"
           height="100%"

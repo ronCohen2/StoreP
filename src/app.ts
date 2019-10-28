@@ -15,6 +15,12 @@ import { Cart } from "./routes/CartRoute";
 // Create Express server
 export const app = express();
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req: any, res: any) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}
 // Express configuration
 app.set("port", process.env.PORT || 3001);
 app.set("views", path.join(__dirname, "../views"));

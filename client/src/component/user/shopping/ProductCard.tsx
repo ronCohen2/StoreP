@@ -13,6 +13,7 @@ import { Route, Redirect, withRouter } from "react-router";
 import { connect } from "react-redux";
 import { addCartItem } from "../../../store/action/cartAction";
 import Login from "../../auth/Login";
+import swal from "sweetalert";
 
 const ProductCard = withRouter((props: any) => {
   const { history }: any = props;
@@ -38,12 +39,19 @@ const ProductCard = withRouter((props: any) => {
           <Button
             onClick={() => {
               userConnected
-                ? props.addToCart(cartId, _id, 1, productName)
-                : alert("You need to log in ");
+                ? props.addToCart(
+                    cartId,
+                    _id,
+                    1,
+                    productName,
+                    props.auth.user.role
+                  )
+                : swal("Please SignIn");
             }}
           >
             Add To Cart
           </Button>
+
           <Button
             onClick={() => {
               history.push(`/itemDetails/${props.data._id}`);
@@ -68,8 +76,9 @@ const mapDispatchToProps = (dispatch: any) => {
       cartId: String,
       productId: String,
       quantity: Number,
-      name: String
-    ) => dispatch(addCartItem(cartId, productId, quantity, name))
+      name: String,
+      Role: Boolean
+    ) => dispatch(addCartItem(cartId, productId, quantity, name, Role))
   };
 };
 export default connect(

@@ -32,8 +32,8 @@ class AddCategory extends Component<any, any> {
     });
   };
   handleSubmit = (e: any) => {
-    const { name, image } = this.state;
     e.preventDefault();
+    const { name, image } = this.state;
     const promsie1 = new Promise(reslove => {
       reslove(this.props.UploadImage(image));
     });
@@ -46,17 +46,11 @@ class AddCategory extends Component<any, any> {
   };
 
   render() {
-    if (
-      this.props.auth.user === undefined ||
-      this.props.auth.user.role === false
-    ) {
-      this.props.history.push("/");
-    }
     return (
       <Container className="border">
         <Row>
           <Col>
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={(e: any) => this.handleSubmit(e)}>
               <h3 className="text-muted">Add New Category</h3>
               <FormGroup>
                 <Label for="name">Name</Label>

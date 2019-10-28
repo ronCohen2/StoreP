@@ -11,6 +11,7 @@ const initialState: Icart = {
   addError: null,
   orderErr: null,
   date: null,
+  receipt: null,
   totalPrice: 0
 };
 const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
@@ -27,6 +28,11 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
       return {
         ...state,
         items: payload.payload
+      };
+    case "RECEIPT_ITEMS":
+      return {
+        ...state,
+        receipt: payload.payload
       };
     case "CALCULATE_TOTAL_PRICE":
       return {
@@ -90,7 +96,9 @@ const cartreducer: Reducer<Icart> = (state = initialState, payload: any) => {
     case "ORDER":
       return {
         ...state,
-        order: payload.payload
+        order: payload.payload,
+        items: [],
+        totalPrice: 0
       };
     case "ORDER_ERR":
       console.log(payload.payload);

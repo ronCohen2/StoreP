@@ -65,8 +65,8 @@ class NavbarC extends React.Component<any, any> {
                       </NavLink>
                     </NavItem>
                   </Col>
-                  {this.props.auth.userConnected &&
-                  this.props.auth.user.role ? (
+                  {this.props.auth.userConnected === true &&
+                  this.props.auth.user.role === true ? (
                     <Col className="">
                       <AdminTab />
                     </Col>

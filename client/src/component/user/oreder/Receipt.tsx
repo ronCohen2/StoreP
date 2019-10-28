@@ -10,7 +10,10 @@ import {
 import { Container, Row, Col } from "reactstrap";
 import { PDFViewer } from "@react-pdf/renderer";
 import { connect } from "react-redux";
-import { getCartItems } from "../../../store/action/cartAction";
+import {
+  getCartItems,
+  getReceiptItems
+} from "../../../store/action/cartAction";
 
 // Create styles
 const styles = StyleSheet.create({
@@ -38,8 +41,7 @@ const styles = StyleSheet.create({
   },
   top: {
     margin: 30,
-    fontSize: 12,
-    textAlign: "right"
+    fontSize: 12
   },
   image: {
     marginVertical: 15,
@@ -51,13 +53,12 @@ class Receipt extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
   }
-  componentWillMount() {
-    const { cartId } = this.props.cart.order.Order;
-    this.props.getCartItems(cartId);
+  componentDidMount() {
+    const { cartId } = this.props.cart;
+    this.props.getReceiptItems(cartId);
   }
   render() {
     const { props } = this;
-    const arr = [1, 2, 3];
     const {
       street,
       city,
@@ -66,41 +67,41 @@ class Receipt extends React.Component<any, any> {
       cartId
     } = props.cart.order.Order;
     const { firstName, lastName, email } = props.auth.user;
-    const { items } = this.props.cart;
+    const { receipt } = props.cart;
     return (
-      <Container>
+      <div>
         <PDFViewer width="1000" height="1000">
           <Document>
-            <Page size="A4" style={styles.text}>
-              <View style={styles.top}>
-                <Text> Name :{firstName + " " + lastName}</Text>
-                <Text> Email :{email}</Text>
-                <Text> Adress :{street + "," + city}</Text>
-                <Text> Ship Date :{shipDate}</Text>
-              </View>
+            {receipt ? (
+              <Page size="A4" style={styles.text}>
+                <View style={styles.top}>
+                  <Text> Name :{firstName + " " + lastName}</Text>
+                  <Text> Email :{email}</Text>
+                  <Text> Adress :{street + "," + city}</Text>
+                  <Text> Ship Date :{shipDate}</Text>
+                </View>
 
-              <View style={styles.center}>
-                <Text> E-Commerce Receipt Number : {totalPrice}</Text>
-              </View>
-              <View style={styles.center}>
-                {items
-                  ? items.map((arr: any, key: any) => {
-                      return (
-                        <Text>
-                          {key + 1} ) {arr.name} , Quantity :{arr.quantity}
-                        </Text>
-                      );
-                    })
-                  : null}
-              </View>
-
-              <View style={styles.center}>
-                <Text> Total Price : {totalPrice}</Text>
-              </View>
-            </Page>
+                <View style={styles.center}>
+                  <Text> E-Commerce Receipt : {cartId}</Text>
+                </View>
+                <View>
+                  {receipt.map((arr: any, key: any) => {
+                    const { name, quantity } = arr;
+                    return (
+                      <Text>
+                        {key} ) {name} , Quantity :{quantity}
+                      </Text>
+                    );
+                  })}
+                </View>
+                <View style={styles.center}>
+                  <Text> Total Price : {totalPrice}</Text>
+                </View>
+              </Page>
+            ) : null}
           </Document>
         </PDFViewer>
-      </Container>
+      </div>
     );
   }
 }
@@ -112,7 +113,7 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getCartItems: (id: any) => dispatch(getCartItems(id))
+    getReceiptItems: (id: any) => dispatch(getReceiptItems(id))
   };
 };
 export default connect(

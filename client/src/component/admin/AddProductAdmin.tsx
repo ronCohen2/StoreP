@@ -57,12 +57,7 @@ class AddProductAdmin extends Component<any, any> {
   render() {
     const { name, categoryName, price, image } = this.state;
     const { category } = this.props.product;
-    if (
-      this.props.auth.user === undefined ||
-      this.props.auth.user.role === false
-    ) {
-      this.props.history.push("/");
-    }
+
     return (
       <Container className="border">
         <Row>

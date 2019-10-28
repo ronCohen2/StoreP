@@ -41,7 +41,13 @@ class QuantintyModal extends React.Component<any, any> {
     const { quantity } = this.state;
     const { userConnected } = this.props.auth;
     if (userConnected) {
-      this.props.AddToCart(cartId, id, quantity, name);
+      this.props.AddToCart(
+        cartId,
+        id,
+        quantity,
+        name,
+        this.props.auth.user.role
+      );
     } else {
       swal("You need to Login");
       this.toggle();
@@ -99,8 +105,9 @@ const mapDispatchToProps = (dispatch: any) => {
       cartId: String,
       productId: String,
       quantity: Number,
-      name: String
-    ) => dispatch(addCartItem(cartId, productId, quantity, name))
+      name: String,
+      role: Boolean
+    ) => dispatch(addCartItem(cartId, productId, quantity, name, role))
   };
 };
 export default connect(

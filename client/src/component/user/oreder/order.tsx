@@ -53,7 +53,6 @@ class order extends Component<any, any> {
     e.preventDefault();
     const { city, street, shipDate, creditCard } = this.state;
     const { cartId, totalPrice, data } = this.props.cart;
-    const { items } = this.props.cart;
     const userId = this.props.auth.user._id;
     if (totalPrice > 0) {
       this.props.order(
@@ -75,7 +74,10 @@ class order extends Component<any, any> {
   };
   render() {
     const { items, date, orderErr } = this.props.cart;
-    console.log(orderErr);
+    const { userConnected } = this.props.auth;
+    if (userConnected === false) {
+      this.props.history.push("/");
+    }
     return (
       <Container>
         <form>

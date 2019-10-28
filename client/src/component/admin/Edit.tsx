@@ -29,12 +29,7 @@ class Edit extends Component<any, any> {
   };
   render() {
     const { productDetails } = this.props.product;
-    if (
-      this.props.auth.user === undefined ||
-      this.props.auth.user.role === false
-    ) {
-      this.props.history.push("/");
-    }
+
     return (
       <Container>
         {productDetails ? (
@@ -90,7 +85,7 @@ class Edit extends Component<any, any> {
                       image: productDetails[0].image
                     };
                     if (
-                      this.state.name ||
+                      this.state.productName ||
                       this.state.price ||
                       this.state.image
                     ) {

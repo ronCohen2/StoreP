@@ -48,7 +48,8 @@ class Login extends React.Component<any, any> {
   };
   render() {
     const { id, password } = this.state;
-    const { loginErr, userConnected } = this.props.auth;
+    const { loginErr } = this.props.auth;
+
     return (
       <div>
         <label color="danger" onClick={this.toggle} className="pr-4 ">

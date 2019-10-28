@@ -13,7 +13,7 @@ Cart.post("/deleteItem", [auth], controller.deleteItem);
 
 Cart.post("/removeAllItems", [auth], controller.empty);
 
-Cart.post("/cartStatus", [auth], controller.CartStatus);
+Cart.post("/cartStatus", controller.CartStatus);
 
 Cart.post("/createOrder", [auth], controller.createOrder);
 

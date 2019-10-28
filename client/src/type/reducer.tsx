@@ -27,6 +27,8 @@ export interface Icart {
   cartError: any;
   addError: any;
   orderErr: any;
+  receipt: any;
+
   totalPrice: any;
   date: any;
 }

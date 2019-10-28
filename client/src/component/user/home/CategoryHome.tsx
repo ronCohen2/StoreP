@@ -16,7 +16,7 @@ class CategoryHome extends Component<any, any> {
       image: null
     };
   }
-  async componentDidMount() {
+  async componentWillMount() {
     const { id }: any = this.props;
     const res = await Axios.get(
       `http://localhost:3001/Products/category/${id}`
@@ -38,9 +38,15 @@ class CategoryHome extends Component<any, any> {
       <Container className="mt-4">
         <h2>{categoryName} Products</h2>
         <Row className="HomeCategoryContainer border rounded mb-4">
-          <Col sm="12" md="4">
-            <img src={image} className="CatyegoryImg" />
-          </Col>
+          {image ? (
+            <Col sm="12" md="4">
+              <img
+                src={require(`../../../../../public/image/${image}`)}
+                className="CatyegoryImg"
+              />
+            </Col>
+          ) : null}
+
           <Col sm="12" md="8">
             {product
               ? product.map((product: any, index: Number) => {

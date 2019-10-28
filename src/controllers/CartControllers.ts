@@ -80,7 +80,9 @@ export let empty = async (req: Request, res: Response) => {
 export const CartStatus = async (req: Request, res: Response) => {
   const { UserId } = req.body;
   try {
-    const cart = await Cart.findOne({ UserId }).sort({ date: -1 });
+    const cart = await Cart.findOne({ UserId })
+      .sort({ _id: -1 })
+      .limit(1);
     console.log(cart);
     if (cart.status === 1) {
       console.log("open cart");

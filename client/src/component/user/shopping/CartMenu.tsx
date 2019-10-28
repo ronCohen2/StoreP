@@ -28,7 +28,7 @@ class Slide extends React.Component<any, any> {
     const { cartId, totalPrice } = this.props.cart;
     return (
       <div>
-        {userConnected ? (
+        {userConnected && this.props.auth.user.role === false ? (
           <Menu
             right
             width={"25%"}
@@ -62,7 +62,7 @@ class Slide extends React.Component<any, any> {
                         <Card body className="cardBg">
                           <CardTitle>
                             {key + 1} ){item.name} {item.quantity},
-                            {item.totalPrice * item.quantity}₪
+                            {item.totalPrice}₪
                             <i
                               onClick={() =>
                                 this.props.deleteItem(cartId, item.product)

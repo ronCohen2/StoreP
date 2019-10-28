@@ -12,6 +12,10 @@ class Register extends Component<any, any> {
     this.state = {};
   }
   render() {
+    const { userConnected } = this.props.auth;
+    if (userConnected === true) {
+      this.props.history.push("/");
+    }
     const { step } = this.props.auth;
     switch (step) {
       case 0:

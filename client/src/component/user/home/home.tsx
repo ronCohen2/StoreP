@@ -13,7 +13,7 @@ class home extends Component<any, any> {
       <Container>
         <img src={Slider} className="HomeBanner" />
         <CategoryHome id="5d5bd6960a5a7d1ab05da2cf" />
-        <CategoryHome id="5d5bd6e10a5a7d1ab05da2d0" />
+        <CategoryHome id="5db6a176019ed73b00c81266" />
       </Container>
     );
   }
