@@ -16,9 +16,11 @@ import { Cart } from "./routes/CartRoute";
 export const app = express();
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+  app.use(express.static(`../../client/build`));
   app.get("*", (req: any, res: any) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
+    res.sendFile(
+      path.resolve(__dirname, "../../client/build", "build", "index.html")
+    );
   });
 }
 // Express configuration
