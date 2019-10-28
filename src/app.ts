@@ -14,7 +14,7 @@ import { Cart } from "./routes/CartRoute";
 
 // Create Express server
 export const app = express();
-
+const port = process.env.PORT || 3001;
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(`../../client/build`));
   app.get("*", (req: any, res: any) => {
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 // Express configuration
-app.set("port", process.env.PORT || 3001);
+// app.set("port", process.env.PORT || 3001);
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
 
@@ -58,3 +58,6 @@ mongoose
 
 app.use(errorNotFoundHandler);
 app.use(errorHandler);
+app.listen(port, () => {
+  console.log(`Server is starting at PORT: ${port}`);
+});
