@@ -37,6 +37,7 @@
     "@types/jsonwebtoken": "^8.3.2",
     "@types/mongoose": "^5.5.11",
     "@types/react-alert": "^5.2.0",
+    "@types/react-burger-menu": "^2.2.5",
     "@types/react-sidebar": "^3.0.0",
     "@types/react-slider": "^0.8.1",
     "@types/reactstrap": "^8.0.1",
