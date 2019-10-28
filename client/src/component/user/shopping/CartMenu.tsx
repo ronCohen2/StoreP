@@ -2,6 +2,7 @@
 
 import React, { Component } from "react";
 import { slide as Menu } from "react-burger-menu";
+// const Menu = require("react-burger-menu");
 import { connect } from "react-redux";
 import { Table, Row, Col, Container, Button, CardSubtitle } from "reactstrap";
 import itemDetails from "./itemDetails";
