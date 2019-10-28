@@ -1,3 +1,5 @@
+// @ts-ignore
+
 import React, { Component } from "react";
 import { slide as Menu } from "react-burger-menu";
 import { connect } from "react-redux";
