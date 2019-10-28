@@ -11,5 +11,5 @@
       "*": ["node_modules/*", "src/types/*", "client/src/type/*"]
     }
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*", "app.ts"]
 }

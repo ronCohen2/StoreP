@@ -4,13 +4,13 @@ import * as path from "path";
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
-import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
+import { errorHandler, errorNotFoundHandler } from "./src/middlewares/errorHandler";
 
 // Routes
-import { Admin } from "./routes/AdminRoutes";
-import { Products } from "./routes/ProductsRoute";
-import { Auth } from "./routes/AuthRoutes";
-import { Cart } from "./routes/CartRoute";
+import { Admin } from "./src/routes/AdminRoutes";
+import { Products } from "./src/routes/ProductsRoute";
+import { Auth } from "./src/routes/AuthRoutes";
+import { Cart } from "./src/routes/CartRoute";
 
 // Create Express server
 export const app = express();
