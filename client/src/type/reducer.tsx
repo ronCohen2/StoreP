@@ -40,4 +40,5 @@ export interface Iproduct {
   productsByCategory: any;
   search: any;
   err: any;
+  moreProduct: String;
 }

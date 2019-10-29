@@ -87,3 +87,17 @@ export const newContact = (
     }
   };
 };
+export const getMoreProduct = (id: String, ProductId: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:3001/Products/MoreProduct/`,
+        {
+          id,
+          ProductId
+        }
+      );
+      dispatch({ type: "MORE_PRODUCTS", payload: res.data });
+    } catch (err) {}
+  };
+};

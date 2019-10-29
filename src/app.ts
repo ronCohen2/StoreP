@@ -4,16 +4,13 @@ import * as path from "path";
 import * as mongoose from "mongoose";
 import * as bodyParser from "body-parser";
 import * as cors from "cors";
-import {
-  errorHandler,
-  errorNotFoundHandler
-} from "./src/middlewares/errorHandler";
+import { errorHandler, errorNotFoundHandler } from "./middlewares/errorHandler";
 
 // Routes
-import { Admin } from "./src/routes/AdminRoutes";
-import { Products } from "./src/routes/ProductsRoute";
-import { Auth } from "./src/routes/AuthRoutes";
-import { Cart } from "./src/routes/CartRoute";
+import { Admin } from "./routes/AdminRoutes";
+import { Products } from "./routes/ProductsRoute";
+import { Auth } from "./routes/AuthRoutes";
+import { Cart } from "./routes/CartRoute";
 
 // Create Express server
 export const app = express();
@@ -26,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 // Express configuration
-// app.set("port", process.env.PORT || 3001);
+app.set("port", process.env.PORT || 3001);
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "pug");
 
@@ -60,6 +57,6 @@ mongoose
 
 app.use(errorNotFoundHandler);
 app.use(errorHandler);
-app.listen(port, () => {
-  console.log(`Server is starting at PORT: ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server is starting at PORT: ${port}`);
+// });

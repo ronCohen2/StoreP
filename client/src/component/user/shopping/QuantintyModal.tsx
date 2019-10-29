@@ -17,7 +17,7 @@ class QuantintyModal extends React.Component<any, any> {
     super(props);
     this.state = {
       modal: false,
-      quantity: 0,
+      quantity: 1 ,
       id: null
     };
 

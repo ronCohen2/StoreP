@@ -61,3 +61,16 @@ export let contact = async (req: Request, res: Response) => {
     res.status(400).send("err in add contact");
   }
 };
+
+export let getMoreProductByCategory = async (req: Request, res: Response) => {
+  const { id, ProductId } = req.body;
+  try {
+    const products = await Products.find({
+      categoryId: id,
+      _id: { $ne: ProductId }
+    }).limit(3);
+    res.status(200).send(products);
+  } catch (error) {
+    res.status(400).send({ err: "err to get product" });
+  }
+};

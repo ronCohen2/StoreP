@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getProductsDetails } from "../../../store/action/productAction";
 import { Container, Row, Col } from "reactstrap";
 import QuantintyModal from "./QuantintyModal";
+import MoreProduct from "./MoreProduct";
 
 class itemDetails extends Component<any & RouteProps, any> {
   constructor(props: any) {
@@ -15,6 +16,12 @@ class itemDetails extends Component<any & RouteProps, any> {
     console.log(id);
     this.props.getProductDetails(id);
     console.log(this.props);
+  }
+  componentWillReceiveProps(nextProps: any) {
+    if (this.props.match.params !== nextProps.match.params) {
+      const { id }: any = nextProps.match.params;
+      this.props.getProductDetails(id);
+    }
   }
   render() {
     const { productDetails }: any = this.props.products;
@@ -49,6 +56,7 @@ class itemDetails extends Component<any & RouteProps, any> {
                 id={productDetails[0]._id}
               />
             </Col>
+            <MoreProduct id={productDetails[0].categoryId} />
           </Row>
         ) : (
           <p>Error in fetch date .</p>

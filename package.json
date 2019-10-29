@@ -9,7 +9,7 @@
     "serve": "node dist/ app.js",
     "watch": "nodemon --exec ts-node -- ./src/server.ts",
     "watch-node": "nodemon dist/server.js",
-    "client": "npm start --prefix client",
+    "client": "cd client && npm start",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "tslint": "tslint -c tslint.json -p tsconfig.json",

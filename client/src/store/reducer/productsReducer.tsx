@@ -7,7 +7,8 @@ const initialState: Iproduct = {
   category: null,
   productsByCategory: null,
   search: null,
-  err: null
+  err: null,
+  moreProduct: ""
 };
 
 const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
@@ -27,6 +28,11 @@ const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
         ...state,
         productDetails: payload.payload
       };
+    case "MORE_PRODUCTS":
+      return {
+        ...state,
+        moreProduct: payload.payload
+      };
     case "ALL_CATEGORY":
       return {
         ...state,
@@ -37,7 +43,9 @@ const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
       const { allProducts } = state;
       return {
         ...state,
-        allProducts: allProducts.filter((search: any) => search._id !== payload.payload)
+        allProducts: allProducts.filter(
+          (search: any) => search._id !== payload.payload
+        )
       };
     case "SEARCH_PRODUCT":
       return {

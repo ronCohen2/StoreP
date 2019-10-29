@@ -1,16 +1,4 @@
-// import React from "react";
-// import { NavItem } from "reactstrap";
-// import { NavLink } from "react-router-dom";
 
-// export default function AdminTab() {
-//   return (
-//     <NavItem>
-//       <NavLink to={"/admin"} className="d-2 text-white">
-//         Admin
-//       </NavLink>
-//     </NavItem>
-//   );
-// }
 import React, { useState } from "react";
 import {
   ButtonDropdown,

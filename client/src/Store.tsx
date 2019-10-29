@@ -17,7 +17,6 @@ import Footer from "./component/layout/Footer";
 import shopCategory from "./component/user/shopping/shopCategory";
 import Slide from "./component/user/shopping/CartMenu";
 import Search from "./component/layout/Search";
-import dashbord from "./component/admin/dashbord";
 import Edit from "./component/admin/Edit";
 import AddCategory from "./component/admin/AddCategory";
 import AddProductAdmin from "./component/admin/AddProductAdmin";
@@ -49,7 +48,6 @@ class Store extends Component<any, any> {
             <Route path="/register" component={Register} />
             <Route path="/order" component={order} />
             <Route path="/Receipt" component={Receipt} />
-            <Route path="/admin" component={dashbord} />
             <Route path="/Add-category" component={AddCategory} />
             <Route path="/Add-Product" component={AddProductAdmin} />
             <Route path="/edit" exact component={EditProduct} />
