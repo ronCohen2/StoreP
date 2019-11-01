@@ -163,3 +163,50 @@ export const addCategory = (categoryName: String, image: String) => {
     }
   };
 };
+
+export const getOpenUserContactMessage = () => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.get(
+        `http://localhost:3001/Admin/OpenUserMessage/`,
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
+      dispatch({
+        type: "CONTACT_MESSAGE",
+        payload: res.data
+      });
+    } catch (err) {}
+  };
+};
+export const SendEmailMessage = (mail: String, subject: any, text: any) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:3001/Admin/SendMail`,
+        {
+          mail,
+          subject,
+          text
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
+      dispatch({
+        type: "EMAIL_ADMIN_SUCCESS",
+        payload: true
+      });
+    } catch (err) {
+      dispatch({
+        type: "EMAIL_ADMIN_SUCCESS",
+        payload: false
+      });
+    }
+  };
+};

@@ -18,6 +18,8 @@ export interface IAdmin {
   removeProductError: any;
   eddCategoryError: any;
   fileName: String;
+  message: String;
+  mailSuccess: any;
 }
 export interface Icart {
   status: any;

@@ -68,7 +68,7 @@ class ProductByCategory extends Component<any & RouteProps, any> {
         <Row>
           <Pagination
             postsPerPage={ProductPerPage}
-            totalPosts={allProducts ? allProducts.length - 1 : null}
+            totalPosts={allProducts ? allProducts.length : null}
             paginate={paginate}
           />
         </Row>

@@ -62,6 +62,15 @@ export let contact = async (req: Request, res: Response) => {
   }
 };
 
+export let getAllOpenContactUsMessage = async (req: Request, res: Response) => {
+  try {
+    const OpenMessage = await Contact.find({ status: false });
+    res.status(200).send(OpenMessage);
+  } catch (error) {
+    res.status(400).send({ err: "error to get message" });
+  }
+};
+
 export let getMoreProductByCategory = async (req: Request, res: Response) => {
   const { id, ProductId } = req.body;
   try {

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as controller from "../controllers/AuthControllers";
+import { format } from "morgan";
 
 export const Auth = Router();
 Auth.post("/registerStep1", controller.registerStep1);

@@ -5,6 +5,7 @@ import category from "../model/categorySchema";
 import * as express from "express";
 var multer = require("multer");
 const fs = require("fs");
+const nodeMailer = require("nodemailer");
 
 var storage = multer.diskStorage({
   destination: function(req: any, file: any, callback: any) {
@@ -98,4 +99,28 @@ export let addCategory = async (req: Request, res: Response) => {
   } catch (err) {
     res.status(400).send({ msg: "error in add category ", err });
   }
+};
+export const sendMail = async (req: Request, res: Response) => {
+  const { mail, subject, text } = req.body;
+  let transporter = nodeMailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "ecommercepro9@gmail.com",
+      pass: "r1234512345"
+    }
+  });
+  let mailOptions = {
+    from: "ecommercepro9@gmail.com",
+    to: mail,
+    subject: subject,
+    text: text
+  };
+  transporter.sendMail(mailOptions, (error: any, info: any) => {
+    if (error) {
+      console.log(error);
+      res.status(400).send({ success: false });
+    } else {
+      res.status(200).send({ success: true });
+    }
+  });
 };

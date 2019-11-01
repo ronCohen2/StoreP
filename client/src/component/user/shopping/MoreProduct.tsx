@@ -23,7 +23,7 @@ class MoreProduct extends Component<any, any> {
   render() {
     const { moreProduct } = this.props.product;
     return (
-      <Container className="mt-5">
+      <Container className="mt-5 mb-5">
         <h3>More Product</h3>
 
         <Row className="border rounded moreProductContainer">

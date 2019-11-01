@@ -25,6 +25,7 @@ import Register from "./component/auth/Register";
 // import Receipt from "./component/user/oreder/Receipt";
 import Receipt from "./component/user/oreder/Receipt";
 import { PDFViewer } from "@react-pdf/renderer";
+import OpenMessage from "./component/admin/OpenMessage";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -52,6 +53,7 @@ class Store extends Component<any, any> {
             <Route path="/Add-Product" component={AddProductAdmin} />
             <Route path="/edit" exact component={EditProduct} />
             <Route path="/Edit/:id" component={Edit} />
+            <Route path="/UserMessage" component={OpenMessage} />
             <Route path="/" component={noMatch} />
           </Switch>
           <Footer />

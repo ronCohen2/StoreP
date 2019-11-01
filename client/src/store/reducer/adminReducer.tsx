@@ -8,7 +8,9 @@ const initialState: IAdmin = {
   addProductErr: null,
   removeProductError: null,
   eddCategoryError: null,
-  fileName: ""
+  fileName: "",
+  message: "",
+  mailSuccess: null
 };
 
 const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
@@ -49,6 +51,17 @@ const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
         ...state,
         fileName: payload.payload
       };
+    case "CONTACT_MESSAGE":
+      return {
+        ...state,
+        message: payload.payload
+      };
+    case "EMAIL_ADMIN_SUCCESS":
+      return {
+        ...state,
+        mailSuccess: payload.payload
+      };
+
     default:
       return state;
   }

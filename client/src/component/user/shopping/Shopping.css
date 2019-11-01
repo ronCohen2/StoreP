@@ -134,8 +134,15 @@
   justify-content: flex-end !important;
 }
 .moreProduct-Image {
-  width: 250px;
+  width: 200px;
+  height: 200px;
   justify-content: center;
+}
+.poductDetailsIMG:hover {
+  height: 105%;
+  width: 105%;
+  cursor: zoom-in;
+  opacity: 0.8;
 }
 .moreProductContainer {
   justify-content: space-around;

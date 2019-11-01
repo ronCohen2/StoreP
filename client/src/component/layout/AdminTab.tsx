@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import {
   ButtonDropdown,
@@ -29,6 +28,9 @@ const AdminTab = (props: any) => {
         <DropdownItem divider />
         <DropdownItem onClick={() => history.push("/add-category")}>
           Add Category
+        </DropdownItem>
+        <DropdownItem onClick={() => history.push("/UserMessage")}>
+          User Message
         </DropdownItem>
       </DropdownMenu>
     </ButtonDropdown>
