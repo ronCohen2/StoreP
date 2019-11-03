@@ -29,6 +29,7 @@ const AdminTab = (props: any) => {
         <DropdownItem onClick={() => history.push("/add-category")}>
           Add Category
         </DropdownItem>
+        <DropdownItem divider />
         <DropdownItem onClick={() => history.push("/UserMessage")}>
           User Message
         </DropdownItem>

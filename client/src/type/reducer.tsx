@@ -18,7 +18,7 @@ export interface IAdmin {
   removeProductError: any;
   eddCategoryError: any;
   fileName: String;
-  message: String;
+  message: any;
   mailSuccess: any;
 }
 export interface Icart {
@@ -42,5 +42,6 @@ export interface Iproduct {
   productsByCategory: any;
   search: any;
   err: any;
+  review: any;
   moreProduct: String;
 }

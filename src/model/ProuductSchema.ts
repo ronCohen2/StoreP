@@ -1,7 +1,29 @@
 import * as mongoose from "mongoose";
 import { IProduct } from "./modelInterfece";
-// import CartItemSchema from "./CartItemSchema";
 const Schema = mongoose.Schema;
+
+const reviewsSchema = new mongoose.Schema({
+  data: {
+    type: Date,
+    default: Date.now()
+  },
+  stars: {
+    type: Number,
+    min: 1,
+    max: 5
+    // required: true
+  },
+  content: {
+    type: String,
+    maxlength: 200,
+    required: true
+  },
+  user: {
+    type: String,
+    required: true
+  }
+});
+export const Review = mongoose.model<any>("Review", reviewsSchema);
 
 const ProductsSchema = new mongoose.Schema({
   productName: {
@@ -21,9 +43,11 @@ const ProductsSchema = new mongoose.Schema({
   },
   image: {
     _id: Schema.Types.ObjectId,
-    // ref: CartItemSchema,
     type: String,
     required: true
+  },
+  review: {
+    type: [reviewsSchema]
   }
 });
 const Products = mongoose.model<IProduct>("Products", ProductsSchema);

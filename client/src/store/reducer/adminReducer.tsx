@@ -61,6 +61,11 @@ const adminReducer: Reducer<IAdmin> = (state = initialState, payload: any) => {
         ...state,
         mailSuccess: payload.payload
       };
+    case "REMOVE_FRON_CONTACT":
+      return {
+        ...state,
+        message: state.message.filter((msg: any) => msg._id !== payload.payload)
+      };
 
     default:
       return state;

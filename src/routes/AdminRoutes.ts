@@ -25,3 +25,9 @@ Admin.post("/Upload", [auth, admin], controller.uploadImage);
 Admin.get("/OpenUserMessage", [auth, admin], getAllOpenContactUsMessage);
 
 Admin.post("/sendMail", [auth, admin], controller.sendMail);
+
+Admin.post(
+  "/ChangeStatusMessage",
+  [auth, admin],
+  controller.ChangeStatusMessage
+);

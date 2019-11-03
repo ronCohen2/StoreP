@@ -8,7 +8,8 @@ const initialState: Iproduct = {
   productsByCategory: null,
   search: null,
   err: null,
-  moreProduct: ""
+  moreProduct: "",
+  review: []
 };
 
 const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
@@ -38,7 +39,16 @@ const reducer: Reducer<Iproduct> = (state = initialState, payload: any) => {
         ...state,
         category: payload.payload
       };
-
+    case "ADD_REVIEW":
+      return {
+        ...state,
+        review: state.review.concat(payload.payload)
+      };
+    case "GET_REVIEW":
+      return {
+        ...state,
+        review: payload.payload
+      };
     case "REMOVE_PRODUCT_ADMIN":
       const { allProducts } = state;
       return {

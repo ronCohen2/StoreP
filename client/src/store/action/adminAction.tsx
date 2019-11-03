@@ -210,3 +210,23 @@ export const SendEmailMessage = (mail: String, subject: any, text: any) => {
     }
   };
 };
+
+export const ChangeStatusMessage = (id: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(
+        `http://localhost:3001/Admin/ChangeStatusMessage`,
+        {
+          id
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
+      dispatch({ type: "REMOVE_FRON_CONTACT", payload: id });
+    
+    } catch (err) {}
+  };
+};

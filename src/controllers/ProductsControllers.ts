@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import Products from "../model/ProuductSchema";
+import Products, { Review } from "../model/ProuductSchema";
 import Category from "../model/categorySchema";
 import Contact from "../model/contactSchema";
 
@@ -81,5 +81,38 @@ export let getMoreProductByCategory = async (req: Request, res: Response) => {
     res.status(200).send(products);
   } catch (error) {
     res.status(400).send({ err: "err to get product" });
+  }
+};
+
+export let AddReview = async (req: Request, res: Response) => {
+  const { stars, content, user, productId } = req.body;
+
+  const newReview = await new Review({
+    stars,
+    content,
+    user
+  });
+  const product = await Products.findByIdAndUpdate(
+    { _id: productId },
+    {
+      $push: {
+        review: newReview
+      }
+    }
+  );
+  await product.save();
+  res.status(200).send("add review");
+  try {
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+export const getProductReview = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.body;
+    const Reviews = await Products.find({ _id: productId }).select("review");
+    res.status(200).send(Reviews[0].review);
+  } catch (error) {
+    res.status(400).send("df");
   }
 };

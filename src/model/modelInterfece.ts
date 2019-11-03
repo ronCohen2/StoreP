@@ -29,6 +29,7 @@ export interface IProduct extends mongoose.Document {
   categoryId: String;
   price: Number;
   image: any;
+  review: any;
 }
 
 export interface IcartItem extends mongoose.Document {
@@ -53,7 +54,7 @@ export interface IContact extends mongoose.Document {
   text: String;
   status: Boolean;
   items?: any;
-  date: any;
+  date: Date;
 }
 
 export interface IOrder extends mongoose.Document {

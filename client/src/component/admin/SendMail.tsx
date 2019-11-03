@@ -12,16 +12,21 @@ import {
   Input,
   Form,
   FormGroup,
-  Alert
+  Alert,
+  Spinner
 } from "reactstrap";
 import { connect } from "react-redux";
-import { SendEmailMessage } from "../../store/action/adminAction";
+import {
+  SendEmailMessage,
+  ChangeStatusMessage
+} from "../../store/action/adminAction";
 
 class ModalExample extends React.Component<any, any> {
   constructor(props: any) {
     super(props);
     this.state = {
-      modal: false
+      modal: false,
+      spineer: false
     };
     this.toggle = this.toggle.bind(this);
   }
@@ -36,16 +41,20 @@ class ModalExample extends React.Component<any, any> {
     });
   };
   handleSubmit = async (e: any) => {
-    e.preventDefault();
     const { subject, text } = this.state;
-    const { mail } = this.props;
+    const { mail, id } = this.props;
+    e.preventDefault();
+    this.setState({ spineer: true });
     await this.props.sendMail(mail, subject, text);
     if (this.props.admin.mailSuccess) {
-      this.toggle();
+      await this.props.ChangeStatusMessage(id);
+      await this.toggle();
     }
+    this.setState({ spineer: false });
   };
   render() {
     const { mail } = this.props;
+    const { spineer } = this.state;
     return (
       <Container>
         <Button color="danger" onClick={this.toggle}>
@@ -75,6 +84,11 @@ class ModalExample extends React.Component<any, any> {
                   required
                 />
               </FormGroup>
+              {spineer ? (
+                <div className="to-center">
+                  <Spinner color="dark" />
+                </div>
+              ) : null}
               {this.props.admin.mailSuccess === false ? (
                 <Alert color="danger">Erorr at send e-mail.</Alert>
               ) : null}
@@ -102,7 +116,8 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     sendMail: (mail: String, subject: any, text: any) =>
-      dispatch(SendEmailMessage(mail, subject, text))
+      dispatch(SendEmailMessage(mail, subject, text)),
+    ChangeStatusMessage: (id: String) => dispatch(ChangeStatusMessage(id))
   };
 };
 export default connect(

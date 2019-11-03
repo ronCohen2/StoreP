@@ -3,6 +3,7 @@ import * as mongoose from "mongoose";
 import Products from "../model/ProuductSchema";
 import category from "../model/categorySchema";
 import * as express from "express";
+import Contact from "../model/contactSchema";
 var multer = require("multer");
 const fs = require("fs");
 const nodeMailer = require("nodemailer");
@@ -123,4 +124,22 @@ export const sendMail = async (req: Request, res: Response) => {
       res.status(200).send({ success: true });
     }
   });
+};
+
+export let ChangeStatusMessage = async (req: Request, res: Response) => {
+  const { id } = req.body;
+  try {
+    const ChangeStatus = await Contact.findByIdAndUpdate(
+      { _id: id },
+      {
+        $set: {
+          status: true
+        }
+      }
+    );
+    await ChangeStatus.save();
+    res.status(200).send("Status Changed");
+  } catch {
+    res.status(400).send("Error in change status");
+  }
 };

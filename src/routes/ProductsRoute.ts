@@ -16,3 +16,7 @@ Products.get("/search/:product", controllear.searchProduct);
 Products.post("/MoreProduct", controllear.getMoreProductByCategory);
 
 Products.post("/contact", controllear.contact);
+
+Products.post("/AddReview", controllear.AddReview);
+
+Products.post("/getProductReview", controllear.getProductReview);

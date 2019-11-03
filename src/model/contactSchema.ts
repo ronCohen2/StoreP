@@ -17,6 +17,10 @@ const contactSchema = new mongoose.Schema({
   status: {
     type: Boolean,
     default: false
+  },
+  date: {
+    type: Date,
+    default: Date.now()
   }
 });
 const Contact = mongoose.model<IContact>("Contact", contactSchema);

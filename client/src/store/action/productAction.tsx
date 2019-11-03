@@ -2,6 +2,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import axios from "axios";
 import swal from "sweetalert";
+import Cookies from "js-cookie";
 
 //All products
 export const getAllProducts = () => {
@@ -99,5 +100,56 @@ export const getMoreProduct = (id: String, ProductId: String) => {
       );
       dispatch({ type: "MORE_PRODUCTS", payload: res.data });
     } catch (err) {}
+  };
+};
+export const AddReview = (
+  stars: Number,
+  content: String,
+  user: String,
+  productId: String
+) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/Products/AddReview",
+        {
+          stars,
+          content,
+          user,
+          productId
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
+      console.log(res.data);
+      dispatch({ type: "ADD_REVIEW", payload: res.data });
+    } catch (error) {
+      // dispatch({ type: "CART_ERR" });
+    }
+  };
+};
+
+export const getProductReview = (productId: String) => {
+  return async (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+    try {
+      const res = await axios.post(
+        "http://localhost:3001/Products/getProductReview",
+        {
+          productId
+        },
+        {
+          headers: {
+            token: Cookies.get("Token")
+          }
+        }
+      );
+      console.log(res.data);
+      dispatch({ type: "GET_REVIEW", payload: res.data });
+    } catch (error) {
+      // dispatch({ type: "CART_ERR" });
+    }
   };
 };

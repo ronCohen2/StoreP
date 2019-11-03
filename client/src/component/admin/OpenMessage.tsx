@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { getOpenUserContactMessage } from "../../store/action/adminAction";
 import { Table, Container } from "reactstrap";
 import SendMail from "./SendMail";
+var moment = require("moment");
+
 class OpenMessage extends Component<any, any> {
   constructor(props: any) {
     super(props);
@@ -20,7 +22,7 @@ class OpenMessage extends Component<any, any> {
             <tr>
               <th>#</th>
               <th>Name</th>
-              <th>Email</th>
+              <th>Date</th>
               <th>Content</th>
               <th>השב </th>
             </tr>
@@ -32,10 +34,10 @@ class OpenMessage extends Component<any, any> {
                     <tr>
                       <th scope="row">{key + 1}</th>
                       <td>{msg.name}</td>
-                      <td>{msg.email}</td>
+                      <td>{moment(msg.date).format("lll")}</td>
                       <td>{msg.text}</td>
                       <th className="m-auto">
-                        <SendMail mail={msg.email} />
+                        <SendMail mail={msg.email} id={msg._id} />
                       </th>
                     </tr>
                   );
