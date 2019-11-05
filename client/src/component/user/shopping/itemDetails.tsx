@@ -5,6 +5,7 @@ import { getProductsDetails } from "../../../store/action/productAction";
 import { Container, Row, Col } from "reactstrap";
 import QuantintyModal from "./QuantintyModal";
 import MoreProduct from "./MoreProduct";
+import Review from "./Review";
 
 class itemDetails extends Component<any & RouteProps, any> {
   constructor(props: any) {
@@ -25,6 +26,7 @@ class itemDetails extends Component<any & RouteProps, any> {
   }
   render() {
     const { productDetails }: any = this.props.products;
+    const { id } = this.props.match.params;
     console.log(productDetails);
 
     return (
@@ -56,6 +58,7 @@ class itemDetails extends Component<any & RouteProps, any> {
                 id={productDetails[0]._id}
               />
             </Col>
+            <Review id={id} />
             <MoreProduct id={productDetails[0].categoryId} />
           </Row>
         ) : (

@@ -86,7 +86,6 @@ export let getMoreProductByCategory = async (req: Request, res: Response) => {
 
 export let AddReview = async (req: Request, res: Response) => {
   const { stars, content, user, productId } = req.body;
-
   const newReview = await new Review({
     stars,
     content,
@@ -101,7 +100,7 @@ export let AddReview = async (req: Request, res: Response) => {
     }
   );
   await product.save();
-  res.status(200).send("add review");
+  res.status(200).send(newReview);
   try {
   } catch (error) {
     res.status(400).send(error);
