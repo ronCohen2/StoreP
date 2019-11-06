@@ -25,7 +25,6 @@ class MoreProduct extends Component<any, any> {
     return (
       <Container className="mt-5 mb-5">
         <h3>More Product</h3>
-
         <Row className="border rounded moreProductContainer">
           {moreProduct
             ? moreProduct.map((product: any, key: any) => {

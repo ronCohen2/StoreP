@@ -17,8 +17,8 @@ class Review extends Component<any, any> {
     };
   }
   async componentWillMount() {
-    await this.props.getProductReview(this.props.id);
-    console.log(this.props.review);
+    const { id } = this.props;
+    await this.props.getProductReview(id);
   }
   async componentWillReceiveProps(nextProps: any) {
     if (this.props.id !== nextProps.id) {
@@ -30,19 +30,22 @@ class Review extends Component<any, any> {
       currentPage: page
     });
   };
+  paginate = (pageNumber: Number) => this.setCurrentPage(pageNumber);
+
   render() {
     const { review } = this.props;
+    const { userConnected } = this.props.auth;
+    const { ReviewPerPage, currentPage } = this.state;
+
     if (review) {
-      const { ReviewPerPage, currentPage }: any = this.state;
       const indexOfLastPost = currentPage * ReviewPerPage;
       const indexOfFirstPost = indexOfLastPost - ReviewPerPage;
       var currentPosts = review.slice(indexOfFirstPost, indexOfLastPost);
     }
-    const { userConnected } = this.props.auth;
-    const paginate = (pageNumber: Number) => this.setCurrentPage(pageNumber);
 
     return (
       <Container className="border mt-4">
+        <h2 className="to-center my-3">Customer Reviews ({review.length})</h2>
         {currentPosts
           ? currentPosts.map((rev: any, key: Number) => {
               return (
@@ -57,12 +60,10 @@ class Review extends Component<any, any> {
                   </Media>
                   <Media body>
                     <Media className="to-right">
-                      {
-                        <img
-                          className="imgRate"
-                          src={require(`../../../assistance/img/star${rev.stars}.JPG`)}
-                        />
-                      }
+                      <img
+                        className="imgRate"
+                        src={require(`../../../assistance/img/star${rev.stars}.JPG`)}
+                      />
                     </Media>
                     <p className="mt-3 mr-3">{rev.content}</p>
                     <div className="ReviewDate mt-4 mr-3">
@@ -77,8 +78,8 @@ class Review extends Component<any, any> {
 
         <Pagination
           postsPerPage={this.state.ReviewPerPage}
-          totalPosts={review ? review.length - 1 : null}
-          paginate={paginate}
+          totalPosts={review ? review.length : null}
+          paginate={this.paginate}
         />
       </Container>
     );

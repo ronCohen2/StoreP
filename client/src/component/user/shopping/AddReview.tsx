@@ -28,7 +28,7 @@ type S = {
 
 class AddReviewC extends Component<P, S> {
   state = {
-    stars: 0,
+    stars: 1,
     content: ""
   };
 
@@ -42,12 +42,12 @@ class AddReviewC extends Component<P, S> {
       content: e.target.value
     });
   };
-  handleSubmit = (e: any) => {
+  handleSubmit = async (e: any) => {
     e.preventDefault();
     const { stars, content } = this.state;
     const { id } = this.props;
     const { _id } = this.props.auth.user;
-    this.props.addReviewAction(stars, content, _id, id);
+    await this.props.addReviewAction(stars, content, _id, id);
   };
   render() {
     return (

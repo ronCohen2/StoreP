@@ -13,22 +13,17 @@ class itemDetails extends Component<any & RouteProps, any> {
     this.state = {};
   }
   componentWillMount() {
-    const { id }: any = this.props.match.params;
-    console.log(id);
+    const { id } = this.props.match.params;
     this.props.getProductDetails(id);
-    console.log(this.props);
   }
   componentWillReceiveProps(nextProps: any) {
     if (this.props.match.params !== nextProps.match.params) {
-      const { id }: any = nextProps.match.params;
+      const { id } = nextProps.match.params;
       this.props.getProductDetails(id);
     }
   }
   render() {
     const { productDetails }: any = this.props.products;
-    const { id } = this.props.match.params;
-    console.log(productDetails);
-
     return (
       <Container className=" rounded pl-4 pt-4">
         {productDetails ? (
@@ -58,11 +53,11 @@ class itemDetails extends Component<any & RouteProps, any> {
                 id={productDetails[0]._id}
               />
             </Col>
-            <Review id={id} />
+            <Review id={this.props.match.params.id} />
             <MoreProduct id={productDetails[0].categoryId} />
           </Row>
         ) : (
-          <p>Error in fetch date .</p>
+          <p>Error in fetch data .</p>
         )}
       </Container>
     );
