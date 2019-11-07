@@ -26,6 +26,11 @@ import Register from "./component/auth/Register";
 import Receipt from "./component/user/oreder/Receipt";
 import { PDFViewer } from "@react-pdf/renderer";
 import OpenMessage from "./component/admin/OpenMessage";
+import { connect } from "react-redux";
+import AdminNav from "./component/layout/AdminNav";
+import Stock from "./component/admin/Stock";
+import Setting from "./component/admin/Setting";
+import DashBoard from "./Dashboard";
 
 class Store extends Component<any, any> {
   constructor(props: any) {
@@ -33,12 +38,20 @@ class Store extends Component<any, any> {
     this.state = {};
   }
   render() {
+    const { Role } = this.props.auth;
     return (
       <Router>
         <Slide right pageWrapId={"page-wrap"} />
-        <main id="page-wrap">
-          <TopNav />
-          <NavbarC />
+        {Role ? (
+          <AdminNav />
+        ) : (
+          <>
+            <TopNav />
+            <NavbarC />
+          </>
+        )}
+
+        <main id="page-wrap" className={Role ? "adminMargin" : ""}>
           <Switch>
             <Route path="/" exact component={home} />
             <Route path="/category/:id" component={shopCategory} />
@@ -54,13 +67,23 @@ class Store extends Component<any, any> {
             <Route path="/edit" exact component={EditProduct} />
             <Route path="/Edit/:id" component={Edit} />
             <Route path="/UserMessage" component={OpenMessage} />
+            <Route path="/Stock" component={Stock} />
+            <Route path="/Setting" component={Setting} />
+            <Route path="/DashBoard" component={DashBoard} />
             <Route path="/" component={noMatch} />
           </Switch>
-          <Footer />
+          {!Role ? <Footer /> : null}
         </main>
       </Router>
     );
   }
 }
-
-export default Store;
+const mapStateToProps = (state: any) => {
+  return {
+    auth: state.auth
+  };
+};
+export default connect(
+  mapStateToProps,
+  null
+)(Store);

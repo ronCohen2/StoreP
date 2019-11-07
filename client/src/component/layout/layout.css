@@ -10,3 +10,23 @@
   /* display: flex; */
   /* justify-content: center !important; */
 }
+.AdminNav-container {
+  height: 100%;
+  width: 15%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #343748;
+  padding-top: 20px;
+  display: block;
+}
+.AdminNavLink {
+  font-size: 40px;
+  color: darkgrey;
+  margin-top: 40px;
+  margin-left: 13%;
+}
+.AdminNavLink :hover {
+  opacity: 0.5;
+}

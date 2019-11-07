@@ -1,4 +1,6 @@
 export interface IAuth {
+  Role: Boolean;
+
   userConnected: Boolean;
   user: any;
   registerErr: any;

@@ -1,7 +1,7 @@
 import { IAuth } from "../../type/reducer";
 import { Reducer } from "redux";
 
-const initialState: IAuth = {
+const initialState = {
   userConnected: false,
   user: undefined,
   registerErr: undefined,
@@ -12,10 +12,11 @@ const initialState: IAuth = {
   phone: "",
   userId: "",
   password: "",
-  Verid: ""
+  Verid: "",
+  Role: false
 };
 
-const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
+const reducer: Reducer = (state = initialState, payload: any) => {
   switch (payload.type) {
     case "REGISTER_STEP1":
       return {
@@ -80,7 +81,8 @@ const reducer: Reducer<IAuth> = (state = initialState, payload: any) => {
         userConnected: true,
         user: payload.payload.user,
         loginErr: null,
-        step: payload.payload.status
+        step: payload.payload.status,
+        Role: payload.payload.user.role
       };
     case "LOGIN_ERR": {
       return {

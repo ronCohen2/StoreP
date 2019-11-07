@@ -124,10 +124,10 @@ export const AddReview = (
           }
         }
       );
-      console.log(res.data);
+      swal("TNX", "Review Accepted", "success");
       dispatch({ type: "ADD_REVIEW", payload: res.data });
     } catch (error) {
-      // dispatch({ type: "CART_ERR" });
+      swal("Sorry", "Error in Add New Review ", "error");
     }
   };
 };

@@ -46,8 +46,10 @@ class AddReviewC extends Component<P, S> {
     e.preventDefault();
     const { stars, content } = this.state;
     const { id } = this.props;
-    const { _id } = this.props.auth.user;
+    const { _id, role } = this.props.auth.user;
+    if (role) return swal("admin cant write review");
     await this.props.addReviewAction(stars, content, _id, id);
+    this.setState({ content: "", stars: 1 });
   };
   render() {
     return (
@@ -68,6 +70,7 @@ class AddReviewC extends Component<P, S> {
             <Input
               type="textarea"
               id="content"
+              value={this.state.content}
               onChange={this.handleChangeInput}
               required
             />
