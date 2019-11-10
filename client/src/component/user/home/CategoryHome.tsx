@@ -7,17 +7,18 @@ import "./home";
 import ProductCard from "./ProductCard";
 import { withRouter } from "react-router-dom";
 import Axios from "axios";
-class CategoryHome extends Component<any, any> {
+
+class CategoryHome extends Component<p, S> {
   constructor(props: any) {
     super(props);
     this.state = {
-      product: null,
-      categoryName: null,
-      image: null
+      product: [],
+      categoryName: "",
+      image: ""
     };
   }
   async componentWillMount() {
-    const { id }: any = this.props;
+    const { id } = this.props;
     const res = await Axios.get(
       `http://localhost:3001/Products/category/${id}`
     );
@@ -32,7 +33,7 @@ class CategoryHome extends Component<any, any> {
     });
   }
   render() {
-    const { product }: any = this.state;
+    const { product } = this.state;
     const { categoryName, image } = this.state;
     return (
       <Container className="mt-4">
@@ -68,7 +69,7 @@ class CategoryHome extends Component<any, any> {
     );
   }
 }
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: { product: [] }) => {
   return {
     product: state.product
   };
@@ -82,3 +83,13 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CategoryHome);
+
+interface S {
+  product: [];
+  categoryName: String;
+  image: String;
+}
+interface p {
+  product: [];
+  id: String;
+}

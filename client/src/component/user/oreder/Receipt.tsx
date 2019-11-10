@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
   }
 });
 
-class Receipt extends React.Component<any, any> {
-  constructor(props: any) {
+class Receipt extends React.Component<P, S> {
+  constructor(props: P) {
     super(props);
   }
   componentDidMount() {
@@ -85,14 +85,16 @@ class Receipt extends React.Component<any, any> {
                   <Text> E-Commerce Receipt : {cartId}</Text>
                 </View>
                 <View>
-                  {receipt.map((arr: any, key: any) => {
-                    const { name, quantity } = arr;
-                    return (
-                      <Text>
-                        {key} ) {name} , Quantity :{quantity}
-                      </Text>
-                    );
-                  })}
+                  {receipt.map(
+                    (arr: { name: String; quantity: Number }, key: any) => {
+                      const { name, quantity } = arr;
+                      return (
+                        <Text>
+                          {key} ) {name} , Quantity :{quantity}
+                        </Text>
+                      );
+                    }
+                  )}
                 </View>
                 <View style={styles.center}>
                   <Text> Total Price : {totalPrice}</Text>
@@ -113,10 +115,35 @@ const mapStateToProps = (state: any) => {
 };
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    getReceiptItems: (id: any) => dispatch(getReceiptItems(id))
+    getReceiptItems: (id: String) => dispatch(getReceiptItems(id))
   };
 };
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Receipt);
+
+interface P {
+  cart: {
+    receipt: [];
+    cartId: String;
+    order: {
+      Order: {
+        street: String;
+        city: String;
+        shipDate: Date;
+        totalPrice: Number;
+        cartId: String;
+      };
+    };
+  };
+  auth: {
+    user: {
+      firstName: String;
+      lastName: String;
+      email: String;
+    };
+  };
+  getReceiptItems: (id: String) => [];
+}
+interface S {}

@@ -14,17 +14,7 @@ import Rating from "react-rating";
 import StartEmpty from "../../../../src/assistance/img/star-empty.png";
 import StartFull from "../../../../src/assistance/img/star-full.png";
 import swal from "sweetalert";
-
-type P = {
-  addReviewAction: any;
-  id: String;
-  auth: any;
-};
-
-type S = {
-  stars: Number;
-  content: String;
-};
+import { IAuth } from "../../../type/reducer";
 
 class AddReviewC extends Component<P, S> {
   state = {
@@ -100,3 +90,19 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddReviewC);
+interface P {
+  addReviewAction: (
+    stars: Number,
+    content: String,
+    user: String,
+    productId: String
+  ) => void;
+  auth: IAuth;
+  id: String;
+}
+
+interface S {
+  stars: Number;
+
+  content: String;
+}

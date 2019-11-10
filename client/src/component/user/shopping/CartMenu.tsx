@@ -5,23 +5,23 @@ import { slide as Menu } from "react-burger-menu";
 // const Menu = require("react-burger-menu");
 import { connect } from "react-redux";
 import { Table, Row, Col, Container, Button, CardSubtitle } from "reactstrap";
-import itemDetails from "./itemDetails";
 import {
   deleteCartItem,
   removeCartItems
 } from "../../../store/action/cartAction";
-import { withRouter, Redirect } from "react-router";
-import { compose } from "redux";
-import { Card, CardTitle, CardText } from "reactstrap";
+import { withRouter, RouteComponentProps } from "react-router";
+import { Card, CardTitle } from "reactstrap";
+import { Icart, IAuth } from "../../../type/reducer";
+import { History } from "history";
 
-class Slide extends React.Component<any, any> {
-  constructor(props: any) {
+class Slide extends React.Component<P & RouteComponentProps, S> {
+  constructor(props: P & RouteComponentProps) {
     super(props);
     this.state = {
       total: 0
     };
   }
-  showSettings(event: any) {
+  showSettings(event: React.FormEvent<HTMLInputElement>) {
     event.preventDefault();
   }
 
@@ -106,3 +106,17 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(Slide));
+
+interface P {
+  cart: Icart;
+  auth: IAuth;
+  items: [];
+  deleteItem: (cartId: String, ProductId: String) => void;
+  removeCartItems: (cartId: String) => void;
+  history: History;
+  pageWrapId: String;
+  right: any;
+}
+interface S {
+  total: Number;
+}

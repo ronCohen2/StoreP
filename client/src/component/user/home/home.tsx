@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import CategoryHome from "./CategoryHome";
 import "./home.css";
 import { Container } from "reactstrap";
-import Slider from "../../../../src/assistance/img/slider-banner.png";
 class home extends Component<any, any> {
   constructor(props: any) {
     super(props);

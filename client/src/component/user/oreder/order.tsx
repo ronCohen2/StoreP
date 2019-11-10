@@ -3,7 +3,6 @@ import {
   Container,
   Row,
   Col,
-  Form,
   FormGroup,
   Label,
   Input,
@@ -15,11 +14,11 @@ import {
   order as Order,
   checkShipDate
 } from "../../../store/action/cartAction";
-import { withRouter } from "react-router";
+import { withRouter, RouteComponentProps } from "react-router";
 import swal from "sweetalert";
 
-class order extends Component<any, any> {
-  constructor(props: any) {
+class order extends Component<P & RouteComponentProps, S> {
+  constructor(props: P & RouteComponentProps) {
     super(props);
     this.state = {
       street: null,
@@ -27,7 +26,7 @@ class order extends Component<any, any> {
     };
   }
 
-  handleChange = (e: any) => {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({
       [e.target.id]: e.target.value
     });
@@ -203,7 +202,7 @@ class order extends Component<any, any> {
                 </thead>
                 <tbody>
                   {items
-                    ? items.map((item: any, key: Number) => {
+                    ? items.map((item: ItemType, key: Number) => {
                         return (
                           <tr>
                             <td>{item.name}</td>
@@ -231,7 +230,7 @@ class order extends Component<any, any> {
     );
   }
 }
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: { cart: []; auth: [] }) => {
   return {
     cart: state.cart,
     auth: state.auth
@@ -268,3 +267,24 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(withRouter(order));
+
+interface P {
+  Street: String;
+  auth: any;
+  cart: any;
+  order: any;
+  checkShipDate: any;
+}
+interface S {
+  street: String | any;
+  city: String | any;
+  shipDate?: Date;
+  creditCard?: Number;
+
+  [key: string]: any;
+}
+type ItemType = {
+  name: String;
+  quantity: Number;
+  totalPrice: Number;
+};

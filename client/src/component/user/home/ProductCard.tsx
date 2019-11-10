@@ -1,22 +1,15 @@
 import React from "react";
-import {
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  CardTitle,
-  CardSubtitle,
-  Button
-} from "reactstrap";
-import { withRouter } from "react-router";
+import { Card, CardImg, CardTitle } from "reactstrap";
+import { withRouter, RouteComponentProps } from "react-router";
 
-function ProductCard(props: any) {
+const ProductCard: React.SFC<P & RouteComponentProps> = props => {
+  const { price, img, id, name } = props;
   return (
     <>
       <Card
         className="ProductCard "
         onClick={() => {
-          props.history.push(`/itemDetails/${props.id}`);
+          props.history.push(`/itemDetails/${id}`);
         }}
       >
         <CardImg
@@ -24,11 +17,19 @@ function ProductCard(props: any) {
           top
           width="100%"
           height="100%"
-          src={require(`../../../../../public/image/${props.img}`)}
+          src={require(`../../../../../public/image/${img}`)}
         />
-        <CardTitle className="to-center">{props.name}</CardTitle>
+        <CardTitle className="to-center">{name}</CardTitle>
       </Card>
     </>
   );
-}
+};
 export default withRouter(ProductCard);
+
+interface P {
+  id: String;
+  img: String;
+  name: String;
+  history: any;
+  price: Number;
+}
